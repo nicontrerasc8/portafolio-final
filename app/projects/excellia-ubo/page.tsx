@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Reveal from "../../components/Reveal";
-import OwnershipGraphClient from "../../components/OwnershipGraphClient";
+
 import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/SiteHeader";
 
