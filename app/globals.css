@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warmer, deeper dark tones for a "premium product" feel */
+  --bg: #0a0a0a;
+  --bg-soft: #111111;
+  --card: #161616;
+  --border: #262626;
+  
+  /* Softer text colors for reading comfort */
+  --ink: #ededed;
+  --muted: #a1a1aa;
+  
+  /* More sophisticated accents - less neon, more "electric organic" */
+  --accent: #5eead4; /* Teal-ish over pure green/cyan */
+  --accent-2: #818cf8; /* Indigo/Soft Blue over harsh blue */
+  
+  --warning: #fbbf24;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-plex);
+  --font-display: var(--font-space);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Cleaner, more subtle ambient light */
+  background: 
+    radial-gradient(circle at 15% 0%, rgba(94, 234, 212, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 10%, rgba(129, 140, 248, 0.08), transparent 40%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font-plex), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(94, 234, 212, 0.2);
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Reduced opacity for a classier, barely-there grid */
+.grid-glow {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px; /* Larger grid = more breathing room */
+  opacity: 0.4;
+  mask-image: radial-gradient(circle at 50% 0%, rgba(0, 0, 0, 1), transparent 80%);
+  pointer-events: none;
+}
+
+/* Cleaner glass effect - less blurry, more "physically correct" feel */
+.glass {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* crisp subtle border */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.tag {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.section-title {
+  font-family: var(--font-space), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s ease infinite;
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at center, var(--tw-gradient-stops));
 }

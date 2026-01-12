@@ -1,0 +1,15 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#05060A"/>
+  <circle cx="180" cy="80" r="220" fill="#35F2C6" fill-opacity="0.15"/>
+  <circle cx="980" cy="140" r="260" fill="#7AA7FF" fill-opacity="0.18"/>
+  <rect x="90" y="140" width="1020" height="350" rx="36" fill="#121628" stroke="#1E2438"/>
+  <text x="150" y="260" fill="#F5F6FB" font-family="Space Grotesk, sans-serif" font-size="54" font-weight="600">
+    Nicolas Contreras Castellano
+  </text>
+  <text x="150" y="330" fill="#9CA4B8" font-family="IBM Plex Sans, sans-serif" font-size="28">
+    Data Systems + Product Engineering
+  </text>
+  <text x="150" y="390" fill="#9CA4B8" font-family="IBM Plex Sans, sans-serif" font-size="22">
+    Pipelines · SQL logic · Dashboards · Automation
+  </text>
+</svg>
