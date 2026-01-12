@@ -12,5 +12,5 @@ const HeroScene = dynamic(() => import("./HeroScene"), {
 });
 
 export default function HeroSceneClient({ className }: HeroSceneClientProps) {
-  return <HeroScene className={className} />;
+  return <HeroScene />;
 }
