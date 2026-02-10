@@ -1,17 +1,26 @@
 import type { Metadata } from "next";
+import Reveal from "../components/Reveal";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import Reveal from "../components/Reveal";
 import ProjectFilters from "./ProjectFilters";
-import { allProjects } from "../lib/content";
+import { getAllProjects } from "../lib/content";
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Proyectos | NCC Technology",
   description:
-    "Case studies across enterprise data systems, ML forecasting, automation modules, and product delivery.",
+    "Casos en los que transformamos procesos manuales en automatizaciones simples y listas para operar.",
+};
+
+const copy = {
+  kicker: "Portafolio",
+  title: "Sistemas de datos y automatización listos para usar",
+  description:
+    "Filtra por foco y explorar cómo entregamos procesos operativos con claridad y velocidad.",
 };
 
 export default function ProjectsPage() {
+  const projects = getAllProjects();
+
   return (
     <div className="min-h-screen">
       <SiteHeader />
@@ -19,19 +28,18 @@ export default function ProjectsPage() {
         <Reveal>
           <div className="flex flex-col gap-6">
             <p className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-              Portfolio
+              {copy.kicker}
             </p>
             <h1 className="section-title text-4xl font-semibold text-white">
-              Data + product systems with real-world impact.
+              {copy.title}
             </h1>
             <p className="max-w-2xl text-lg text-zinc-300">
-              Each project ships with clear ownership, technical depth, and a
-              measurable outcome. Filter by focus area to explore.
+              {copy.description}
             </p>
           </div>
         </Reveal>
         <div className="mt-10">
-          <ProjectFilters projects={allProjects} />
+          <ProjectFilters projects={projects} />
         </div>
       </main>
       <SiteFooter />

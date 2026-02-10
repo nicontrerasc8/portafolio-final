@@ -1,13 +1,72 @@
 import type { Metadata } from "next";
 import Reveal from "../../components/Reveal";
-
 import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Excellia — UBO Automation",
+  title: "Excellia - Automatización UBO | NCC Technology",
   description:
-    "Confidential case study on automating Ultimate Beneficial Owner determination using recursive SQL, secure workflows, and audit-ready outputs.",
+    "Caso de NCC Technology: automatizamos la detección de Beneficiarios Finales con SQL recursivo y cumplimiento listo para auditoría.",
+};
+
+const copy = {
+  kicker: "Caso confidencial",
+  title: "Excellia - Automatización UBO",
+  summary:
+    "Automatizamos la determinación de Beneficiarios Finales para que auditorías y cumplimiento puedan actuar en segundos.",
+  tags: [
+    "PostgreSQL",
+    "SQL recursivo",
+    "Supabase RPC",
+    "Seguridad a nivel de fila",
+    "Cumplimiento",
+  ],
+  contextTitle: "Contexto y restricciones",
+  contextItems: [
+    "Las estructuras tenían múltiples niveles de propiedad indirecta entre entidades legales.",
+    "Necesitábamos resultados explicables y listos para auditoría en cada paso.",
+    "El flujo manual basado en hojas de cálculo tardaba días y era difícil de trazar.",
+    "La información sensible debía mantenerse oculta del front-end y de las herramientas de depuración.",
+  ],
+  problemTitle: "Problema",
+  problem:
+    "Determinar Beneficiarios Finales era lento e impreciso, lo que generaba riesgos de cumplimiento en cada auditoría.",
+  solutionTitle: "Solución",
+  solution:
+    "Construimos un flujo de automatización con SQL recursivo en la base de datos y resultados filtrados con reglas de acceso sólidas.",
+  decisionsTitle: "Decisiones técnicas clave",
+  decisions: [
+    {
+      label: "SQL recursivo en la base de datos:",
+      detail:
+        "Entregamos resultados deterministas y auditables sin exponer jerarquías intermedias al frontend.",
+    },
+    {
+      label: "Capa RPC segura:",
+      detail: "Centralizamos la lógica y evitamos acceso directo a tablas.",
+    },
+    {
+      label: "Salvaguardas de rendimiento:",
+      detail:
+        "Indexamos relaciones, limitamos profundidad y preparamos vistas de auditoría.",
+    },
+    {
+      label: "Seguridad desde el diseño:",
+      detail:
+        "Row Level Security de Supabase asegura que cada usuario solo vea lo que necesita.",
+    },
+  ],
+  outcomeTitle: "Resultados e impacto",
+  outcome:
+    "Pasamos de días de análisis manual a segundos con trazabilidad total, cumpliendo auditorías sin exponer datos sensibles.",
+  outcomeTags: [
+    "Resultados deterministas",
+    "Listo para auditoría",
+    "Riesgo reducido",
+    "Eficiencia operativa",
+  ],
+  footerNote:
+    "Documentación técnica y métricas adicionales disponibles a solicitud.",
 };
 
 export default function ExcelliaPage() {
@@ -16,164 +75,102 @@ export default function ExcelliaPage() {
       <SiteHeader />
 
       <main className="mx-auto w-full max-w-7xl px-6 pb-24 pt-16 md:px-10 lg:px-12">
-        {/* ================= HERO ================= */}
         <Reveal>
           <div className="flex flex-col gap-6">
             <p className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-              Confidential case study
+              {copy.kicker}
             </p>
 
             <h1 className="section-title text-4xl font-semibold text-white">
-              Excellia — UBO Determination Automation
+              {copy.title}
             </h1>
 
-            <p className="max-w-3xl text-base text-zinc-300">
-              Designed and implemented an automated system to determine Ultimate
-              Beneficial Owners (UBO) across complex, multi-level ownership
-              structures under strict compliance and confidentiality constraints.
-            </p>
+            <p className="max-w-3xl text-base text-zinc-300">{copy.summary}</p>
 
             <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-zinc-400">
-              <span className="tag px-4 py-2">PostgreSQL</span>
-              <span className="tag px-4 py-2">Recursive SQL</span>
-              <span className="tag px-4 py-2">Supabase RPC</span>
-              <span className="tag px-4 py-2">Row Level Security</span>
-              <span className="tag px-4 py-2">Compliance</span>
+              {copy.tags.map((tag) => (
+                <span key={tag} className="tag px-4 py-2">
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </Reveal>
 
-        {/* ================= CONTEXT ================= */}
         <Reveal>
           <div className="mt-14 glass rounded-3xl p-8">
             <h2 className="section-title text-2xl font-semibold text-white">
-              Context & constraints
+              {copy.contextTitle}
             </h2>
 
             <ul className="mt-4 space-y-3 text-sm text-zinc-300">
-              <li>
-                • Ownership structures included multiple layers of indirect
-                participation across legal entities.
-              </li>
-              <li>
-                • UBO resolution required deterministic and explainable results
-                suitable for audit and regulatory review.
-              </li>
-              <li>
-                • Manual analysis relied on spreadsheets and ad-hoc SQL queries,
-                increasing operational risk and review time.
-              </li>
-              <li>
-                • Sensitive client data could not be exposed at the application
-                layer or through debugging workflows.
-              </li>
+              {copy.contextItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </div>
         </Reveal>
 
-        {/* ================= PROBLEM & SOLUTION ================= */}
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <Reveal>
             <div className="glass rounded-3xl p-8">
               <h2 className="section-title text-2xl font-semibold text-white">
-                Problem
+                {copy.problemTitle}
               </h2>
 
-              <p className="mt-4 text-sm text-zinc-300">
-                Determining Ultimate Beneficial Owners is a compliance-critical
-                process. Indirect ownership paths must be traced accurately,
-                consistently, and reproducibly. Existing workflows were slow,
-                error-prone, and difficult to audit.
-              </p>
+              <p className="mt-4 text-sm text-zinc-300">{copy.problem}</p>
             </div>
           </Reveal>
 
           <Reveal>
             <div className="glass rounded-3xl p-8">
               <h2 className="section-title text-2xl font-semibold text-white">
-                Solution
+                {copy.solutionTitle}
               </h2>
 
-              <p className="mt-4 text-sm text-zinc-300">
-                Built an end-to-end automation workflow that resolves ownership
-                chains at the database level using recursive SQL, exposing only
-                validated, audit-ready results to the application layer.
-              </p>
+              <p className="mt-4 text-sm text-zinc-300">{copy.solution}</p>
             </div>
           </Reveal>
         </div>
 
-        {/* ================= TECHNICAL DECISIONS ================= */}
         <Reveal>
           <div className="mt-10 glass rounded-3xl p-8">
             <h2 className="section-title text-2xl font-semibold text-white">
-              Key technical decisions
+              {copy.decisionsTitle}
             </h2>
 
             <ul className="mt-4 space-y-4 text-sm text-zinc-300">
-              <li>
-                <strong className="text-white">
-                  Recursive SQL over application traversal:
-                </strong>{" "}
-                ensured deterministic results, reduced data leakage risk, and
-                simplified auditability.
-              </li>
-              <li>
-                <strong className="text-white">
-                  RPC-based execution layer:
-                </strong>{" "}
-                centralized business logic and prevented direct table access.
-              </li>
-              <li>
-                <strong className="text-white">
-                  Performance safeguards:
-                </strong>{" "}
-                indexed ownership relationships, bounded recursion depth, and
-                pre-aggregated audit views.
-              </li>
-              <li>
-                <strong className="text-white">
-                  Security by design:
-                </strong>{" "}
-                Supabase Row Level Security enforced entity-level access control
-                across all workflows.
-              </li>
+              {copy.decisions.map((decision) => (
+                <li key={decision.label}>
+                  <strong className="text-white">{decision.label}</strong>{" "}
+                  {decision.detail}
+                </li>
+              ))}
             </ul>
           </div>
         </Reveal>
 
-
-
-        {/* ================= OUTCOME ================= */}
         <Reveal>
           <div className="mt-10 glass rounded-3xl p-8">
             <h2 className="section-title text-2xl font-semibold text-white">
-              Outcome & impact
+              {copy.outcomeTitle}
             </h2>
 
-            <p className="mt-4 text-sm text-zinc-300">
-              The system reduced manual analysis effort, improved traceability,
-              and enabled faster and more reliable compliance decisions. All
-              results are audit-ready by default, while maintaining strict data
-              confidentiality.
-            </p>
+            <p className="mt-4 text-sm text-zinc-300">{copy.outcome}</p>
 
             <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-zinc-400">
-              <span className="tag px-4 py-2">Deterministic results</span>
-              <span className="tag px-4 py-2">Audit-ready</span>
-              <span className="tag px-4 py-2">Reduced risk</span>
-              <span className="tag px-4 py-2">Operational efficiency</span>
+              {copy.outcomeTags.map((tag) => (
+                <span key={tag} className="tag px-4 py-2">
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
         </Reveal>
 
-        {/* ================= FOOTER NOTE ================= */}
         <Reveal>
           <div className="mt-16 border-t border-white/10 pt-8">
-            <p className="text-sm text-zinc-400">
-              Detailed schema, SQL logic, and performance benchmarks available
-              upon request for vetted teams.
-            </p>
+            <p className="text-sm text-zinc-400">{copy.footerNote}</p>
           </div>
         </Reveal>
       </main>

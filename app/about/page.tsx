@@ -2,15 +2,9 @@ import type { Metadata } from "next";
 import Reveal from "../components/Reveal";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import { getIndustries, getStrengths } from "../lib/content";
+import { Brain, Database, Layers, LineChart, Factory } from "lucide-react";
 
-import { industries, strengths } from "../lib/content";
-import {
-  Brain,
-  Database,
-  Layers,
-  LineChart,
-  Factory,
-} from "lucide-react";
 function DecorativeGrid() {
   return (
     <svg
@@ -39,14 +33,29 @@ function DecorativeGrid() {
 }
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "Sobre NCC Technology",
+  description: "Perfil, fortalezas y enfoque de NCC Technology en datos y automatización.",
+};
+
+const copy = {
+  kicker: "Sobre NCC Technology",
+  titleLine1: "Transformamos datos y producto",
+  titleLine2: "en decisiones y automatizaciones sin fricción",
   description:
-    "Background, education, and strengths of Nicolas Contreras Castellano.",
+    "NCC Technology une datos, automatización y entrega web para que los equipos puedan actuar con claridad hoy mismo.",
+  descriptionTwo:
+    "Desde pipelines hasta interfaces, trabajamos como tu equipo interno para resolver tareas reales y liberar tiempo de valor.",
+  ownership: "Responsabilidad completa del problema al resultado",
+  strengthsTitle: "Fortalezas clave",
+  industriesTitle: "Industrias donde ya trabajamos",
 };
 
 const icons = [Brain, Database, Layers, LineChart];
 
 export default function AboutPage() {
+  const strengths = getStrengths();
+  const industries = getIndustries();
+
   return (
     <div className="min-h-screen">
       <SiteHeader />
@@ -54,43 +63,37 @@ export default function AboutPage() {
       <main className="relative mx-auto w-full max-w-7xl px-6 pb-24 pt-20 md:px-10 lg:px-12">
         <Reveal>
           <div className="relative grid gap-12 lg:grid-cols-[1.3fr_0.7fr]">
-            {/* ABOUT CARD */}
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl">
               <DecorativeGrid />
 
               <p className="relative text-xs uppercase tracking-[0.35em] text-zinc-400">
-                About
+                {copy.kicker}
               </p>
 
               <h1 className="relative mt-4 text-4xl font-semibold leading-tight text-white">
-                Engineering systems <br />
-                that make decisions easier
+                {copy.titleLine1}
+                <br />
+                {copy.titleLine2}
               </h1>
 
               <p className="relative mt-6 max-w-xl text-sm leading-relaxed text-zinc-300">
-                I am Nicol&aacute;s Contreras Castellano, a Systems & Industrial
-                Engineering graduate from the University of Arizona (4.0 GPA) and
-                an Information Systems Engineering student (top 10%).
+                {copy.description}
               </p>
 
               <p className="relative mt-4 max-w-xl text-sm leading-relaxed text-zinc-300">
-                Over the last two years, I’ve built data platforms, automation
-                systems, and ML forecasting pipelines across retail, FMCG, and
-                logistics — always focused on turning complexity into clarity.
+                {copy.descriptionTwo}
               </p>
 
               <div className="relative mt-8 flex items-center gap-3 text-xs uppercase tracking-widest text-zinc-400">
                 <Factory className="h-4 w-4" />
-                End-to-End Ownership
+                {copy.ownership}
               </div>
             </div>
 
-            {/* RIGHT COLUMN */}
             <div className="space-y-8">
-              {/* STRENGTHS */}
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
                 <h2 className="section-title text-xl font-semibold text-white">
-                  Core Strengths
+                  {copy.strengthsTitle}
                 </h2>
 
                 <ul className="mt-6 space-y-4">
@@ -109,10 +112,9 @@ export default function AboutPage() {
                 </ul>
               </div>
 
-              {/* INDUSTRIES */}
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
                 <h2 className="section-title text-xl font-semibold text-white">
-                  Industries
+                  {copy.industriesTitle}
                 </h2>
 
                 <div className="mt-5 flex flex-wrap gap-3">

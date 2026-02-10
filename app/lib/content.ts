@@ -1,5 +1,12 @@
 export type ProjectCategory = "Data" | "ML" | "Automation" | "Web";
 
+export const categoryLabels: Record<ProjectCategory, string> = {
+  Data: "Datos",
+  ML: "IA",
+  Automation: "Automatización",
+  Web: "Web",
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -14,152 +21,159 @@ export type Project = {
   featured?: boolean;
 };
 
-export const featuredProjects: Project[] = [
+const projects: Project[] = [
   {
     slug: "excellia-ubo",
     name: "Excellia (Grupo Romero)",
-    label: "UBO Automation",
+    label: "Automatización UBO",
     categories: ["Data", "Automation", "Web"],
     summary:
-      "A graph-centric compliance platform that maps Ultimate Beneficial Owners for audits.",
+      "Automatizamos la trazabilidad de Beneficiarios Finales para auditorías claras y sin manualidades.",
     problem:
-      "Manual mapping of ownership chains was slow and error-prone, creating audit risks for complex corporate structures.",
+      "Los mapas manuales eran lentos, inseguros y hacía falta trazabilidad precisa para cumplir con normas.",
     approach:
-      "Built a recursive SQL engine to traverse ownership graphs instantly, wrapped in a secure Next.js dashboard for compliance teams.",
-    stack: ["Next.js", "Supabase", "Recursive SQL", "RLS"],
+      "Creamos un motor SQL recursivo y un tablero seguro que entrega resultados listos para entrega de cumplimiento.",
+    stack: ["Next.js", "Supabase", "SQL recursivo", "Seguridad a nivel de fila"],
     outcome:
-      "Reduced a 3-day manual audit process to seconds, ensuring 100% data lineage and security context.",
+      "Convertimos 3 días de análisis en segundos con trazabilidad total y contexto de seguridad.",
     featured: true,
   },
   {
     slug: "appruebo",
-    name: "Appruebo",
-    label: "Learning Analytics",
+    name: "Ludus",
+    label: "Plataforma Ludus",
     categories: ["ML", "Data", "Web"],
-    summary:
-      "Educational platform predicting student performance with real-time ML feedback.",
-    problem:
-      "Both students and institutions lacked visibility into learning gaps until it was too late to intervene.",
-    approach:
-      "Developed an ML pipeline that analyzes quiz performance to forecast outcomes and suggest personalized study paths.",
-    stack: ["Next.js", "Python", "ML Pipelines", "Analytics"],
-    outcome:
-      "Empowered students with data-driven study habits and gave admins a live view of cohort health.",
-    link: "https://appruebo.vercel.app/",
+    summary: "Ludus mantiene la experiencia educativa alineada con la nueva URL.",
+    problem: "No había visibilidad rápida de qué aprender.",
+    approach: "Conectamos datos y mostramos lo esencial.",
+    stack: ["Next.js", "Python", "Analytics"],
+    outcome: "Los equipos reaccionan sin esperar reportes largos.",
+    link: "https://www.ludus-edu.com/",
     featured: true,
   },
   {
     slug: "un-ratito-con-dios",
     name: "Un Ratito con Dios",
-    label: "Mobile Product",
+    label: "Producto móvil",
     categories: ["Web", "Automation"],
     summary:
-      "Daily devotional app scaling content delivery to a dedicated community.",
+      "Escalamos la entrega diaria de devocionales para una comunidad fiel sin añadir tareas nuevas.",
     problem:
-      "Delivering daily multimedia content manually was unscalable and prone to consistency issues.",
+      "Publicar cada día era manual e inconsistente, y el equipo no podía mantener el ritmo.",
     approach:
-      "Automated the content supply chain from CMS to end-user device, ensuring reliable daily delivery.",
-    stack: ["React Native", "Node.js", "Firebase", "Automation"],
+      "Automatizamos la cadena desde el CMS hasta la app, con reglas de publicación rígidas y monitoreo automático.",
+    stack: ["React Native", "Node.js", "Firebase", "Automatización"],
     outcome:
-      "Scaled to 1,500+ active users with 99.9% delivery reliability and zero manual daily overhead.",
+      "1,500+ usuarios activos, entregas al 99.9% y cero trabajo manual diario.",
     link: "https://lnk.bio/unratitocondios",
     featured: true,
   },
-];
-
-export const allProjects: Project[] = [
-  ...featuredProjects,
   {
     slug: "vida-software",
     name: "Vida Software",
-    label: "Retail Data Systems",
+    label: "Sistemas retail",
     categories: ["Data", "ML", "Automation"],
     summary:
-      "Automation ecosystem handling SKU-level decisions for major retail clients.",
+      "Ecosistema automatizado para decisiones de stock y precio con información confiable.",
     problem:
-      "Retail managers drowned in excel sheets, struggling to forecast demand across thousands of SKU data.",
+      "Gerentes pasaban días en Excel sin poder reaccionar a cambios repentinos en el mercado.",
     approach:
-      "Engineered Python ETL pipelines and demand forecasting models feeding into live dashboards.",
-    stack: ["Python", "SQL", "ETL", "Forecasting", "Dashboards"],
+      "Construimos pipelines ETL en Python, modelos de pronóstico y dashboards que hablan el mismo idioma que la operación.",
+    stack: ["Python", "SQL", "ETL", "Pronósticos", "Dashboards"],
     outcome:
-      "Processed 50k+ monthly records, automating critical inventory and stock decisions.",
+      "Procesamos 50k+ registros mensuales y dejamos decisiones operativas en piloto automático.",
+  },
+  {
+    slug: "goxa",
+    name: "GOXA",
+    label: "GOXA Studio",
+    categories: ["Data", "Automation"],
+    summary: "GOXA automatiza reportes sin ruido.",
+    problem: "Las métricas tardaban días en llegar.",
+    approach: "Ponemos dashboards listos y alertas mínimas.",
+    stack: ["Next.js", "SQL"],
+    outcome: "Información que se entiende en segundos.",
   },
   {
     slug: "kompass-cargo",
     name: "Kompass Cargo",
-    label: "Logistics Intelligence",
+    label: "Inteligencia logística",
     categories: ["Data", "Web"],
     summary:
-      "Commercial pricing intelligence suite for the logistics sector.",
+      "Un tablero comercial que junta precios, márgenes y alertas para equipos logísticos.",
     problem:
-      "Sales teams priced routes on intuition rather than data, leading to inconsistent margins.",
+      "Los comerciales trabajaban a ciegas y regalaban margen porque no tenían datos claros ni consistentes.",
     approach:
-      "Centralized pricing data into a unified reporting suite gave commercial teams clear benchmarks.",
+      "Centralizamos precios en una suite de reportes con benchmarks sencillos y señales de acción.",
     stack: ["Next.js", "SQL", "Analytics", "Reporting"],
     outcome:
-      "Standardized pricing strategy across 30+ client portfolios, improving margin consistency.",
+      "Estandarizamos la estrategia de precio en 30+ clientes y mejoramos la consistencia de los márgenes.",
   },
 ];
 
+export const getFeaturedProjects = (): Project[] =>
+  projects.filter((project) => project.featured);
+
+export const getAllProjects = (): Project[] => projects;
+
 export const strengths = [
-  "Auditable Data Pipelines",
-  "Recursive SQL Logic",
-  "ML Forecasting Integration",
-  "Enterprise Automation Modules",
+  "Pipelines auditables que dan confianza",
+  "SQL recursivo que sigue reglas limpias",
+  "Pronósticos de IA listos para actuar",
+  "Automatizaciones que se mantienen solas",
 ];
 
 export const industries = [
-  "Retail & FMCG",
-  "Logistics & Supply Chain",
-  "Education Tech",
-  "Compliance & Audit",
+  "Retail y FMCG",
+  "Logística y cadena de suministro",
+  "Educación y tecnología educativa",
+  "Cumplimiento y auditoría",
 ];
 
-export const experience = [
+export type ExperienceItem = {
+  role: string;
+  company: string;
+  period: string;
+  highlights: string[];
+};
+
+export const experience: ExperienceItem[] = [
   {
-    role: "Junior Software Engineer",
+    role: "Ingeniero de software",
     company: "Vida Software",
-    period: "05/2025 — Present",
+    period: "05/2025 - Presente",
     highlights: [
-      "Building interactive web dashboards (React/Next.js) for enterprise retail & FMCG clients.",
-      "Implemented a demand forecasting system combining ML pipelines with SQL/Python ETLs.",
-      "Developed an internal support chatbot connected to corporate databases (RAG).",
-      "Built 30+ automation modules (PHP/SQL) processing 50k+ monthly records for pricing and orders.",
+      "Lidero dashboards interactivos que alínean retail con producto digital.",
+      "Automatizo pronósticos y operaciones con pipelines Python + SQL.",
+      "Mantengo más de 30 módulos que mueven stock y precio sin intervención diaria.",
     ],
   },
   {
-    role: "Pricing & IT Intern",
+    role: "Analista de pricing y TI",
     company: "Kompass Cargo",
-    period: "11/2024 — 05/2025",
+    period: "11/2024 - 05/2025",
     highlights: [
-      "Designed a landing page and internal digital flows to reduce operational costs.",
-      "Created dynamic reporting suites for pricing decisions and efficiency tracking.",
-      "Managed pricing proposals for a portfolio of 30+ logistics clients.",
+      "Diseñé flujos digitales que redujeron costos operativos y errores.",
+      "Convertí datos dispersos en reportes claros con señales comerciales.",
+      "Gestioné propuestas técnicas para más de 30 clientes logísticos.",
     ],
   },
   {
-    role: "Web Developer & AI Solutions Engineer",
+    role: "Desarrollador web y soluciones IA",
     company: "Freelance",
-    period: "01/2023 — 11/2024",
+    period: "01/2023 - 11/2024",
     highlights: [
-      "Developed 8+ responsive websites for startups (Next.js, PHP, SQL).",
-      "Implemented 'Trippio', an AI travel planner using RAG pipelines for personalized itineraries.",
-      "Built high-conversion landing pages and intelligent forms with modern auth.",
+      "Lancé ocho experiencias web responsivas para startups que necesitaban conversión.",
+      "Construí 'Trippio', un planificador de viajes IA con pipelines RAG sencillos.",
+      "Desarrollé landing pages inteligentes con autenticación moderna.",
     ],
   },
 ];
 
-export const education = [
-  {
-    school: "University of Arizona",
-    degree: "B.S. Industrial Engineering",
-    period: "2021 — 2025",
-    details: "Summa Cum Laude (4.0 GPA)",
-  },
-  {
-    school: "Universidad Peruana de Ciencias Aplicadas",
-    degree: "B.S. Information Systems Engineering",
-    period: "2021 — 2026",
-    details: "Top 10% ",
-  },
-];
+export type IndustryTag = string;
+
+export const getStrengths = (): string[] => strengths;
+
+export const getIndustries = (): IndustryTag[] => industries;
+
+export const getExperience = (): ExperienceItem[] => experience;

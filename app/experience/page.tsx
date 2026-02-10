@@ -2,15 +2,22 @@ import type { Metadata } from "next";
 import Reveal from "../components/Reveal";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import { experience } from "../lib/content";
+import { getExperience } from "../lib/content";
 
 export const metadata: Metadata = {
-  title: "Experience",
+  title: "Experiencia | NCC Technology",
   description:
-    "Timeline of enterprise data systems, automation modules, and product delivery.",
+    "Experiencia en sistemas de datos, automatización y entregas con resultados medibles.",
+};
+
+const copy = {
+  kicker: "Experiencia",
+  title: "Entregas empresariales con impacto real",
 };
 
 export default function ExperiencePage() {
+  const experience = getExperience();
+
   return (
     <div className="min-h-screen">
       <SiteHeader />
@@ -18,16 +25,16 @@ export default function ExperiencePage() {
         <Reveal>
           <div className="flex flex-col gap-4">
             <p className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-              Experience
+              {copy.kicker}
             </p>
             <h1 className="section-title text-4xl font-semibold text-white">
-              Enterprise delivery with measurable outcomes.
+              {copy.title}
             </h1>
           </div>
         </Reveal>
         <div className="mt-12 space-y-6">
           {experience.map((item, index) => (
-            <Reveal key={item.company} delay={index * 0.08}>
+            <Reveal key={`${item.company}-${item.role}`} delay={index * 0.08}>
               <div className="glass rounded-3xl p-8">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>

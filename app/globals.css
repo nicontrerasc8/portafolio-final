@@ -1,21 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Warmer, deeper dark tones for a "premium product" feel */
-  --bg: #0a0a0a;
-  --bg-soft: #111111;
-  --card: #161616;
-  --border: #262626;
-  
-  /* Softer text colors for reading comfort */
-  --ink: #ededed;
-  --muted: #a1a1aa;
-  
-  /* More sophisticated accents - less neon, more "electric organic" */
-  --accent: #5eead4; /* Teal-ish over pure green/cyan */
-  --accent-2: #818cf8; /* Indigo/Soft Blue over harsh blue */
-  
-  --warning: #fbbf24;
+
 }
 
 @theme inline {

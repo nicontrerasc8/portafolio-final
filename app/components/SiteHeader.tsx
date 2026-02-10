@@ -1,33 +1,53 @@
+"use client";
 import Link from "next/link";
-
-const navItems = [
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/experience", label: "Experience" },
-
-];
+import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function SiteHeader() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05060a]/80 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 md:px-10 lg:px-12">
-        <Link
+    <header 
+      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+        isScrolled 
+          ? "border-slate-200/50 bg-white/95 shadow-sm backdrop-blur-lg" 
+          : "border-[#0D3B66]/20 bg-gradient-to-r bg-gradient-to-br from-[#051829]  to-[#051824] shadow-lg backdrop-blur-lg"
+      }`}
+    >
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 md:px-10 lg:px-12">
+        <Link 
           href="/"
-          className="font-[var(--font-space)] text-lg uppercase tracking-[0.2em] text-white"
+         
         >
-          NC
+          <span  className={`font-[var(--font-space)] text-lg font-black uppercase tracking-[0.2em] transition-colors ${
+            isScrolled 
+              ? "text-slate-900 hover:text-blue-700" 
+              : "text-white hover:text-blue-200"
+          }`}>
+            NCC Technology
+          </span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm text-zinc-300">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="transition hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+
+        <a
+          href="mailto:nicontrerasc8@gmail.com?subject=Consulta%20sobre%20Servicios%20NCC%20Technology"
+          className={`group inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+            isScrolled 
+              ? "bg-slate-200 text-slate-900 hover:bg-slate-200" 
+              : "bg-white text-[#0A2E5C] hover:bg-blue-50"
+          }`}
+        >
+          Agendar Consultoría
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </a>
       </div>
     </header>
   );

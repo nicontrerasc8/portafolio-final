@@ -20,38 +20,38 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ncctechnology.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Nicolas Contreras Castellano | Data Systems & Product Engineer",
-    template: "%s | Nicolas Contreras Castellano",
+    default: "NCC Technology | Soluciones de datos simples y confiables",
+    template: "%s | NCC Technology",
   },
   description:
-    "End-to-end data and automation systems for enterprise decisions, from pipelines and SQL logic to dashboards and web delivery.",
+    "NCC Technology transforma decisiones operativas con datos claros y automatizaciones sencillas listas para funcionar.",
   openGraph: {
-    title: "Nicolas Contreras Castellano",
+    title: "NCC Technology",
     description:
-      "End-to-end data and automation systems for enterprise decisions, from pipelines and SQL logic to dashboards and web delivery.",
+      "NCC Technology transforma decisiones operativas con datos claros y automatizaciones sencillas.",
     url: siteUrl,
-    siteName: "Nicolas Contreras Castellano",
+    siteName: "NCC Technology",
     images: [
       {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "Nicolas Contreras Castellano Portfolio",
+        alt: "NCC Technology",
       },
     ],
-    locale: "en_US",
+    locale: "es_ES",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nicolas Contreras Castellano",
+    title: "NCC Technology",
     description:
-      "End-to-end data and automation systems for enterprise decisions, from pipelines and SQL logic to dashboards and web delivery.",
+      "NCC Technology transforma decisiones operativas con datos claros y automatizaciones sencillas.",
     images: ["/og.svg"],
   },
 };
@@ -62,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}
       >

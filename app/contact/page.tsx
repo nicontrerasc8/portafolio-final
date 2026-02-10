@@ -4,9 +4,18 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contacto | NCC Technology",
   description:
-    "Start a conversation about data systems, automation, and product delivery.",
+    "Conversemos sobre soluciones de datos sencillas, automatizaciones y entregas web rápidas.",
+};
+
+const copy = {
+  kicker: "Contacto",
+  title: "¿Listos para lanzar tu producto de datos?",
+  description:
+    "Trabajamos con equipos que necesitan claridad, velocidad y automatizaciones que se mantienen solas. Comparte tu reto y trazaremos el camino completo.",
+  email: "hola@ncctechnology.com",
+  linkLabel: "LinkedIn",
 };
 
 export default function ContactPage() {
@@ -17,22 +26,20 @@ export default function ContactPage() {
         <Reveal>
           <div className="glass rounded-3xl p-10 text-center">
             <p className="text-xs uppercase tracking-[0.35em] text-zinc-400">
-              Contact
+              {copy.kicker}
             </p>
             <h1 className="section-title mt-4 text-4xl font-semibold text-white">
-              Ready to ship your data product?
+              {copy.title}
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-sm text-zinc-300">
-              I partner with teams who need secure, scalable data systems and
-              web delivery. Share your goals and I will map the path from data
-              ingestion to decision-ready output.
+              {copy.description}
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <a
-                href="mailto:hello@nicolascontreras.dev"
+                href={`mailto:${copy.email}`}
                 className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#35f2c6]"
               >
-                hello@nicolascontreras.dev
+                {copy.email}
               </a>
               <a
                 href="https://www.linkedin.com/"
@@ -40,7 +47,7 @@ export default function ContactPage() {
                 rel="noreferrer"
                 className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/60"
               >
-                LinkedIn
+                {copy.linkLabel}
               </a>
             </div>
           </div>

@@ -1,586 +1,637 @@
 ﻿"use client";
 import Link from "next/link";
-import Reveal from "./components/Reveal";
+import Image from "next/image";
+import { useState } from "react";
+import { 
+  ArrowRight, 
+  FileSpreadsheet, 
+  Mail, 
+  RefreshCw, 
+  AlertCircle, 
+  BarChart3, 
+  Users,
+  Zap,
+  Settings,
+  Smartphone,
+  Building2,
+  ShoppingCart,
+  CheckCircle2,
+  X,
+  ExternalLink,
+  TrendingUp,
+  Shield,
+  Clock
+} from "lucide-react";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
-import { featuredProjects } from "./lib/content";
 
-export default function Home() {
+const projects = [
+  {
+    id: 'excellia',
+    name: 'Excellia - Grupo Romero',
+    logo: '/excellia.png',
+    description: 'Automatización de identificación del Beneficiario Final',
+    challenge:
+      'Excellia requería automatizar el proceso de identificación del Beneficiario Final, el cual implicaba análisis manual de estructuras societarias complejas, múltiples fuentes de información y alto riesgo operativo en procesos de cumplimiento regulatorio.',
+    solution:
+      'Lideré el desarrollo de una plataforma digital que traduce los requerimientos legales y normativos en un flujo automatizado. La solución centraliza información societaria, asegura trazabilidad completa y permite analizar estructuras complejas y relaciones indirectas entre empresas.',
+    results: [
+      'Reducción drástica del tiempo de análisis frente al proceso manual',
+      'Reportes listos para auditorías y revisiones internas',
+      'Mayor control, trazabilidad y reducción del riesgo operativo',
+      'Menor dependencia de análisis manual y hojas de cálculo'
+    ],
+    tags: ['LegalTech', 'Compliance', 'Process Automation', 'Data Modeling']
+  },
+
+  {
+    id: 'ludus',
+    name: 'LUDUS',
+    logo: '/ludus.png',
+    description: 'Plataforma educativa gamificada',
+    challenge:
+      'Las instituciones educativas enfrentan baja motivación estudiantil y limitada visibilidad del progreso académico en tiempo real, con procesos pedagógicos poco adaptados al entorno digital.',
+    solution:
+      'Desarrollo de LUDUS, una plataforma educativa gamificada que combina contenido académico, evaluación automática y mecánicas de juego. Permite a estudiantes, docentes y líderes educativos visualizar progreso, desempeño y hábitos de aprendizaje desde dashboards centralizados.',
+    results: [
+      'Mejora en engagement y constancia de los estudiantes',
+      'Seguimiento académico en tiempo real',
+      'Base tecnológica escalable para instituciones educativas'
+    ],
+    link: "https://www.ludus-edu.com/",
+    tags: ['EdTech', 'Gamification', 'SaaS', 'Education']
+  },
+
+  {
+    id: 'un-ratito',
+    name: 'Un ratito con Dios',
+    logo: '/unratitocondios.png',
+    description: 'Plataforma digital de acompañamiento espiritual',
+    challenge:
+      'La comunidad requería un espacio digital accesible para compartir reflexiones, contenidos espirituales y acompañamiento, más allá de los canales tradicionales.',
+    solution:
+      'Desarrollo de una plataforma digital enfocada en la difusión de contenido espiritual y reflexivo, facilitando el acceso a mensajes, recursos y espacios de conexión para la comunidad.',
+    results: [
+      'Mayor alcance del contenido espiritual',
+      'Acceso digital constante para la comunidad',
+      'Centralización de contenidos y mensajes'
+    ],
+      link: 'https://lnk.bio/unratitocondios',
+    tags: ['Content Platform', 'Community', 'Digital Experience']
+  },
+
+  {
+    id: 'goxa',
+    name: 'GOXA',
+    logo: '/goxa.png',
+    description: 'E-commerce de productos naturales',
+    challenge:
+      'GOXA necesitaba digitalizar su canal de ventas y ordenar su operación comercial para mejorar la experiencia de compra y facilitar la gestión del negocio.',
+    solution:
+      'Desarrollé e implementé el e-commerce de GOXA, una plataforma orientada a la venta de productos naturales, optimizando el flujo de compra y sentando las bases para la operación digital del negocio.',
+    results: [
+      'Canal de ventas digital funcional',
+      'Mejora en la experiencia de compra',
+      'Base tecnológica para escalar la operación comercial'
+    ],
+    link: 'https://goxa.pe',
+    tags: ['E-commerce', 'Digital Sales', 'Product Platform']
+  },
+
+  {
+    id: 'elpez',
+    name: 'El Pez Nuestro de Cada Día',
+    logo: '/elpez.png',
+    description: 'Landing page corporativa con contactos, posts y videos para el negocio gastronómico',
+    challenge:
+      'El equipo requería un canal digital completo que reuniera pedidos, contactos, posts de redes y contenido audiovisual en un solo punto para promover su propuesta de valor.',
+    solution:
+      'Diseñamos una landing page 360° que integra formularios de contacto, secciones de redes sociales, galerías de videos y enlaces de pedidos, con foco en contenido multimedia y experiencia móvil.',
+    results: [
+      'Canal digital oficial para impulsar marca y pedidos',
+      'Contenido visual y social centralizado en una sola experiencia',
+      'Mayor engagement gracias a videos y enlaces directos de contacto'
+    ],
+    link: 'https://elpeznuestrodecadadia.vercel.app/',
+    tags: ['Food Tech', 'Operations', 'Digital Transformation']
+  }
+];
+
+// Modal component
+function ProjectModal({ 
+  project, 
+  isOpen, 
+  onClose 
+}: { 
+  project: typeof projects[0]; 
+  isOpen: boolean; 
+  onClose: () => void;
+}) {
+  if (!isOpen) return null;
+
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
-      <SiteHeader />
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+      onClick={onClose}
+    >
+      <div 
+        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 transition-colors"
+        >
+          <X className="w-5 h-5 text-neutral-600" />
+        </button>
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-8 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Contenido izquierdo */}
-            <div className="max-w-4xl">
-              {/* Status Badge */}
-              <Reveal delay={0.1}>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
-                    Open to opportunities
-                  </span>
-                </div>
-              </Reveal>
-
-              {/* Main Headline */}
-              <Reveal delay={0.2}>
-                <h1 className="text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
-                  Hi, I'm Nicolás.
-                  <br />
-                  I build{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400">
-                    tools that work
-                  </span>
-                  .
-                </h1>
-              </Reveal>
-
-              {/* Intro */}
-              <Reveal delay={0.3}>
-                <div className="space-y-4 text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl">
-                  <p>
-                    I'm a systems & industrial engineer who fell in love with coding. I specialize in
-                    building data systems and internal tools that actually make people's jobs easier.
-                  </p>
-                  <p>
-                    My work is about <strong className="text-gray-900 dark:text-white">solving real problems</strong>—automating
-                    the boring stuff, turning messy data into clear insights, and building interfaces
-                    people don't hate using.
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* CTAs */}
-              <Reveal delay={0.4}>
-                <div className="flex flex-wrap gap-4 mb-12">
-                  <Link
-                    href="#projects"
-                    className="group inline-flex items-center gap-2 px-6 py-3 bg-gray-900  dark:text-gray-900 rounded-lg font-medium hover:scale-105 transition-all"
-                  >
-                    See my work
-                    <svg
-                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
-                </div>
-              </Reveal>
-
-              {/* Skills tags */}
-              <Reveal delay={0.5}>
-                <div className="flex flex-wrap gap-3">
-                  {["Python", "React", "SQL", "Data Pipelines", "Automation", "Next.js"].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </Reveal>
+        {/* Content */}
+        <div className="p-8 sm:p-14">
+          {/* Logo and header */}
+          <div className="flex items-center gap-8 mb-10 pb-10 border-b border-neutral-200">
+            <div className="w-24 h-24 relative bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-2xl shadow-lg flex items-center justify-center overflow-hidden border border-neutral-200">
+              <Image
+                src={project.logo}
+                alt={project.name}
+                width={70}
+                height={70}
+                className="object-contain"
+              />
             </div>
-
-            {/* SVG Animado al costado */}
-            <Reveal delay={0.6}>
-              <div className="hidden lg:block relative">
-                <svg
-                  viewBox="0 0 400 400"
-                  className="w-full h-auto"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Círculos orbitales */}
-                  <g className="animate-[spin_20s_linear_infinite]" style={{ transformOrigin: '200px 200px' }}>
-                    <circle
-                      cx="200"
-                      cy="200"
-                      r="150"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      className="text-blue-500/20 dark:text-blue-400/20"
-                    />
-                    <circle
-                      cx="200"
-                      cy="50"
-                      r="8"
-                      fill="currentColor"
-                      className="text-blue-500 dark:text-blue-400"
-                    >
-                      <animateTransform
-                        attributeName="transform"
-                        attributeType="XML"
-                        type="rotate"
-                        from="0 200 200"
-                        to="360 200 200"
-                        dur="20s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  </g>
-
-                  <g className="animate-[spin_15s_linear_infinite_reverse]" style={{ transformOrigin: '200px 200px' }}>
-                    <circle
-                      cx="200"
-                      cy="200"
-                      r="100"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                      className="text-cyan-500/20 dark:text-cyan-400/20"
-                    />
-                    <circle
-                      cx="300"
-                      cy="200"
-                      r="6"
-                      fill="currentColor"
-                      className="text-cyan-500 dark:text-cyan-400"
-                    >
-                      <animateTransform
-                        attributeName="transform"
-                        attributeType="XML"
-                        type="rotate"
-                        from="0 200 200"
-                        to="-360 200 200"
-                        dur="15s"
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  </g>
-
-                  {/* Hexágono central */}
-                  <g className="animate-pulse">
-                    <polygon
-                      points="200,130 245,155 245,205 200,230 155,205 155,155"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="text-blue-600 dark:text-blue-400"
-                    />
-                    <polygon
-                      points="200,145 235,165 235,195 200,215 165,195 165,165"
-                      fill="currentColor"
-                      className="text-blue-500/10 dark:text-blue-400/10"
-                    />
-                  </g>
-
-                  {/* Puntos flotantes */}
-                  <circle cx="100" cy="100" r="3" fill="currentColor" className="text-blue-400 dark:text-blue-300">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
-                    <animate attributeName="cy" values="100;90;100" dur="3s" repeatCount="indefinite" />
-                  </circle>
-                  <circle cx="300" cy="120" r="3" fill="currentColor" className="text-cyan-400 dark:text-cyan-300">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite" />
-                    <animate attributeName="cy" values="120;110;120" dur="4s" repeatCount="indefinite" />
-                  </circle>
-                  <circle cx="80" cy="280" r="3" fill="currentColor" className="text-blue-500 dark:text-blue-400">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="3.5s" repeatCount="indefinite" />
-                    <animate attributeName="cy" values="280;270;280" dur="3.5s" repeatCount="indefinite" />
-                  </circle>
-                  <circle cx="320" cy="300" r="3" fill="currentColor" className="text-cyan-500 dark:text-cyan-400">
-                    <animate attributeName="opacity" values="0.3;1;0.3" dur="4.5s" repeatCount="indefinite" />
-                    <animate attributeName="cy" values="300;290;300" dur="4.5s" repeatCount="indefinite" />
-                  </circle>
-
-                  {/* Líneas de conexión animadas */}
-                  <line x1="200" y1="200" x2="100" y2="100" stroke="currentColor" strokeWidth="1" className="text-blue-500/20 dark:text-blue-400/20">
-                    <animate attributeName="opacity" values="0.1;0.3;0.1" dur="3s" repeatCount="indefinite" />
-                  </line>
-                  <line x1="200" y1="200" x2="300" y2="120" stroke="currentColor" strokeWidth="1" className="text-cyan-500/20 dark:text-cyan-400/20">
-                    <animate attributeName="opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite" />
-                  </line>
-                  <line x1="200" y1="200" x2="80" y2="280" stroke="currentColor" strokeWidth="1" className="text-blue-500/20 dark:text-blue-400/20">
-                    <animate attributeName="opacity" values="0.1;0.3;0.1" dur="3.5s" repeatCount="indefinite" />
-                  </line>
-                </svg>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Patrón de fondo sutil */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
-            style={{
-              backgroundImage: `
-          linear-gradient(to right, #000 1px, transparent 1px),
-          linear-gradient(to bottom, #000 1px, transparent 1px)
-        `,
-              backgroundSize: '4rem 4rem'
-            }}
-          ></div>
-        </div>
-      </section>
-
-      {/* PROJECTS SECTION */}
-      <section id="projects" className="py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
-        {/* Elementos decorativos de fondo */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
-        <div className="absolute top-40 -left-20 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 -right-20 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-6 lg:px-8 relative z-10">
-          {/* Header mejorado */}
-          <Reveal>
-            <div className="mb-16 max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-                <svg className="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-                <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
-                  Featured Work
-                </span>
-              </div>
-              <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-                Projects
+            <div className="flex-1">
+              <h2 className="text-4xl font-black text-neutral-900 mb-3 tracking-tight">
+                {project.name}
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-                Here's some of the work I've done. Most of it involves taking manual processes
-                and turning them into automated systems.
+              <p className="text-xl text-neutral-600 leading-relaxed">
+                {project.description}
               </p>
             </div>
-          </Reveal>
+          </div>
 
-          {/* Projects list mejorado */}
-          <div className="space-y-8">
-            {featuredProjects.map((project, index) => (
-              <Reveal key={project.slug} delay={0.1 * index}>
-                <Link href={`/projects/${project.slug}`}>
-                  <article className="group relative bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300">
-                    {/* Efecto de brillo al hover */}
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-
-                    <div className="relative grid lg:grid-cols-3 gap-8">
-                      {/* Left: Title & tags */}
-                      <div className="space-y-4">
-                        {/* Número del proyecto */}
-                        <div className="flex items-center gap-3">
-                          <span className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-500/10 dark:bg-blue-400/10 text-blue-600 dark:text-blue-400 font-bold text-sm border border-blue-500/20">
-                            {String(index + 1).padStart(2, '0')}
-                          </span>
-                          <div className="flex-1 h-px bg-gradient-to-r from-blue-500/20 to-transparent"></div>
-                        </div>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2">
-                          {project.categories.slice(0, 2).map((cat) => (
-                            <span
-                              key={cat}
-                              className="inline-flex items-center gap-1 text-xs px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200/50 dark:border-blue-800/50"
-                            >
-                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 8 8">
-                                <circle cx="4" cy="4" r="3" />
-                              </svg>
-                              {cat}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Título */}
-                        <div>
-                          <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors flex items-center gap-2">
-                            {project.name}
-                            <svg className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                          </h3>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                            {project.label}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Right: Content mejorado */}
-                      <div className="lg:col-span-2 space-y-6">
-                        {/* Descripción */}
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
-                          {project.summary}
-                        </p>
-
-                        {/* Problem & Result con iconos */}
-                        <div className="grid md:grid-cols-2 gap-4">
-                          {/* Problem */}
-                          <div className="relative p-4 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700">
-                            <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-red-500/10 dark:bg-red-400/10 flex items-center justify-center">
-                                <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                </svg>
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-1">
-                                  Problem
-                                </span>
-                                <p className="text-sm text-gray-700 dark:text-gray-300">
-                                  {project.problem}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Result */}
-                          <div className="relative p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-200 dark:border-emerald-800/50">
-                            <div className="flex items-start gap-3">
-                              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 dark:bg-emerald-400/10 flex items-center justify-center">
-                                <svg className="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide block mb-1">
-                                  Result
-                                </span>
-                                <p className="text-sm text-gray-900 dark:text-gray-100 font-medium">
-                                  {project.outcome}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* View details mejorado */}
-                        <div className="pt-2">
-                          <div className="inline-flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 font-medium group-hover:gap-3 transition-all">
-                            <span>View case study</span>
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Indicador de hover */}
-                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-cyan-500 rounded-l-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  </article>
-                </Link>
-              </Reveal>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-3 mb-10">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200/50 text-blue-700 text-sm font-bold tracking-wide"
+              >
+                {tag}
+              </span>
             ))}
           </div>
 
-          {/* Ver más mejorado */}
-          <Reveal delay={0.3}>
-            <div className="mt-16 text-center">
-              <Link
-                href="/projects"
-                className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all hover:shadow-lg hover:shadow-blue-500/10"
-              >
-                <span>View all projects</span>
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </Reveal>
+          {/* Challenge */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-black text-neutral-900 mb-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+                <AlertCircle className="w-5 h-5 text-red-600" />
+              </div>
+              Problemática identificada
+            </h3>
+            <p className="text-neutral-700 leading-relaxed text-lg pl-13">
+              {project.challenge}
+            </p>
+          </div>
 
-    
+          {/* Solution */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-black text-neutral-900 mb-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-blue-600" />
+              </div>
+              Solución Implementada
+            </h3>
+            <p className="text-neutral-700 leading-relaxed text-lg pl-13">
+              {project.solution}
+            </p>
+          </div>
+
+          {/* Results */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-black text-neutral-900 mb-6 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-green-600" />
+              </div>
+              Impacto Medible
+            </h3>
+            <ul className="space-y-4">
+              {project.results.map((result, index) => (
+                <li key={index} className="flex items-start gap-4 pl-13">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-neutral-700 leading-relaxed text-lg font-medium">{result}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CTA */}
+          {
+            project.link &&
+            <div className="pt-6 border-t border-neutral-200">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" rounded-xl bg-gradient-to-r from-blue-600 px-8 py-4 via-blue-700 to-purple-700 text-white font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+            >
+              <span className="inline-flex items-center gap-3 text-white">
+                Visitar sitio web
+              <ExternalLink className="w-5 h-5" />
+              </span>
+            </a>
+          </div>
+          
+          }
         </div>
+      </div>
+    </div>
+  );
+}
+
+// Company logo component with modal trigger
+function CompanyLogo({ 
+  project, 
+  onClick 
+}: { 
+  project: typeof projects[0]; 
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative flex items-center justify-center p-12 sm:p-14 bg-white rounded-[28px] border border-neutral-200 shadow-sm hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] cursor-pointer overflow-hidden min-h-[260px] w-full sm:w-[320px]"
+    >
+      <div className="relative w-44 h-28 flex items-center justify-center z-0">
+        <Image
+          src={project.logo}
+          alt={project.name}
+          width={130}
+          height={70}
+          className="object-contain transition-transform duration-300 group-hover:scale-110"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 rounded-2xl transition-all duration-300" />
+      
+      {/* Hover overlay with text */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#051829] via-[#062341] to-[#0A2E5C] rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center p-6 z-10">
+        <div className="text-center">
+          <p className="text-white font-bold text-base mb-2">Ver caso de éxito</p>
+          <p className="text-white/90 text-sm leading-relaxed">{project.description}</p>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+// Animated tech grid background
+function TechGridBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Base gradient - azul empresarial más oscuro */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#051829] via-[#062341] to-[#0A2E5C]" />
+      
+      {/* Animated grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e5a9a20_1px,transparent_1px),linear-gradient(to_bottom,#1e5a9a20_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      
+      {/* Glowing orbs - tonos azul oscuro */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#1E40AF]/15 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#0F2D54]/15 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-[#1E3A8A]/10 rounded-full blur-3xl" />
+      
+      {/* Circuit lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-10">
+        <defs>
+          <pattern id="circuit" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+            <path d="M 0 100 L 50 100 L 50 50 L 150 50 L 150 150 L 200 150" 
+                  stroke="#1E40AF" 
+                  strokeWidth="1" 
+                  fill="none" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#circuit)" />
+      </svg>
+      
+      {/* Noise texture overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')] opacity-20" />
+    </div>
+  );
+}
+
+// Problem item with icon
+function ProblemItem({ icon: Icon, text }: { icon: any; text: string }) {
+  return (
+    <div className="flex items-start gap-5 p-6 rounded-xl bg-gradient-to-br from-red-50 to-orange-50/50 border border-red-200/50 hover:border-red-300/50 hover:shadow-lg transition-all duration-300">
+      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg">
+        <Icon className="w-6 h-6 text-white" />
+      </div>
+      <p className="text-neutral-800 leading-relaxed pt-2 text-lg font-medium">{text}</p>
+    </div>
+  );
+}
+
+// Service card component
+function ServiceCard({ 
+  icon: Icon, 
+  title, 
+  description
+}: { 
+  icon: any; 
+  title: string; 
+  description: string;
+}) {
+  return (
+    <div className="group relative p-10 rounded-2xl bg-white border border-neutral-200 shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:via-purple-500/5 group-hover:to-cyan-500/5 rounded-2xl transition-all duration-300" />
+      <div className="relative">
+        <div className="w-20 h-20 bg-gradient-to-br from-[#051829] via-[#062341] to-[#0A2E5C] rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg mx-auto">
+          <Icon className="w-10 h-10 text-white" />
+        </div>
+        <h3 className="text-2xl font-black text-neutral-900 mb-5 tracking-tight">{title}</h3>
+        <p className="text-neutral-600 leading-relaxed text-lg">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+// Target audience card
+function AudienceCard({ 
+  icon: Icon, 
+  title, 
+  description
+}: { 
+  icon: any; 
+  title: string; 
+  description: string;
+}) {
+  return (
+    <div className="group relative p-10 rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700 shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-[1.02] overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="relative">
+        <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-8 group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300 border border-white/20 mx-auto">
+          <Icon className="w-10 h-10 text-white" />
+        </div>
+        <h3 className="text-2xl font-black text-white mb-5 tracking-tight">{title}</h3>
+        <p className="text-neutral-300 leading-relaxed text-lg">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openProjectModal = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 300);
+  };
+
+  return (
+    <div className="min-h-screen bg-neutral-50">
+      <SiteHeader />
+
+      {/* ===================== */}
+      {/* HERO */}
+      {/* ===================== */}
+      <section className="relative py-24 sm:py-40 overflow-hidden">
+        <TechGridBackground />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-10">
+              <Shield className="w-4 h-4 text-blue-300" />
+              <span className="text-sm font-bold text-white tracking-wide">
+                Transformación Digital Empresarial
+              </span>
+            </div>
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white mb-8 leading-tight tracking-tight">
+              NCC Technology
+            </h1>
+
+            <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-100 mb-6 tracking-tight">
+              Eliminamos las ineficiencias operacionales de su empresa
+            </p>
+
+            <p className="text-lg sm:text-xl lg:text-2xl text-blue-100/90 mb-14 max-w-4xl mx-auto leading-relaxed">
+              Desarrollamos sistemas tecnológicos a medida que optimizan procesos operativos, 
+              eliminan dependencias de herramientas manuales y escalan con su crecimiento empresarial.
+            </p>
+
+            {/* Company Logos */}
+            <div className="flex flex-col items-center gap-10">
+              <p className="text-sm font-bold text-blue-200 uppercase tracking-widest">
+                Proyectos
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-6 max-w-5xl mx-auto">
+                {projects.map((project) => (
+                  <CompanyLogo 
+                    key={project.id}
+                    project={project}
+                    onClick={() => openProjectModal(project)}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-neutral-50 to-transparent" />
       </section>
 
-      {/* ABOUT/APPROACH SECTION */}
-      <section className="py-24 bg-white dark:bg-gray-950 relative overflow-hidden">
-        {/* Elementos decorativos de fondo */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-
-        <div className="container mx-auto px-6 lg:px-8 relative z-10">
+      {/* ===================== */}
+      {/* PROBLEMA */}
+      {/* ===================== */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <Reveal>
-              <div className="mb-16">
-                <h2 className="text-3xl lg:text-5xl font-bold mb-4">
-                  How I work
-                </h2>
-                <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400"></div>
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 border border-red-200 mb-6">
+                <AlertCircle className="w-4 h-4 text-red-600" />
+                <span className="text-sm font-bold text-red-700 tracking-wide">INEFICIENCIAS OPERACIONALES</span>
               </div>
-            </Reveal>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-neutral-900 mb-8 tracking-tight">
+                Desafíos Empresariales Frecuentes
+              </h2>
+              <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+                Identificamos y resolvemos problemas críticos que limitan el crecimiento escalable
+              </p>
+            </div>
 
-            <Reveal delay={0.2}>
-              <div className="space-y-12">
-                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl">
-                  I come from a systems & industrial engineering background, which means I think a lot about
-                  <strong className="text-gray-900 dark:text-white"> processes, efficiency, and systems</strong>.
-                  When I build something, I'm thinking about how it fits into the bigger picture.
-                </p>
-
-                {/* Grid de principios con iconos */}
-                <div className="grid md:grid-cols-2 gap-6 py-8">
-                  {/* Card 1: Usefulness */}
-                  <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-blue-500/10 dark:bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                          I focus on usefulness
-                          <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                          </svg>
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          The best tool is one people actually use. I design with the end user in mind,
-                          whether that's a warehouse manager or a data analyst.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 2: Scale */}
-                  <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-cyan-500 dark:hover:border-cyan-400 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 dark:bg-cyan-400/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg className="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                          I build for scale
-                          <svg className="w-4 h-4 text-cyan-600 dark:text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                          </svg>
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          What works for 100 records should work for 100,000. I think about performance
-                          and maintainability from day one.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 3: Clarity */}
-                  <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-blue-500/10 dark:bg-blue-400/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                          I value clarity
-                          <svg className="w-4 h-4 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                          </svg>
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          Clean code, clear documentation, simple interfaces. Complexity should be
-                          hidden from users, not from the codebase.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 4: Automation */}
-                  <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-cyan-500 dark:hover:border-cyan-400 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-cyan-500/10 dark:bg-cyan-400/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg className="w-6 h-6 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-bold text-xl text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                          I automate relentlessly
-                          <svg className="w-4 h-4 text-cyan-600 dark:text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                          </svg>
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          If something takes more than 5 minutes and happens more than once a week,
-                          it should probably be automated.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Call to action final */}
-                <div className="relative bg-gradient-to-r from-blue-500/10 via-cyan-500/10 to-blue-500/10 dark:from-blue-400/10 dark:via-cyan-400/10 dark:to-blue-400/10 p-8 rounded-2xl border border-blue-500/20 dark:border-blue-400/20">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
-                      <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-lg text-gray-900 dark:text-white font-semibold mb-2">
-                        Currently interested in:
-                      </p>
-                      <p className="text-gray-600 dark:text-gray-300">
-                        Building internal tools and data platforms that help companies make better decisions faster.
-                        If you're working on something in this space, I'd love to hear about it.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ProblemItem 
+                icon={FileSpreadsheet}
+                text="Dependencia crítica de hojas de cálculo para procesos core del negocio"
+              />
+              <ProblemItem 
+                icon={Mail}
+                text="Información fragmentada en múltiples canales de comunicación no integrados"
+              />
+              <ProblemItem 
+                icon={RefreshCw}
+                text="Procesos operativos con alta dependencia de recursos humanos específicos"
+              />
+              <ProblemItem 
+                icon={AlertCircle}
+                text="Inconsistencias de datos por transferencia manual y falta de validaciones sistémicas"
+              />
+              <ProblemItem 
+                icon={BarChart3}
+                text="Generación de reportes ejecutivos con demoras de horas o días"
+              />
+              <ProblemItem 
+                icon={Clock}
+                text="Equipos operativos saturados con tareas de bajo valor agregado"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* STATS - más honestos */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-6 lg:px-8">
-          <Reveal>
-            <div className="grid md:grid-cols-4 gap-8 max-w-4xl">
-              <div>
-                <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                  50k+
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Records processed monthly across systems I've built
-                </div>
+      {/* ===================== */}
+      {/* QUÉ HACEMOS */}
+      {/* ===================== */}
+      <section className="py-24 bg-gradient-to-br from-neutral-50 via-blue-50/30 to-neutral-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 mb-6">
+                <Zap className="w-4 h-4 text-blue-600" />
+                <span className="text-sm font-bold text-blue-700 tracking-wide">NUESTRA PROPUESTA DE VALOR</span>
               </div>
-              <div>
-                <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                  1,500+
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Active users on tools I've developed
-                </div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                  30+
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Custom modules built for automation
-                </div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-                  Top 10%
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
-                  Academic ranking in engineering program
-                </div>
-              </div>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-neutral-900 mb-8 tracking-tight">
+                Soluciones Tecnológicas Estratégicas
+              </h2>
+              <p className="text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed mb-6">
+                No ofrecemos productos estandarizados ni soluciones genéricas de mercado.
+              </p>
+              <p className="text-lg text-neutral-600 max-w-3xl mx-auto leading-relaxed mb-6">
+                Iniciamos con un diagnóstico profundo de sus procesos operacionales: análisis de flujos de trabajo, 
+                identificación de dependencias críticas y mapeo de puntos de fricción.
+              </p>
+              <p className="text-lg text-neutral-600 max-w-3xl mx-auto leading-relaxed">
+                Posteriormente, diseñamos e implementamos sistemas tecnológicos que automatizan operaciones 
+                repetitivas y optimizan el flujo de información empresarial.
+              </p>
             </div>
-          </Reveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <ServiceCard
+                icon={Zap}
+                title="Automatización de Procesos"
+                description="Eliminamos tareas operativas repetitivas mediante automatización inteligente y flujos de trabajo sistematizados."
+              />
+              <ServiceCard
+                icon={Settings}
+                title="Desarrollo a Medida"
+                description="Creamos soluciones tecnológicas personalizadas adaptadas a la estructura operacional específica de su organización."
+              />
+              <ServiceCard
+                icon={Smartphone}
+                title="Plataformas Empresariales"
+                description="Desarrollamos aplicaciones y plataformas escalables con enfoque en usabilidad, mantenibilidad y rendimiento."
+              />
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* ===================== */}
+      {/* PARA QUIÉN */}
+      {/* ===================== */}
+      <section className="py-24 bg-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl" />
+        </div>
 
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-20">
+           
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-8 tracking-tight">
+                Organizaciones en Fase de Escalamiento
+              </h2>
+              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
+                Trabajamos con empresas establecidas preparadas para implementar transformación operacional
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <AudienceCard
+                icon={Building2}
+                title="Empresas Consolidadas"
+                description="Organizaciones con procesos operacionales definidos que requieren sistematización y optimización para escalar eficientemente."
+              />
+              <AudienceCard
+                icon={ShoppingCart}
+                title="Negocios Digitales"
+                description="Plataformas de E-commerce y empresas tecnológicas que necesitan infraestructura operacional robusta para soportar crecimiento acelerado."
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===================== */}
+      {/* CTA FINAL */}
+      {/* ===================== */}
+      <section className="py-24 sm:py-40 bg-gradient-to-br from-[#051829] via-[#062341] to-[#0A2E5C] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-10">
+              <CheckCircle2 className="w-5 h-5 text-emerald-300" />
+              <span className="text-sm font-bold text-white tracking-wide">
+                CONSULTORÍA INICIAL SIN COMPROMISO
+              </span>
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white mb-10 leading-tight tracking-tight">
+              Si identifica ineficiencias operacionales en su empresa,<br className="hidden lg:block" /> 
+              existe una solución tecnológica.
+            </h2>
+
+            <p className="text-xl sm:text-2xl text-white/90 mb-14 max-w-3xl mx-auto leading-relaxed">
+              Agendemos una sesión de diagnóstico. Analizaremos sus procesos operacionales, 
+              identificaremos oportunidades de optimización y determinaremos la viabilidad de implementación.
+            </p>
+
+            <a
+              href="mailto:nicontrerasc8@gmail.com?subject=Consulta%20sobre%20Servicios%20NCC%20Technology"
+              className="group inline-flex items-center gap-3 px-12 py-6 rounded-xl bg-white text-[#051829] font-bold text-xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105"
+            >
+              Agendar Consultoría Estratégica
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </section>
 
       <SiteFooter />
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 }
