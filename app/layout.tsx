@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -7,10 +7,10 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
-const plexSans = IBM_Plex_Sans({
+const interSans = Inter({
   variable: "--font-plex",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${spaceGrotesk.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${interSans.variable} ${plexMono.variable} antialiased`}
       >
         {children}
       </body>

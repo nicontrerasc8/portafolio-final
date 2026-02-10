@@ -28,7 +28,7 @@ export default function SiteHeader() {
           href="/"
          
         >
-          <span  className={`font-[var(--font-space)] text-lg font-black uppercase tracking-[0.2em] transition-colors ${
+          <span  className={`font-[var(--font-space)] text-lg font-black  tracking-[0.2em] transition-colors ${
             isScrolled 
               ? "text-slate-900 hover:text-blue-700" 
               : "text-white hover:text-blue-200"
