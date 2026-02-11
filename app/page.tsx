@@ -213,7 +213,7 @@ function CompanyLogo({ project, onClick }: { project: typeof projects[0]; onClic
   return (
     <button
       onClick={onClick}
-      className="group relative w-50 h-50 rounded-2xl bg-white p-6 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl border border-slate-200 overflow-hidden"
+      className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-6 min-h-[120px] sm:min-h-[140px]"
       aria-label={`Ver caso de éxito de ${project.name}`}
     >
       <Image
@@ -320,16 +320,21 @@ function ServiceCard({ icon: Icon, title, description }: { icon: any; title: str
 // Target audience card
 function AudienceCard({ icon: Icon, title, description }: { icon: any; title: string; description: string; }) {
   return (
-    <div className="p-8 bg-slate-800/40 rounded-2xl border border-slate-700/50 hover:border-slate-600/50 transition-all hover:shadow-lg group">
-      <div className="mb-5 p-4 bg-slate-700/30 rounded-xl w-fit group-hover:bg-slate-700/50 transition-colors">
-        <Icon className="w-8 h-8 text-slate-300" />
+    <div className="relative overflow-hidden rounded-3xl border border-slate-700/50 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-6 sm:p-8 shadow-2xl shadow-slate-950/70 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-blue-500/30">
+      <div className="absolute -top-10 -right-8 h-32 w-32 rounded-full bg-blue-500/20 blur-3xl transition-opacity duration-300 group-hover:opacity-80" />
+      <div className="flex items-center justify-center">
+        <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 shadow-lg shadow-blue-900/30">
+          <Icon className="h-8 w-8 text-white" />
+          <span className="absolute inset-0 rounded-2xl border border-white/20" />
+        </div>
       </div>
-      <h3 className="text-xl font-bold text-white mb-3 font-display">
+      <h3 className="relative z-10 mt-6 text-xl font-bold text-white font-display">
         {title}
       </h3>
-      <p className="text-slate-300 leading-relaxed font-body text-base">
+      <p className="relative z-10 mt-3 text-slate-300 leading-relaxed font-body text-base">
         {description}
       </p>
+    
     </div>
   );
 }
@@ -381,19 +386,19 @@ export default function Home() {
       {/* ===================== */}
       {/* HERO */}
       {/* ===================== */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 py-24">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <TechGridBackground />
         
-        <div className="relative z-10 max-w-7xl mx-auto text-center">
-          <h1 className="text-7xl md:text-8xl lg:text-8xl font-bold text-white mb-8 leading-[1.1] tracking-tight font-display">
+        <div className="relative z-10 mx-auto max-w-5xl text-center px-4 sm:px-0">
+          <h1 className="text-5xl font-bold text-white mb-6 leading-[1.1] tracking-tight font-display sm:text-6xl md:text-7xl lg:text-8xl">
             NCC Technology
           </h1>
           
-          <p className="text-4xl md:text-5xl lg:text-5xl font-bold text-slate-300 mb-8 leading-tight tracking-tight font-display">
+          <p className="text-3xl font-bold text-slate-300 mb-8 leading-tight tracking-tight font-display sm:text-4xl md:text-5xl">
             Automatizamos lo que <br />hoy te quita tiempo
           </p>
           
-          <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto mb-16 leading-relaxed font-body">
+          <p className="text-base text-slate-300 max-w-4xl mx-auto mb-16 leading-relaxed font-body sm:text-lg md:text-xl">
             Creamos sistemas a medida que eliminan el trabajo manual repetitivo, 
             reducen errores y te permiten enfocarte en lo que realmente importa.
           </p>
@@ -403,7 +408,7 @@ export default function Home() {
             <p className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-10 font-body">
               Proyectos exitosos
             </p>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
               {projects.map((project) => (
                 <CompanyLogo
                   key={project.id}
@@ -422,8 +427,8 @@ export default function Home() {
       {/* ===================== */}
       {/* CASO EXCELLIA */}
       {/* ===================== */}
-      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-950 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-20 px-4 sm:px-6 lg:py-24 bg-gradient-to-b from-slate-950 to-slate-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-0">
           <div className="text-center mb-16">
             <span className="inline-block px-5 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm font-semibold tracking-wide uppercase font-body mb-6">
               Caso de éxito
@@ -436,7 +441,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 mb-12">
             {/* Antes */}
             <div className="bg-slate-800/40 rounded-2xl p-8 border border-red-500/20">
               <div className="text-center mb-6">
@@ -510,10 +515,10 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center">
+          <div className="text-center inline-flex w-full justify-center">
             <button
               onClick={() => openProjectModal(projects[0])}
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all font-semibold font-body shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="inline-flex w-full justify-center items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-white font-semibold font-body shadow-lg transition-all transform hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-xl"
             >
               Ver caso completo
               <ArrowRight className="w-5 h-5" />
@@ -525,8 +530,8 @@ export default function Home() {
       {/* ===================== */}
       {/* PROBLEMA */}
       {/* ===================== */}
-      <section className="relative py-24 px-6 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-20 px-4 sm:px-6 bg-slate-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-0">
           <div className="text-center mb-16">
             <span className="inline-block px-5 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-red-300 text-sm font-semibold tracking-wide uppercase font-body mb-6">
               ¿Te suena familiar?
@@ -539,7 +544,7 @@ export default function Home() {
             </p>
           </div>
 
-         <div className="grid md:grid-cols-2 gap-6">
+         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
   <ProblemItem
     icon={FileSpreadsheet}
     text="Tu equipo depende de Excel para procesos críticos que deberían estar automatizados"
@@ -579,8 +584,8 @@ export default function Home() {
       {/* ===================== */}
       {/* QUÉ HACEMOS */}
       {/* ===================== */}
-      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 to-slate-950">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div className="max-w-6xl mx-auto px-4 sm:px-0">
           <div className="text-center mb-16">
             <span className="inline-block px-5 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-sm font-semibold tracking-wide uppercase font-body mb-6">
               Cómo trabajamos
@@ -590,7 +595,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto mb-16 space-y-6">
+          <div className="max-w-4xl mx-auto mb-16 space-y-6 px-2 sm:px-0">
             <p className="text-lg text-slate-300 leading-relaxed font-body">
               <strong className="text-white font-semibold">No vendemos software estándar.</strong> Cada empresa es diferente y merece una solución que realmente funcione para ella.
             </p>
@@ -604,7 +609,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <ServiceCard
               icon={BarChart3}
               title="1. Entendemos tu negocio"
@@ -627,8 +632,8 @@ export default function Home() {
       {/* ===================== */}
       {/* PARA QUIÉN */}
       {/* ===================== */}
-      <section className="relative py-24 px-6 bg-slate-950">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-20 px-4 sm:px-6 bg-slate-950">
+        <div className="max-w-6xl mx-auto px-4 sm:px-0">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight font-display">
               ¿Es esto para ti?
@@ -638,7 +643,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <AudienceCard
               icon={Building2}
               title="Empresas establecidas"
@@ -661,13 +666,13 @@ export default function Home() {
       {/* ===================== */}
       {/* CTA FINAL */}
       {/* ===================== */}
-      <section className="relative py-32 px-6 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 overflow-hidden">
+      <section className="relative py-24 px-4 sm:px-6 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-slate-500 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
+        <div className="relative z-10 mx-auto max-w-4xl text-center px-4 sm:px-0">
           <span className="inline-block px-5 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-sm font-semibold tracking-wide uppercase font-body mb-8">
             Primera conversación sin costo
           </span>
@@ -683,7 +688,7 @@ export default function Home() {
           
           <Link
             href="#contacto"
-            className="inline-flex items-center gap-3 px-8 py-5 bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold rounded-xl transition-all shadow-2xl hover:shadow-blue-500/25 transform hover:-translate-y-1 font-body"
+            className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-8 py-5 text-lg font-bold text-white transition-all shadow-2xl hover:bg-blue-700 hover:shadow-blue-500/25 transform hover:-translate-y-1 sm:w-auto font-body"
           >
             Agendar conversación
             <ArrowRight className="w-6 h-6" />
