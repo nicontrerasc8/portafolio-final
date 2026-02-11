@@ -515,13 +515,13 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center inline-flex w-full justify-center">
+          <div className="flex justify-center">
             <button
               onClick={() => openProjectModal(projects[0])}
-              className="inline-flex w-full justify-center items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-white font-semibold font-body shadow-lg transition-all transform hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-xl"
+              className="inline-flex items-center gap-2 rounded-2xl border border-blue-500/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-xl"
             >
               Ver caso completo
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
