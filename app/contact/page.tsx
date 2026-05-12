@@ -14,7 +14,7 @@ const copy = {
   title: "¿Listos para lanzar tu producto de datos?",
   description:
     "Trabajamos con equipos que necesitan claridad, velocidad y automatizaciones que se mantienen solas. Comparte tu reto y trazaremos el camino completo.",
-  email: "nicontrerasc8@gmail.com",
+  email: "ncc.technology1@gmail.com",
   linkLabel: "LinkedIn",
 };
 

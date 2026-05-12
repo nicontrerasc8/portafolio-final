@@ -5,10 +5,10 @@ export default function SiteFooter() {
         <p>© 2026 C8 Tech. Decisiones claras, resultados reales.</p>
         <div className="flex flex-wrap gap-4">
           <a
-            href="mailto:nicontrerasc8@gmail.com"
+            href="mailto:ncc.technology1@gmail.com"
             className="text-[#9fb4d9] hover:text-cyan-100"
           >
-            nicontrerasc8@gmail.com
+            ncc.technology1@gmail.com
           </a>
           <a
             href="https://www.linkedin.com/in/nicolascontrerascastellanoo/"

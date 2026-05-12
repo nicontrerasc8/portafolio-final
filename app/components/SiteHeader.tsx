@@ -49,7 +49,7 @@ export default function SiteHeader() {
         </Link>
 
         <a
-          href="mailto:nicontrerasc8@gmail.com?subject=Consulta%20sobre%20Servicios%20C8%20Tech"
+          href="mailto:ncc.technology1@gmail.com?subject=Consulta%20sobre%20Servicios%20C8%20Tech"
           className={`group inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 ${
             isScrolled
               ? "bg-white text-[#06112c] hover:bg-cyan-100"
