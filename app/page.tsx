@@ -11,8 +11,6 @@ import {
   BarChart3,
   Zap,
   ShoppingCart,
-  Sun,
-  Moon,
 } from "lucide-react";
 import SiteFooter from "./components/SiteFooter";
 
@@ -46,7 +44,6 @@ const clients = [
     logo: "/elpez.png",
   },
 ];
-
 
 const legacyProjects = [
   {
@@ -157,36 +154,6 @@ const legacyProjects = [
     tags: ["Landing", "Pedidos", "Web"],
   },
 ];
-function ThemeToggle({
-  isDark,
-  onToggle,
-}: {
-  isDark: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className={`fixed right-5 top-5 z-[60] flex items-center gap-2 rounded-full border px-4 py-2 font-body text-sm font-black shadow-2xl backdrop-blur transition hover:-translate-y-0.5 ${
-        isDark
-          ? "border-white/10 bg-white/10 text-white shadow-black/40 hover:bg-white/15"
-          : "border-blue-100 bg-white/90 text-slate-950 shadow-blue-100/80 hover:bg-blue-50"
-      }`}
-      aria-label="Cambiar tema"
-    >
-      <span
-        className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
-          isDark ? "bg-[#246bff] text-white" : "bg-[#f4f8ff] text-[#246bff]"
-        }`}
-      >
-        {isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-      </span>
-
-      <span>{isDark ? "Dark" : "Light"}</span>
-    </button>
-  );
-}
 
 const projectUpdates: Record<string, Partial<(typeof legacyProjects)[number]>> = {
   "corporacion-grupo-romero": {
@@ -326,7 +293,7 @@ const services = [
 
 function LogoBox({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="mx-4 flex h-40 min-w-[300px] items-center justify-center border border-blue-100 bg-white/90 px-9 py-5 shadow-xl shadow-blue-100/70 backdrop-blur">
+    <div className="mx-4 flex h-40 min-w-[300px] items-center justify-center rounded-3xl border border-white/10 bg-white px-9 py-5 shadow-2xl shadow-black/30 backdrop-blur">
       {logo ? (
         <Image
           src={logo}
@@ -349,8 +316,8 @@ function ClientCarousel() {
 
   return (
     <div className="relative mt-12 w-full overflow-hidden">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#07111f] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#07111f] to-transparent" />
 
       <div className="flex w-max animate-logoScroll">
         {repeatedClients.map((client, index) => (
@@ -485,7 +452,7 @@ function ProjectCard({
     <button
       type="button"
       onClick={onClick}
-      className="group rounded-3xl border border-blue-100 bg-white/90 p-6 text-left shadow-xl transition hover:-translate-y-1 hover:border-[#246bff]/35 hover:bg-blue-50"
+      className="group rounded-3xl border border-white/10 bg-white p-6 text-left shadow-2xl shadow-black/30 transition hover:-translate-y-1 hover:border-[#246bff]/50 hover:bg-[#f8fbff]"
     >
       <div className="mb-7 flex min-h-52 items-center justify-center">
         {project.logo ? (
@@ -545,7 +512,7 @@ function ServiceCard({
 
   return (
     <div
-      className="service-card group relative overflow-hidden rounded-[2rem] border border-blue-100 bg-white/90 p-8 text-center shadow-2xl shadow-blue-100/70"
+      className="service-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white p-8 text-center shadow-2xl shadow-black/30"
       style={{ animationDelay: `${index * 120}ms` }}
     >
       <div className={`absolute -top-20 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-gradient-to-br ${service.glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
@@ -574,21 +541,21 @@ function ServiceCard({
 function TechBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#f4f8ff] to-[#eaf2ff]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#050b14] via-[#07111f] to-[#0b1f3a]" />
 
       <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgb(36 107 255 / 0.10) 1px, transparent 1px),
-            linear-gradient(to bottom, rgb(36 107 255 / 0.10) 1px, transparent 1px)
+            linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px)
           `,
           backgroundSize: "64px 64px",
         }}
       />
 
-      <div className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#246bff]/10 blur-3xl" />
-      <div className="absolute bottom-[15%] right-[10%] h-96 w-96 rounded-full bg-[#246bff]/5 blur-3xl" />
+      <div className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#246bff]/25 blur-3xl" />
+      <div className="absolute bottom-[15%] right-[10%] h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
     </div>
   );
 }
@@ -597,17 +564,9 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(
     null,
   );
-  const [isDark, setIsDark] = useState(false);
 
   return (
-    <div
-      data-theme={isDark ? "dark" : "light"}
-      className={`min-h-screen transition-colors duration-500 ${
-        isDark ? "bg-slate-950" : "bg-white"
-      }`}
-    >
-      <ThemeToggle isDark={isDark} onToggle={() => setIsDark(!isDark)} />
-
+    <div className="min-h-screen bg-[#07111f] text-white">
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap");
 
@@ -674,92 +633,6 @@ export default function Home() {
           opacity: 1;
           animation: serviceShine 0.9s ease forwards;
         }
-
-        [data-theme="dark"] {
-          color-scheme: dark;
-        }
-
-        [data-theme="dark"] section {
-          background-color: #020617 !important;
-        }
-
-        [data-theme="dark"] .bg-white {
-          background-color: #020617 !important;
-        }
-
-        [data-theme="dark"] .bg-white\/90 {
-          background-color: rgba(15, 23, 42, 0.92) !important;
-        }
-
-        [data-theme="dark"] .bg-\[\#f4f8ff\]\/90 {
-          background-color: rgba(15, 23, 42, 0.95) !important;
-        }
-
-        [data-theme="dark"] .bg-blue-50 {
-          background-color: rgba(36, 107, 255, 0.12) !important;
-        }
-
-        [data-theme="dark"] .text-slate-950 {
-          color: #ffffff !important;
-        }
-
-        [data-theme="dark"] .text-slate-600 {
-          color: #cbd5e1 !important;
-        }
-
-        [data-theme="dark"] .border-blue-100,
-        [data-theme="dark"] .border-slate-200 {
-          border-color: rgba(96, 165, 250, 0.25) !important;
-        }
-
-        [data-theme="dark"] .shadow-blue-100\/70,
-        [data-theme="dark"] .shadow-blue-100\/80,
-        [data-theme="dark"] .shadow-blue-200\/70 {
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55) !important;
-        }
-
-        [data-theme="dark"] .from-white {
-          --tw-gradient-from: #020617 var(--tw-gradient-from-position) !important;
-          --tw-gradient-to: rgb(2 6 23 / 0) var(--tw-gradient-to-position) !important;
-          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
-        }
-
-        [data-theme="dark"] .via-\[\#f4f8ff\] {
-          --tw-gradient-to: rgb(15 23 42 / 0) var(--tw-gradient-to-position) !important;
-          --tw-gradient-stops: var(--tw-gradient-from), #0f172a var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
-        }
-
-        [data-theme="dark"] .to-\[\#eaf2ff\],
-        [data-theme="dark"] .to-white {
-          --tw-gradient-to: #020617 var(--tw-gradient-to-position) !important;
-        }
-
-        [data-theme="dark"] .from-\[\#b8d8ff\]\/50,
-        [data-theme="dark"] .from-\[\#dbeafe\]\/70 {
-          --tw-gradient-from: rgba(36, 107, 255, 0.22) var(--tw-gradient-from-position) !important;
-          --tw-gradient-to: rgba(36, 107, 255, 0) var(--tw-gradient-to-position) !important;
-          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
-        }
-
-        [data-theme="dark"] .to-\[\#246bff\]\/20 {
-          --tw-gradient-to: rgba(184, 216, 255, 0.14) var(--tw-gradient-to-position) !important;
-        }
-
-        [data-theme="dark"] .bg-gradient-to-r.from-white.to-transparent {
-          background-image: linear-gradient(to right, #020617, transparent) !important;
-        }
-
-        [data-theme="dark"] .bg-gradient-to-l.from-white.to-transparent {
-          background-image: linear-gradient(to left, #020617, transparent) !important;
-        }
-
-        [data-theme="dark"] .hover\:bg-blue-50:hover {
-          background-color: rgba(36, 107, 255, 0.16) !important;
-        }
-
-        [data-theme="dark"] .hover\:bg-blue-100:hover {
-          background-color: rgba(36, 107, 255, 0.18) !important;
-        }
       `}</style>
 
       <section className="relative overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
@@ -767,9 +640,9 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-            <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl sm:h-40 sm:w-40">
+            <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl  sm:h-40 sm:w-40">
               <Image
-                src={isDark ? "/logo-dark.jpeg" : "/logo.jpeg"}
+                src="/logo.jpeg"
                 alt="C8 Tech"
                 fill
                 sizes="160px"
@@ -778,32 +651,32 @@ export default function Home() {
               />
             </div>
 
-            <p className="font-body mb-5 rounded-full border border-blue-100 bg-[#246bff]/5 px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#246bff]">
+            <p className="font-body mb-5 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#b8d8ff] backdrop-blur">
               SOLUCIONES DIGITALES A MEDIDA
             </p>
 
-            <h1 className="font-display text-5xl font-black leading-tight tracking-tight text-slate-950 sm:text-6xl md:text-7xl">
+            <h1 className="font-display text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
               Impulsamos la eficiencia y el crecimiento de tu empresa con tecnología.
             </h1>
 
-            <p className="font-body mt-6 max-w-2xl text-xl leading-relaxed text-slate-600 md:text-2xl">
+            <p className="font-body mt-6 max-w-2xl text-xl leading-relaxed text-slate-300 md:text-2xl">
               Conectamos ventas, procesos y datos a través de soluciones en e-commerce, automatización y BI.
             </p>
 
             <div className="mt-9 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
               <Link
                 href="#contacto"
-                className="font-body inline-flex items-center justify-center gap-3 rounded-2xl bg-[#246bff] px-8 py-5 text-lg font-black text-white shadow-2xl transition hover:-translate-y-1 hover:bg-[#1f57d6]"
+                className="font-body inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-5 text-lg font-black text-[#07111f] shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#dbeafe]"
               >
-                Quiero automatizar
-                <ArrowRight className="h-5 w-5" />
+                <strong className="text-[#246bff] flex flex-row items-center gap-3">Quiero automatizar <ArrowRight className="h-5 w-5" /></strong>
+                
               </Link>
 
               <Link
                 href="#casos"
-                className="font-body inline-flex items-center justify-center rounded-2xl border border-blue-100 bg-white px-8 py-5 text-lg font-black text-[#246bff] transition hover:bg-blue-50"
+                className="font-body inline-flex items-center justify-center rounded-2xl border border-white/20 bg-[#246bff] px-8 py-5 text-lg font-black text-white backdrop-blur transition hover:-translate-y-1 "
               >
-                <strong className="text-[#246bff]">Ver trabajos</strong>
+                <strong>Ver trabajos</strong>
               </Link>
             </div>
           </div>
@@ -812,7 +685,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-white px-4 py-24 sm:px-6">
+      <section className="relative overflow-hidden bg-[#07111f] px-4 py-24 sm:px-6">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#246bff]/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl">
@@ -820,7 +693,7 @@ export default function Home() {
             <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-[#246bff]">
               ¿Qué hacemos?
             </p>
-            <h2 className="font-display mt-3 text-4xl font-black text-slate-950 md:text-5xl">
+            <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
               Menos manual. Más automático. Más rentable.
             </h2>
           </div>
@@ -833,14 +706,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="casos" className="bg-white px-4 py-20 sm:px-6">
+      <section id="casos" className="bg-[#07111f] px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left">
             <div>
               <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-[#246bff]">
                 Clientes
               </p>
-              <h2 className="font-display mt-3 text-4xl font-black text-slate-950 md:text-5xl">
+              <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
                 Trabajos realizados
               </h2>
             </div>
@@ -861,7 +734,7 @@ export default function Home() {
 
       <section
         id="contacto"
-        className="relative overflow-hidden bg-gradient-to-br from-white via-[#f4f8ff] to-white px-4 py-24 sm:px-6"
+        className="relative overflow-hidden bg-gradient-to-br from-[#050b14] via-[#07111f] to-[#0b1f3a] px-4 py-24 sm:px-6"
       >
         <div className="absolute inset-0 opacity-20">
           <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-[#246bff] blur-3xl" />
@@ -869,20 +742,22 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <h2 className="font-display text-5xl font-black leading-tight text-slate-950 md:text-6xl">
+          <h2 className="font-display text-5xl font-black leading-tight text-white md:text-6xl">
             ¿Qué proceso quieres simplificar?
           </h2>
 
-          <p className="font-body mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-600">
+          <p className="font-body mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300">
             Cuéntanos qué haces manualmente. Te decimos cómo automatizarlo.
           </p>
 
           <Link
             href="mailto:ncc.technology1@gmail.com?subject=Quiero automatizar un proceso"
-            className="font-body mt-10 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#246bff] px-8 py-5 text-lg font-black text-white shadow-2xl transition hover:-translate-y-1 hover:bg-[#1f57d6] sm:w-auto"
+            className="font-body mt-10 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-white px-8 py-5 text-lg font-black text-[#07111f] shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#dbeafe] sm:w-auto"
           >
-            Contactar ahora
+            <strong className="text-[#246bff] flex flex-row items-center gap-3">
+              Contactar ahora
             <ArrowRight className="h-5 w-5" />
+            </strong>
           </Link>
         </div>
       </section>
