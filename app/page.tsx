@@ -1,709 +1,662 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ArrowRight, FileSpreadsheet, Mail, RefreshCw, AlertCircle, BarChart3, Users, Zap, Settings, Smartphone, Building2, ShoppingCart, CheckCircle2, X, ExternalLink, TrendingUp, Shield, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  X,
+  CheckCircle2,
+  ExternalLink,
+  BarChart3,
+  Zap,
+  ShoppingCart,
+} from "lucide-react";
 import SiteFooter from "./components/SiteFooter";
-import SiteHeader from "./components/SiteHeader";
+
+const clients = [
+  {
+    name: "Grupo Romero",
+    logo: "/logo-gruporomero.jpg",
+  },
+  {
+    name: "CIDELSA",
+    logo: "/cidelsa.png",
+  },
+  {
+    name: "Subway",
+    logo: "/subway.png",
+  },
+  {
+    name: "TMF Group",
+    logo: "/tmf.png",
+  },
+  {
+    name: "PTC",
+    logo: "/logo-ptc.png",
+  },
+  {
+    name: "GOXA",
+    logo: "/goxa.png",
+  },
+  {
+    name: "El Pez Nuestro",
+    logo: "/elpez.png",
+  },
+];
 
 const projects = [
   {
-    id: 'excellia',
-    name: 'Excellia – Grupo Romero',
-    logo: '/excellia.png',
-    description: 'Automatización de la determinación del Beneficiario Final',
-    challenge:
-      'El área legal de Excellia realizaba la determinación del Beneficiario Final mediante análisis manual de estructuras societarias complejas, múltiples fuentes de información y cálculos extensos en Excel, lo que implicaba alto riesgo operativo y largos tiempos de trabajo.',
-    solution:
-      'Desarrollo de un sistema web a medida que automatiza completamente la determinación del Beneficiario Final, traduce los requerimientos normativos en un flujo digital y centraliza la información con trazabilidad e historial completo.',
+    id: "corporacion-grupo-romero",
+    service: "BI",
+    name: "Grupo Romero",
+    logo: "/logo-gruporomero.jpg",
+    description: "Automatización de reportes y análisis corporativo.",
+    problem: "Demasiado trabajo manual para consolidar información.",
+    solution: "Centralizamos datos y dejamos reportes listos para revisar.",
     results: [
-      'Reducción significativa del tiempo de análisis frente al proceso manual',
-      'Eliminación de cálculos manuales y disminución del riesgo de error',
-      'Reportes listos para auditorías y revisiones internas',
-      'Mayor control, trazabilidad e histórico de declaraciones'
+      "Menos trabajo manual",
+      "Información más ordenada",
+      "Reportes más rápidos",
     ],
-    tags: ['LegalTech', 'Compliance', 'Automatización de Procesos', 'Data Modeling']
+    tags: ["BI", "Automatización", "Reportes"],
   },
   {
-    id: 'ludus',
-    name: 'LUDUS',
-    logo: '/ludus.png',
-    description: 'Plataforma educativa gamificada',
-    challenge:
-      'Las instituciones educativas enfrentaban baja motivación estudiantil y poca visibilidad del progreso académico en tiempo real, con procesos pedagógicos poco adaptados al entorno digital.',
-    solution:
-      'Desarrollo de LUDUS, una plataforma educativa gamificada que combina contenido académico, evaluación automática y mecánicas de juego, permitiendo a estudiantes, docentes y líderes educativos monitorear el desempeño desde dashboards centralizados.',
+    id: "cidelsa",
+    service: "BI",
+    name: "CIDELSA",
+    logo: "/cidelsa.png",
+    description: "Reportes comerciales automatizados.",
+    problem: "Reportes manuales que tomaban tiempo y generaban duplicidad.",
+    solution: "Automatizamos el flujo comercial en tableros de BI.",
     results: [
-      'Mejora en el engagement y la constancia de los estudiantes',
-      'Seguimiento académico en tiempo real',
-      'Base tecnológica escalable para instituciones educativas'
+      "Reportes automáticos",
+      "Mejor seguimiento comercial",
+      "Menos uso de archivos manuales",
     ],
-    link: 'https://www.ludus-edu.com/',
-    tags: ['EdTech', 'Gamificación', 'SaaS', 'Educación']
+    tags: ["BI", "Ventas", "Dashboards"],
   },
   {
-    id: 'un-ratito',
-    name: 'Un Ratito con Dios',
-    logo: '/unratitocondios.png',
-    description: 'Plataforma digital de acompañamiento espiritual',
-    challenge:
-      'La comunidad necesitaba un espacio digital accesible para compartir reflexiones, contenidos espirituales y acompañamiento más allá de los canales tradicionales.',
-    solution:
-      'Desarrollo de una plataforma digital enfocada en la difusión de contenido espiritual y reflexivo, facilitando el acceso a mensajes, recursos y espacios de conexión para la comunidad.',
+    id: "subway",
+    service: "BI",
+    name: "Subway",
+    logo: "/subway.png",
+    description: "Automatización de reportes comerciales.",
+    problem: "La operación necesitaba reportes más rápidos y consistentes.",
+    solution: "Estandarizamos indicadores y automatizamos reportes.",
     results: [
-      'Mayor alcance del contenido espiritual',
-      'Acceso digital constante para la comunidad',
-      'Centralización de contenidos y mensajes'
+      "Indicadores claros",
+      "Menos carga operativa",
+      "Reportes más rápidos",
     ],
-    link: 'https://lnk.bio/unratitocondios',
-    tags: ['Plataforma de Contenidos', 'Comunidad', 'Experiencia Digital']
+    tags: ["BI", "Retail", "Reportes"],
   },
   {
-    id: 'goxa',
-    name: 'GOXA',
-    logo: '/goxa.png',
-    description: 'E-commerce de productos naturales',
-    challenge:
-      'GOXA necesitaba digitalizar su canal de ventas y ordenar su operación comercial para mejorar la experiencia de compra y facilitar la gestión diaria del negocio.',
-    solution:
-      'Diseño e implementación del e-commerce de GOXA, una plataforma orientada a la venta de productos naturales que optimiza el flujo de compra y sienta las bases para una operación digital escalable.',
+    id: "tmf-group",
+    service: "Automatización",
+    name: "TMF Group",
+    logo: "/tmf.png",
+    description: "Automatización de correos con Power Automate.",
+    problem: "Correos y derivaciones gestionados manualmente.",
+    solution: "Creamos un flujo automático para ordenar y derivar correos.",
     results: [
-      'Canal de ventas digital operativo',
-      'Mejora en la experiencia de compra del cliente',
-      'Base tecnológica para escalar la operación comercial'
+      "Menos tareas repetitivas",
+      "Flujo más ordenado",
+      "Mayor rapidez interna",
     ],
-    link: 'https://goxa.pe',
-    tags: ['E-commerce', 'Ventas Digitales', 'Plataforma de Producto']
+    tags: ["Power Automate", "Correos", "Procesos"],
   },
   {
-    id: 'elpez',
-    name: 'El Pez Nuestro de Cada Día',
-    logo: '/elpez.png',
-    description: 'Landing page corporativa con contactos, publicaciones y videos',
-    challenge:
-      'El negocio requería un canal digital que centralizara pedidos, contactos, publicaciones en redes sociales y contenido audiovisual en un solo punto.',
-    solution:
-      'Diseño de una landing page integral que reúne formularios de contacto, enlaces de pedidos, secciones sociales y galerías de video, con foco en contenido visual y experiencia móvil.',
+    id: "ptc",
+    service: "IA",
+    name: "PTC",
+    logo: "/logo-ptc.png",
+    description: "Automatización de propuestas con IA.",
+    problem: "Crear propuestas tomaba tiempo y repetía pasos.",
+    solution: "Usamos IA para estructurar y acelerar propuestas.",
     results: [
-      'Canal digital oficial para impulsar marca y pedidos',
-      'Contenido visual y social centralizado en una sola experiencia',
-      'Mayor engagement gracias a videos y accesos directos'
+      "Propuestas más rápidas",
+      "Formato más consistente",
+      "Menos trabajo manual",
     ],
-    link: 'https://elpeznuestrodecadadia.vercel.app/',
-    tags: ['Gastronomía', 'Operaciones', 'Presencia Digital']
-  }
+    tags: ["IA", "Gemini", "Propuestas"],
+  },
+  {
+    id: "goxa",
+    service: "E-commerce",
+    name: "GOXA",
+    logo: "/goxa.png",
+    description: "Tienda online de productos naturales.",
+    problem: "El negocio necesitaba vender mejor por internet.",
+    solution: "Creamos un e-commerce simple, rápido y escalable.",
+    results: [
+      "Canal digital activo",
+      "Mejor experiencia de compra",
+      "Base lista para crecer",
+    ],
+    link: "https://goxa.pe",
+    tags: ["E-commerce", "Ventas", "Web"],
+  },
+  {
+    id: "elpez",
+    service: "Web",
+    name: "El Pez Nuestro",
+    logo: "/elpez.png",
+    description: "Landing page para pedidos y contacto.",
+    problem: "El negocio necesitaba una presencia digital clara.",
+    solution: "Creamos una página simple para mostrar marca, pedidos y contacto.",
+    results: [
+      "Página oficial",
+      "Accesos rápidos",
+      "Mejor presencia digital",
+    ],
+    link: "https://elpeznuestrodecadadia.vercel.app/",
+    tags: ["Landing", "Pedidos", "Web"],
+  },
 ];
 
-// Modal component
-function ProjectModal({ project, isOpen, onClose }: { project: typeof projects[0]; isOpen: boolean; onClose: () => void; }) {
-  if (!isOpen) return null;
+const services = [
+  {
+    title: "Reportes automáticos",
+    description: "Deja de armar Excel a mano. Te dejamos dashboards claros.",
+    icon: BarChart3,
+    stat: "BI",
+    glow: "from-cyan-300/30 to-[#246bff]/30",
+  },
+  {
+    title: "Procesos automáticos",
+    description: "Automatizamos correos, tareas repetitivas y flujos internos.",
+    icon: Zap,
+    stat: "Flow",
+    glow: "from-[#246bff]/35 to-cyan-300/20",
+  },
+  {
+    title: "Webs que venden",
+    description: "Creamos tiendas y páginas simples para captar clientes.",
+    icon: ShoppingCart,
+    stat: "Web",
+    glow: "from-cyan-200/25 to-[#246bff]/35",
+  },
+];
+
+function LogoBox({ name, logo }: { name: string; logo: string }) {
+  return (
+    <div className="mx-4 flex h-40 min-w-[300px] items-center justify-center border border-cyan-200/12 bg-[#07183f]/70 px-9 py-5 shadow-xl shadow-[#06112c]/40 backdrop-blur">
+      {logo ? (
+        <Image
+          src={logo}
+          alt={name}
+          width={300}
+          height={180}
+          className="max-h-32 w-full rounded-lg object-contain brightness-110 contrast-110"
+        />
+      ) : (
+        <span className="text-center font-display text-4xl font-black text-white">
+          {name}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function ClientCarousel() {
+  const repeatedClients = [...clients, ...clients];
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
-      onClick={onClose}
-    >
-      <div
-        className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-700/50"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors z-10"
-          aria-label="Cerrar"
-        >
-          <X className="w-5 h-5 text-slate-300" />
-        </button>
+    <div className="relative mt-12 w-full overflow-hidden">
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#06112c] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#06112c] to-transparent" />
 
-        {/* Content */}
-        <div className="p-8 md:p-12">
-          {/* Logo and header */}
-          <div className="flex items-start gap-6 mb-8">
-            <div className="w-20 h-20 rounded-xl bg-white p-3 flex-shrink-0 shadow-lg">
-              <Image
-                src={project.logo}
-                alt={project.name}
-                width={80}
-                height={80}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 font-display tracking-tight">
-                {project.name}
-              </h2>
-              <p className="text-lg text-slate-300 font-body leading-relaxed">
-                {project.description}
-              </p>
-            </div>
-          </div>
-
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-4 py-1.5 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium font-body border border-blue-500/20"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {/* Challenge */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3 font-display">
-              <AlertCircle className="w-6 h-6 text-amber-400" />
-              El Problema
-            </h3>
-            <p className="text-slate-300 leading-relaxed font-body text-base">
-              {project.challenge}
-            </p>
-          </div>
-
-          {/* Solution */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3 font-display">
-              <Zap className="w-6 h-6 text-blue-400" />
-              La Solución
-            </h3>
-            <p className="text-slate-300 leading-relaxed font-body text-base">
-              {project.solution}
-            </p>
-          </div>
-
-          {/* Results */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3 font-display">
-              <TrendingUp className="w-6 h-6 text-emerald-400" />
-              Los Resultados
-            </h3>
-            <ul className="space-y-3">
-              {project.results.map((result, index) => (
-                <li key={index} className="flex items-start gap-3 text-slate-300 font-body text-base">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">{result}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTA */}
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-all font-semibold font-body shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Visitar sitio web
-              <ExternalLink className="w-5 h-5" />
-            </a>
-          )}
-        </div>
+      <div className="flex w-max animate-logoScroll">
+        {repeatedClients.map((client, index) => (
+          <LogoBox
+            key={`${client.name}-${index}`}
+            name={client.name}
+            logo={client.logo}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
-// Company logo component with modal trigger
-function CompanyLogo({ project, onClick }: { project: typeof projects[0]; onClick: () => void; }) {
+function ProjectModal({
+  project,
+  isOpen,
+  onClose,
+}: {
+  project: (typeof projects)[0];
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl rounded-3xl border border-cyan-200/15 bg-[#07183f] p-6 shadow-2xl md:p-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute right-5 top-5 rounded-full bg-white/10 p-2 transition hover:bg-white/20"
+          aria-label="Cerrar"
+        >
+          <X className="h-5 w-5 text-white" />
+        </button>
+
+        <div className="mb-6 flex items-center gap-5 pr-10">
+          <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-cyan-200/12 bg-[#06112c] p-4">
+            {project.logo ? (
+              <Image
+                src={project.logo}
+                alt={project.name}
+                width={120}
+                height={80}
+                className="max-h-20 w-auto rounded-lg object-contain brightness-110 contrast-110"
+              />
+            ) : (
+              <span className="text-center font-display text-xl font-black text-white">
+                {project.name}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <p className="font-body text-sm font-bold uppercase tracking-[0.2em] text-cyan-200">
+              {project.service}
+            </p>
+            <h2 className="font-display mt-1 text-3xl font-bold text-white">
+              {project.name}
+            </h2>
+            <p className="font-body mt-2 text-[#c9d8f2]">
+              {project.description}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4">
+          <div className="rounded-2xl bg-[#06112c]/70 p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+              Problema
+            </p>
+            <p className="font-body mt-2 text-lg text-white">
+              {project.problem}
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-[#06112c]/70 p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+              Solución
+            </p>
+            <p className="font-body mt-2 text-lg text-white">
+              {project.solution}
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-[#06112c]/70 p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+              Resultado
+            </p>
+
+            <div className="mt-3 grid gap-3">
+              {project.results.map((result) => (
+                <div key={result} className="flex items-center gap-3 text-white">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" />
+                  <span className="font-body">{result}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body mt-6 inline-flex items-center gap-2 rounded-xl bg-[#246bff] px-5 py-3 font-bold text-white transition hover:bg-[#1f57d6]"
+          >
+            Ver sitio
+            <ExternalLink className="h-4 w-4" />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ProjectCard({
+  project,
+  onClick,
+}: {
+  project: (typeof projects)[0];
+  onClick: () => void;
+}) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-6 min-h-[120px] sm:min-h-[140px]"
-      aria-label={`Ver caso de éxito de ${project.name}`}
+      className="group rounded-3xl border border-cyan-200/12 bg-[#07183f]/80 p-6 text-left shadow-xl transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-[#0a1c4d]"
     >
-      <Image
-        src={project.logo}
-        alt={project.name}
-        width={160}
-        height={160}
-        className="w-full h-full object-contain relative z-0"
-      />
-      
-      {/* Hover overlay with text */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/95 to-slate-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center">
-        <p className="text-white font-bold text-sm mb-1 font-display">
-          Ver caso completo
-        </p>
-        <p className="text-slate-300 text-xs line-clamp-2 font-body">
-          {project.description}
-        </p>
+      <div className="mb-7 flex min-h-52 items-center justify-center">
+        {project.logo ? (
+          <Image
+            src={project.logo}
+            alt={project.name}
+            width={380}
+            height={260}
+            className="aspect-[16/9] max-h-48 w-full rounded-lg object-contain brightness-110 contrast-110 transition duration-300 group-hover:scale-110"
+          />
+        ) : (
+          <span className="text-center font-display text-5xl font-black text-white">
+            {project.name}
+          </span>
+        )}
+      </div>
+
+      <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+        {project.service}
+      </p>
+
+      <h3 className="font-display mt-2 text-2xl font-bold text-white">
+        {project.name}
+      </h3>
+
+      <p className="font-body mt-3 text-base leading-relaxed text-[#c9d8f2]">
+        {project.description}
+      </p>
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        {project.tags.slice(0, 3).map((tag) => (
+          <span
+            key={tag}
+            className="rounded-full bg-cyan-300/10 px-3 py-1 text-xs font-bold text-cyan-100"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-6 flex items-center gap-2 font-body font-bold text-white">
+        Ver caso
+        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
       </div>
     </button>
   );
 }
 
-// Animated tech grid background
-function TechGridBackground() {
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof services)[0];
+  index: number;
+}) {
+  const Icon = service.icon;
+
+  return (
+    <div
+      className="service-card group relative overflow-hidden rounded-[2rem] border border-cyan-200/12 bg-[#07183f]/80 p-8 text-center shadow-2xl shadow-[#06112c]/50"
+      style={{ animationDelay: `${index * 120}ms` }}
+    >
+      <div className={`absolute -top-20 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-gradient-to-br ${service.glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(201,216,242,0.10),transparent_48%)] opacity-70" />
+
+      <div className="relative mx-auto mb-7 flex h-28 w-28 items-center justify-center rounded-[1.75rem] border border-cyan-200/20 bg-[#06112c]/80 shadow-2xl shadow-[#246bff]/20 transition duration-500 group-hover:-translate-y-2 group-hover:scale-110 group-hover:border-cyan-200/40">
+        <div className="absolute inset-3 rounded-[1.35rem] bg-[#246bff]/10 transition group-hover:bg-cyan-300/10" />
+        <Icon className="relative h-14 w-14 text-cyan-100 drop-shadow-[0_0_18px_rgba(201,216,242,0.45)] transition duration-500 group-hover:text-white" />
+      </div>
+
+      <p className="relative mx-auto mb-4 inline-flex rounded-full border border-cyan-200/15 bg-cyan-300/10 px-4 py-1 text-xs font-black uppercase tracking-[0.22em] text-cyan-100">
+        {service.stat}
+      </p>
+
+      <h3 className="relative font-display text-3xl font-black leading-tight text-white">
+        {service.title}
+      </h3>
+
+      <p className="relative mx-auto mt-4 max-w-xs font-body text-lg leading-relaxed text-[#c9d8f2]">
+        {service.description}
+      </p>
+
+      <div className="relative mx-auto mt-7 h-1 w-16 rounded-full bg-gradient-to-r from-cyan-200 to-[#246bff] opacity-70 transition duration-500 group-hover:w-24 group-hover:opacity-100" />
+    </div>
+  );
+}
+
+function TechBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Base gradient - azul empresarial más oscuro */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950" />
-      
-      {/* Animated grid */}
-      <div 
+      <div className="absolute inset-0 bg-gradient-to-br from-[#06112c] via-[#07183f] to-[#0a1c4d]" />
+
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgb(59 130 246 / 0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgb(59 130 246 / 0.1) 1px, transparent 1px)
+            linear-gradient(to right, rgb(59 130 246 / 0.12) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(59 130 246 / 0.12) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px',
-          animation: 'gridMove 20s linear infinite'
+          backgroundSize: "64px 64px",
         }}
       />
-      
-      {/* Glowing orbs - tonos azul oscuro */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-slate-600/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-      
-      {/* Circuit lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="circuit" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-            <path d="M0 100 L50 100 L50 50 L150 50 L150 150 L200 150" stroke="rgb(59 130 246)" strokeWidth="1" fill="none" />
-            <circle cx="50" cy="100" r="3" fill="rgb(59 130 246)" />
-            <circle cx="50" cy="50" r="3" fill="rgb(59 130 246)" />
-            <circle cx="150" cy="50" r="3" fill="rgb(59 130 246)" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#circuit)" />
-      </svg>
 
-      {/* Noise texture overlay */}
-      <div className="absolute inset-0 opacity-5 mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`
-        }}
-      />
-    </div>
-  );
-}
-
-// Problem item with icon
-function ProblemItem({ icon: Icon, text }: { icon: any; text: string }) {
-  return (
-    <div className="flex items-start gap-4 p-6 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-slate-600/50 transition-all hover:bg-slate-800/60 group">
-      <div className="p-3 bg-red-500/10 rounded-lg group-hover:bg-red-500/20 transition-colors">
-        <Icon className="w-6 h-6 text-red-400" />
-      </div>
-      <p className="text-slate-300 leading-relaxed flex-1 font-body text-base">
-        {text}
-      </p>
-    </div>
-  );
-}
-
-// Service card component
-function ServiceCard({ icon: Icon, title, description }: { icon: any; title: string; description: string; }) {
-  return (
-    <div className="p-8 bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-2xl border border-slate-700/50 hover:border-blue-500/30 transition-all hover:shadow-xl hover:shadow-blue-500/5 group">
-      <div className="flex flex-col items-center text-center">
-        <div className="mb-6 p-6 bg-blue-500/10 rounded-2xl group-hover:bg-blue-500/20 transition-colors">
-          <Icon className="w-16 h-16 text-blue-400" />
-        </div>
-        <h3 className="text-xl font-bold text-white mb-3 font-display">
-          {title}
-        </h3>
-        <p className="text-slate-300 leading-relaxed font-body text-base">
-          {description}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Target audience card
-function AudienceCard({ icon: Icon, title, description }: { icon: any; title: string; description: string; }) {
-  return (
-    <div className="relative overflow-hidden rounded-3xl border border-slate-700/50 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 p-6 sm:p-8 shadow-2xl shadow-slate-950/70 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-blue-500/30">
-      <div className="absolute -top-10 -right-8 h-32 w-32 rounded-full bg-blue-500/20 blur-3xl transition-opacity duration-300 group-hover:opacity-80" />
-      <div className="flex items-center justify-center">
-        <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 shadow-lg shadow-blue-900/30">
-          <Icon className="h-8 w-8 text-white" />
-          <span className="absolute inset-0 rounded-2xl border border-white/20" />
-        </div>
-      </div>
-      <h3 className="relative z-10 mt-6 text-xl font-bold text-white font-display">
-        {title}
-      </h3>
-      <p className="relative z-10 mt-3 text-slate-300 leading-relaxed font-body text-base">
-        {description}
-      </p>
-    
+      <div className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#246bff]/15 blur-3xl" />
+      <div className="absolute bottom-[15%] right-[10%] h-96 w-96 rounded-full bg-cyan-300/10 blur-3xl" />
     </div>
   );
 }
 
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openProjectModal = (project: typeof projects[0]) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedProject(null), 300);
-  };
+  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(
+    null,
+  );
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-[#06112c]">
       <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap');
-        
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes gridMove {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(60px); }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.2s ease-out;
-        }
-        
+        @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap");
+
         .font-display {
-          font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: "Sora", -apple-system, BlinkMacSystemFont, sans-serif;
         }
-        
+
         .font-body {
-          font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+          font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @keyframes logoScroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes serviceFloat {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        @keyframes serviceShine {
+          from {
+            transform: translateX(-120%) rotate(12deg);
+          }
+          to {
+            transform: translateX(180%) rotate(12deg);
+          }
+        }
+
+        .animate-logoScroll {
+          animation: logoScroll 28s linear infinite;
+        }
+
+        .animate-logoScroll:hover {
+          animation-play-state: paused;
+        }
+
+        .service-card {
+          animation: serviceFloat 5s ease-in-out infinite;
+        }
+
+        .service-card::after {
+          content: "";
+          position: absolute;
+          inset: -40% auto -40% 0;
+          width: 90px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+          transform: translateX(-120%) rotate(12deg);
+          transition: opacity 0.3s ease;
+          opacity: 0;
+        }
+
+        .service-card:hover::after {
+          opacity: 1;
+          animation: serviceShine 0.9s ease forwards;
         }
       `}</style>
 
-      <SiteHeader />
+      <section className="relative overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
+        <TechBackground />
 
-      {/* ===================== */}
-      {/* HERO */}
-      {/* ===================== */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <TechGridBackground />
-        
-        <div className="relative z-10 mx-auto max-w-5xl text-center px-4 sm:px-0">
-          <h1 className="text-5xl font-bold text-white mb-6 leading-[1.1] tracking-tight font-display sm:text-6xl md:text-7xl lg:text-8xl">
-            NCC Technology
-          </h1>
-          
-          <p className="text-3xl font-bold text-slate-300 mb-8 leading-tight tracking-tight font-display sm:text-4xl md:text-5xl">
-            Automatizamos lo que <br />hoy te quita tiempo
-          </p>
-          
-          <p className="text-base text-slate-300 max-w-4xl mx-auto mb-16 leading-relaxed font-body sm:text-lg md:text-xl">
-            Creamos sistemas a medida que eliminan el trabajo manual repetitivo, 
-            reducen errores y te permiten enfocarte en lo que realmente importa.
-          </p>
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+            <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl border border-white/10 bg-[#06112c] shadow-2xl sm:h-40 sm:w-40">
+              <Image
+                src="/logo.jpeg"
+                alt="C8 Tech"
+                fill
+                sizes="160px"
+                className="object-cover"
+                priority
+              />
+            </div>
 
-          {/* Company Logos */}
-          <div className="mb-12">
-            <p className="text-sm font-semibold tracking-widest uppercase text-slate-500 mb-10 font-body">
-              Proyectos exitosos
+            <p className="font-body mb-5 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-cyan-200">
+              Automatización para empresas
             </p>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-              {projects.map((project) => (
-                <CompanyLogo
-                  key={project.id}
-                  project={project}
-                  onClick={() => openProjectModal(project)}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
 
-        {/* Bottom gradient fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none" />
-      </section>
+            <h1 className="font-display text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
+              Simplificamos tu operación.
+            </h1>
 
-      {/* ===================== */}
-      {/* CASO EXCELLIA */}
-      {/* ===================== */}
-      <section className="relative py-20 px-4 sm:px-6 lg:py-24 bg-gradient-to-b from-slate-950 to-slate-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-0">
-          <div className="text-center mb-16">
-            <span className="inline-block px-5 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm font-semibold tracking-wide uppercase font-body mb-6">
-              Caso de éxito
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight font-display">
-              Excellia - Grupo Romero
-            </h2>
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto font-body leading-relaxed">
-              De 1 semana de trabajo manual a 1 hora automatizada
+            <p className="font-body mt-6 max-w-2xl text-xl leading-relaxed text-[#c9d8f2] md:text-2xl">
+              Automatizamos reportes, procesos y sistemas para que tu equipo trabaje más rápido.
             </p>
-          </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 mb-12">
-            {/* Antes */}
-            <div className="bg-slate-800/40 rounded-2xl p-8 border border-red-500/20">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-red-500/10 rounded-full mb-4">
-                  <div className="text-4xl">😔</div>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 font-display italic">Antes</h3>
-              </div>
-              <ul className="space-y-3 text-slate-300 font-body">
-                <li className="flex items-start gap-2">
-                  <span className="text-red-400 mt-1">✗</span>
-                  <span>1 semana analizando estructuras societarias manualmente</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-400 mt-1">✗</span>
-                  <span>Cálculos en Excel sin forma de automatizarlos</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-400 mt-1">✗</span>
-                  <span>Alto riesgo de errores (Excel con 4k filas)</span>
-                </li>
-              </ul>
-            </div>
+            <div className="mt-9 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
+              <Link
+                href="#contacto"
+                className="font-body inline-flex items-center justify-center gap-3 rounded-2xl bg-[#246bff] px-8 py-5 text-lg font-black text-white shadow-2xl transition hover:-translate-y-1 hover:bg-[#1f57d6]"
+              >
+                Quiero automatizar
+                <ArrowRight className="h-5 w-5" />
+              </Link>
 
-            {/* Solución */}
-            <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 rounded-2xl p-8 border border-blue-500/30 md:scale-105 shadow-xl">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-500/20 rounded-full mb-4">
-                  <Zap className="w-10 h-10 text-blue-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 font-display italic">Solución</h3>
-              </div>
-              <ul className="space-y-3 text-slate-200 font-body">
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-1">→</span>
-                  <span>Sistema web que ingresa datos fácilmente</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-1">→</span>
-                  <span>Cálculos automáticos sin errores</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-1">→</span>
-                  <span>Historial completo y búsquedas instantáneas</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Después */}
-            <div className="bg-slate-800/40 rounded-2xl p-8 border border-emerald-500/20">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-500/10 rounded-full mb-4">
-                  <div className="text-4xl">😊</div>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 font-display italic">Después</h3>
-              </div>
-              <ul className="space-y-3 text-slate-300 font-body">
-                <li className="flex items-start gap-2">
-                  <span className="text-emerald-400 mt-1">✓</span>
-                  <span><strong className="text-white">1 hora</strong> para empresas grandes</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-emerald-400 mt-1">✓</span>
-                  <span>El área legal enfoca su tiempo en tareas de valor</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-emerald-400 mt-1">✓</span>
-                  <span>Reportes listos para auditorías</span>
-                </li>
-              </ul>
+              <Link
+                href="#casos"
+                className="font-body inline-flex items-center justify-center rounded-2xl border border-cyan-200/20 bg-white/5 px-8 py-5 text-lg font-black text-white transition hover:bg-white/10"
+              >
+                Ver trabajos
+              </Link>
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <button
-              onClick={() => openProjectModal(projects[0])}
-              className="inline-flex items-center gap-2 rounded-2xl border border-blue-500/40 bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              Ver caso completo
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+          <ClientCarousel />
         </div>
       </section>
 
-      {/* ===================== */}
-      {/* PROBLEMA */}
-      {/* ===================== */}
-      <section className="relative py-20 px-4 sm:px-6 bg-slate-900">
-        <div className="max-w-6xl mx-auto px-4 sm:px-0">
-          <div className="text-center mb-16">
-            <span className="inline-block px-5 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-red-300 text-sm font-semibold tracking-wide uppercase font-body mb-6">
-              ¿Te suena familiar?
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight font-display">
-              Problemas que encontramos <br />en el día a día
-            </h2>
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto font-body leading-relaxed">
-              Si te identificas con alguno de estos puntos, podemos ayudarte
+      <section className="relative overflow-hidden bg-[#06112c] px-4 py-24 sm:px-6">
+        <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#246bff]/10 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mb-14 text-center">
+            <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-cyan-200">
+              Qué hacemos
             </p>
-          </div>
-
-         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-  <ProblemItem
-    icon={FileSpreadsheet}
-    text="Tu equipo depende de Excel para procesos críticos que deberían estar automatizados"
-  />
-  <ProblemItem
-    icon={RefreshCw}
-    text="Pierdes horas en tareas manuales repetitivas que podrían hacerse automáticamente"
-  />
-  <ProblemItem
-    icon={AlertCircle}
-    text="Los cálculos manuales generan errores que te cuestan tiempo y dinero"
-  />
-  <ProblemItem
-    icon={Clock}
-    text="Procesos que deberían tomar minutos les toman días a tu equipo"
-  />
-  <ProblemItem
-    icon={Mail}
-    text="Usas correos y WhatsApp para coordinar cuando necesitas un sistema centralizado"
-  />
-  <ProblemItem
-    icon={BarChart3}
-    text="No tienes visibilidad en tiempo real de lo que pasa en tu operación"
-  />
-  <ProblemItem
-    icon={Settings}
-    text="Los ERP o software estándar no se adaptan a tu forma de trabajar"
-  />
-  <ProblemItem
-    icon={Shield}
-    text="Te falta trazabilidad y documentación para auditorías o cumplimiento normativo"
-  />
-</div>
-        </div>
-      </section>
-
-      {/* ===================== */}
-      {/* QUÉ HACEMOS */}
-      {/* ===================== */}
-      <section className="relative py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-900 to-slate-950">
-        <div className="max-w-6xl mx-auto px-4 sm:px-0">
-          <div className="text-center mb-16">
-            <span className="inline-block px-5 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-sm font-semibold tracking-wide uppercase font-body mb-6">
-              Cómo trabajamos
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight font-display">
-              Nuestra forma de resolver <br />tus problemas
+            <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
+              Menos manual. Más automático.
             </h2>
           </div>
 
-          <div className="max-w-4xl mx-auto mb-16 space-y-6 px-2 sm:px-0">
-            <p className="text-lg text-slate-300 leading-relaxed font-body">
-              <strong className="text-white font-semibold">No vendemos software estándar.</strong> Cada empresa es diferente y merece una solución que realmente funcione para ella.
-            </p>
-            <p className="text-lg text-slate-300 leading-relaxed font-body">
-              Primero conversamos contigo para entender cómo trabajan hoy: qué tareas toman más tiempo, 
-              dónde se pierden datos, qué frustra a tu equipo.
-            </p>
-            <p className="text-lg text-slate-300 leading-relaxed font-body">
-              Después creamos un sistema a tu medida que automatiza lo repetitivo, centraliza la información 
-              y hace que tu equipo pueda trabajar más rápido y con menos errores.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            <ServiceCard
-              icon={BarChart3}
-              title="1. Entendemos tu negocio"
-              description="Hablamos contigo para identificar exactamente qué te está frenando y dónde hay oportunidades de mejora."
-            />
-            <ServiceCard
-              icon={Settings}
-              title="2. Creamos tu solución"
-              description="Diseñamos y desarrollamos un sistema que se adapta a tu forma de trabajar, no al revés."
-            />
-            <ServiceCard
-              icon={TrendingUp}
-              title="3. Crece contigo"
-              description="Tu sistema evoluciona junto con tu negocio. Sin límites ni sorpresas."
-            />
+          <div className="grid gap-7 md:grid-cols-3">
+            {services.map((service, index) => (
+              <ServiceCard key={service.title} service={service} index={index} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ===================== */}
-      {/* PARA QUIÉN */}
-      {/* ===================== */}
-      <section className="relative py-20 px-4 sm:px-6 bg-slate-950">
-        <div className="max-w-6xl mx-auto px-4 sm:px-0">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight font-display">
-              ¿Es esto para ti?
-            </h2>
-            <p className="text-xl text-slate-400 max-w-3xl mx-auto font-body leading-relaxed">
-              Trabajamos con empresas que ya están funcionando y quieren optimizar su operación
-            </p>
+      <section id="casos" className="bg-[#07183f] px-4 py-20 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 flex flex-col gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left">
+            <div>
+              <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-cyan-200">
+                Clientes
+              </p>
+              <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
+                Trabajos realizados
+              </h2>
+            </div>
+
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            <AudienceCard
-              icon={Building2}
-              title="Empresas establecidas"
-              description="Ya tienes clientes y operaciones, pero sabes que podrías ser más eficiente con la tecnología adecuada."
-            />
-            <AudienceCard
-              icon={Users}
-              title="Equipos creciendo"
-              description="Tu equipo está creciendo y los procesos manuales ya no dan abasto. Necesitas escalar sin complicarte."
-            />
-            <AudienceCard
-              icon={Shield}
-              title="Empresas reguladas"
-              description="Necesitas tener todo documentado, trazable y listo para auditorías sin que sea un dolor de cabeza."
-            />
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                onClick={() => setSelectedProject(project)}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ===================== */}
-      {/* CTA FINAL */}
-      {/* ===================== */}
-      <section className="relative py-24 px-4 sm:px-6 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 overflow-hidden">
+      <section
+        id="contacto"
+        className="relative overflow-hidden bg-gradient-to-br from-[#06112c] via-[#0a1c4d] to-[#06112c] px-4 py-24 sm:px-6"
+      >
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-slate-500 rounded-full blur-3xl" />
+          <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-[#246bff] blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-cyan-300 blur-3xl" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl text-center px-4 sm:px-0">
-          <span className="inline-block px-5 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-sm font-semibold tracking-wide uppercase font-body mb-8">
-            Primera conversación sin costo
-          </span>
-          
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight tracking-tight font-display">
-            Conversemos sobre lo que <br />necesita tu empresa
+        <div className="relative z-10 mx-auto max-w-4xl text-center">
+          <h2 className="font-display text-5xl font-black leading-tight text-white md:text-6xl">
+            ¿Qué proceso quieres simplificar?
           </h2>
-          
-          <p className="text-xl text-slate-300 mb-12 leading-relaxed font-body">
-            Agenda una llamada sin compromiso. Te escuchamos, identificamos oportunidades 
-            y te decimos con honestidad si podemos ayudarte.
+
+          <p className="font-body mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-[#c9d8f2]">
+            Cuéntanos qué haces manualmente. Te decimos cómo automatizarlo.
           </p>
-          
+
           <Link
-            href="#contacto"
-            className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-blue-600 px-8 py-5 text-lg font-bold text-white transition-all shadow-2xl hover:bg-blue-700 hover:shadow-blue-500/25 transform hover:-translate-y-1 sm:w-auto font-body"
+            href="mailto:nicontrerasc8@gmail.com?subject=Quiero automatizar un proceso"
+            className="font-body mt-10 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#246bff] px-8 py-5 text-lg font-black text-white shadow-2xl transition hover:-translate-y-1 hover:bg-[#1f57d6] sm:w-auto"
           >
-            Agendar conversación
-            <ArrowRight className="w-6 h-6" />
+            Contactar ahora
+            <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       </section>
 
       <SiteFooter />
 
-      {/* Project Modal */}
       {selectedProject && (
         <ProjectModal
           project={selectedProject}
-          isOpen={isModalOpen}
-          onClose={closeModal}
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
         />
       )}
     </div>

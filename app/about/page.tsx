@@ -33,16 +33,16 @@ function DecorativeGrid() {
 }
 
 export const metadata: Metadata = {
-  title: "Sobre NCC Technology",
-  description: "Perfil, fortalezas y enfoque de NCC Technology en datos y automatización.",
+  title: "Sobre C8 Tech",
+  description: "Perfil, fortalezas y enfoque de C8 Tech en datos y automatización.",
 };
 
 const copy = {
-  kicker: "Sobre NCC Technology",
+  kicker: "Sobre C8 Tech",
   titleLine1: "Transformamos datos y producto",
   titleLine2: "en decisiones y automatizaciones sin fricción",
   description:
-    "NCC Technology une datos, automatización y entrega web para que los equipos puedan actuar con claridad hoy mismo.",
+    "C8 Tech une datos, automatización y entrega web para que los equipos puedan actuar con claridad hoy mismo.",
   descriptionTwo:
     "Desde pipelines hasta interfaces, trabajamos como tu equipo interno para resolver tareas reales y liberar tiempo de valor.",
   ownership: "Responsabilidad completa del problema al resultado",

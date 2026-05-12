@@ -20,28 +20,28 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ncctechnology.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://c8tech.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "NCC Technology | Soluciones de datos simples y confiables",
-    template: "%s | NCC Technology",
+    default: "C8 Tech | Soluciones de datos simples y confiables",
+    template: "%s | C8 Tech",
   },
   description:
-    "NCC Technology transforma decisiones operativas con datos claros y automatizaciones sencillas listas para funcionar.",
+    "C8 Tech transforma decisiones operativas con datos claros y automatizaciones sencillas listas para funcionar.",
   openGraph: {
-    title: "NCC Technology",
+    title: "C8 Tech",
     description:
-      "NCC Technology transforma decisiones operativas con datos claros y automatizaciones sencillas.",
+      "C8 Tech transforma decisiones operativas con datos claros y automatizaciones sencillas.",
     url: siteUrl,
-    siteName: "NCC Technology",
+    siteName: "C8 Tech",
     images: [
       {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "NCC Technology",
+        alt: "C8 Tech",
       },
     ],
     locale: "es_ES",
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NCC Technology",
+    title: "C8 Tech",
     description:
-      "NCC Technology transforma decisiones operativas con datos claros y automatizaciones sencillas.",
+      "C8 Tech transforma decisiones operativas con datos claros y automatizaciones sencillas.",
     images: ["/og.svg"],
   },
 };

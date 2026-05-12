@@ -1,10 +1,9 @@
-export type ProjectCategory = "Data" | "ML" | "Automation" | "Web";
+export type ProjectCategory = "Sightflow" | "AI" | "Ecommerce";
 
 export const categoryLabels: Record<ProjectCategory, string> = {
-  Data: "Datos",
-  ML: "IA",
-  Automation: "Automatización",
-  Web: "Web",
+  Sightflow: "Sightflow",
+  AI: "Consultoría de IA",
+  Ecommerce: "E-commerce",
 };
 
 export type Project = {
@@ -23,91 +22,114 @@ export type Project = {
 
 const projects: Project[] = [
   {
-    slug: "excellia-ubo",
-    name: "Excellia (Grupo Romero)",
-    label: "Automatización UBO",
-    categories: ["Data", "Automation", "Web"],
+    slug: "corporacion-grupo-romero",
+    name: "Corporación Grupo Romero",
+    label: "Sightflow",
+    categories: ["Sightflow"],
     summary:
-      "Automatizamos la trazabilidad de Beneficiarios Finales para auditorías claras y sin manualidades.",
+      "Automatización de BI para trazabilidad, análisis corporativo y reportes listos para revisión.",
     problem:
-      "Los mapas manuales eran lentos, inseguros y hacía falta trazabilidad precisa para cumplir con normas.",
+      "El equipo necesitaba dejar atrás análisis manuales con hojas de cálculo y consolidar información crítica.",
     approach:
-      "Creamos un motor SQL recursivo y un tablero seguro que entrega resultados listos para entrega de cumplimiento.",
-    stack: ["Next.js", "Supabase", "SQL recursivo", "Seguridad a nivel de fila"],
+      "Implementamos una solución de BI que centraliza datos, ordena reglas de cálculo y automatiza reportes.",
+    stack: ["Sightflow", "BI", "Reporting", "Automatización"],
     outcome:
-      "Convertimos 3 días de análisis en segundos con trazabilidad total y contexto de seguridad.",
+      "Menos trabajo manual, información trazable y reportes listos para toma de decisiones.",
     featured: true,
   },
   {
-    slug: "appruebo",
-    name: "Ludus",
-    label: "Plataforma Ludus",
-    categories: ["ML", "Data", "Web"],
-    summary: "Ludus mantiene la experiencia educativa alineada con la nueva URL.",
-    problem: "No había visibilidad rápida de qué aprender.",
-    approach: "Conectamos datos y mostramos lo esencial.",
-    stack: ["Next.js", "Python", "Analytics"],
-    outcome: "Los equipos reaccionan sin esperar reportes largos.",
-    link: "https://www.ludus-edu.com/",
+    slug: "cidelsa",
+    name: "CIDELSA",
+    label: "Sightflow",
+    categories: ["Sightflow"],
+    summary:
+      "Automatización de reportes comerciales para reducir preparación manual y mejorar seguimiento.",
+    problem:
+      "El equipo comercial dependía de reportes manuales que tomaban tiempo y duplicaban esfuerzos.",
+    approach:
+      "Automatizamos el flujo de reportes comerciales con una capa de BI que consolida datos e indicadores.",
+    stack: ["Sightflow", "BI", "Comercial", "Dashboards"],
+    outcome:
+      "Reportes comerciales automatizados, menos archivos manuales y mayor visibilidad de ventas.",
     featured: true,
   },
   {
-    slug: "un-ratito-con-dios",
-    name: "Un Ratito con Dios",
-    label: "Producto móvil",
-    categories: ["Web", "Automation"],
+    slug: "subway",
+    name: "Subway",
+    label: "Sightflow",
+    categories: ["Sightflow"],
     summary:
-      "Escalamos la entrega diaria de devocionales para una comunidad fiel sin añadir tareas nuevas.",
+      "Automatización de reportes comerciales para estandarizar indicadores y reducir carga operativa.",
     problem:
-      "Publicar cada día era manual e inconsistente, y el equipo no podía mantener el ritmo.",
+      "La operación requería reportes comerciales más rápidos y consistentes para el control diario.",
     approach:
-      "Automatizamos la cadena desde el CMS hasta la app, con reglas de publicación rígidas y monitoreo automático.",
-    stack: ["React Native", "Node.js", "Firebase", "Automatización"],
+      "Automatizamos reportes y tableros de BI para estandarizar indicadores comerciales.",
+    stack: ["Sightflow", "BI", "Retail", "Reporting"],
     outcome:
-      "1,500+ usuarios activos, entregas al 99.9% y cero trabajo manual diario.",
-    link: "https://lnk.bio/unratitocondios",
+      "Reportes más rápidos, indicadores consistentes y menor carga manual para el equipo.",
     featured: true,
   },
   {
-    slug: "vida-software",
-    name: "Vida Software",
-    label: "Sistemas retail",
-    categories: ["Data", "ML", "Automation"],
+    slug: "tmf-group",
+    name: "TMF Group",
+    label: "Consultoría de IA",
+    categories: ["AI"],
     summary:
-      "Ecosistema automatizado para decisiones de stock y precio con información confiable.",
+      "Automatización de un flujo de correos con Power Automate para reducir tareas repetitivas.",
     problem:
-      "Gerentes pasaban días en Excel sin poder reaccionar a cambios repentinos en el mercado.",
+      "El equipo gestionaba correos y derivaciones con pasos manuales que consumían tiempo.",
     approach:
-      "Construimos pipelines ETL en Python, modelos de pronóstico y dashboards que hablan el mismo idioma que la operación.",
-    stack: ["Python", "SQL", "ETL", "Pronósticos", "Dashboards"],
+      "Diseñamos un flujo en Power Automate para ordenar entradas, disparar acciones y mejorar continuidad.",
+    stack: ["Power Automate", "Procesos", "Automatización", "IA"],
     outcome:
-      "Procesamos 50k+ registros mensuales y dejamos decisiones operativas en piloto automático.",
+      "Flujo de correos automatizado, menos tareas repetitivas y mayor orden operativo.",
+  },
+  {
+    slug: "ptc",
+    name: "PTC",
+    label: "Consultoría de IA",
+    categories: ["AI"],
+    summary:
+      "Automatización del flujo de creación de propuestas comerciales con Gemini.",
+    problem:
+      "La creación de propuestas requería recopilar información, estructurar contenido y repetir pasos.",
+    approach:
+      "Creamos un flujo asistido por Gemini para generar y ordenar propuestas con mayor consistencia.",
+    stack: ["Gemini", "IA", "Propuestas", "Automatización"],
+    outcome:
+      "Menos tiempo de preparación y una estructura más consistente para el equipo comercial.",
   },
   {
     slug: "goxa",
     name: "GOXA",
-    label: "GOXA Studio",
-    categories: ["Data", "Automation"],
-    summary: "GOXA automatiza reportes sin ruido.",
-    problem: "Las métricas tardaban días en llegar.",
-    approach: "Ponemos dashboards listos y alertas mínimas.",
-    stack: ["Next.js", "SQL"],
-    outcome: "Información que se entiende en segundos.",
+    label: "E-commerce",
+    categories: ["Ecommerce"],
+    summary:
+      "E-commerce para ordenar ventas digitales y facilitar la operación comercial.",
+    problem:
+      "GOXA necesitaba digitalizar su canal de ventas y mejorar la experiencia de compra.",
+    approach:
+      "Diseñamos e implementamos una tienda orientada a conversión, contenido claro y operación escalable.",
+    stack: ["E-commerce", "Web", "Ventas digitales"],
+    outcome:
+      "Canal de ventas digital operativo y mejor base tecnológica para escalar.",
+    link: "https://goxa.pe",
   },
   {
-    slug: "kompass-cargo",
-    name: "Kompass Cargo",
-    label: "Inteligencia logística",
-    categories: ["Data", "Web"],
+    slug: "el-pez-nuestro-de-cada-dia",
+    name: "El Pez Nuestro de Cada Día",
+    label: "E-commerce",
+    categories: ["Ecommerce"],
     summary:
-      "Un tablero comercial que junta precios, márgenes y alertas para equipos logísticos.",
+      "Landing comercial para centralizar pedidos, contactos, contenido social y videos.",
     problem:
-      "Los comerciales trabajaban a ciegas y regalaban margen porque no tenían datos claros ni consistentes.",
+      "El negocio requería un canal digital que reuniera pedidos, contactos y contenido audiovisual.",
     approach:
-      "Centralizamos precios en una suite de reportes con benchmarks sencillos y señales de acción.",
-    stack: ["Next.js", "SQL", "Analytics", "Reporting"],
+      "Creamos una landing page integral con enlaces de pedido, contacto, redes y galería visual.",
+    stack: ["Landing page", "E-commerce", "Contenido", "Web"],
     outcome:
-      "Estandarizamos la estrategia de precio en 30+ clientes y mejoramos la consistencia de los márgenes.",
+      "Canal digital oficial para impulsar marca, pedidos y presencia en redes.",
+    link: "https://elpeznuestrodecadadia.vercel.app/",
   },
 ];
 
@@ -117,17 +139,17 @@ export const getFeaturedProjects = (): Project[] =>
 export const getAllProjects = (): Project[] => projects;
 
 export const strengths = [
-  "Pipelines auditables que dan confianza",
-  "SQL recursivo que sigue reglas limpias",
-  "Pronósticos de IA listos para actuar",
-  "Automatizaciones que se mantienen solas",
+  "BI automatizado para reportes comerciales",
+  "Flujos de IA y no-code para procesos internos",
+  "E-commerce y canales digitales orientados a venta",
+  "Automatizaciones simples que reducen trabajo manual",
 ];
 
 export const industries = [
-  "Retail y FMCG",
-  "Logística y cadena de suministro",
-  "Educación y tecnología educativa",
-  "Cumplimiento y auditoría",
+  "BI y reporting comercial",
+  "Consultoría de IA",
+  "E-commerce",
+  "Automatización de procesos",
 ];
 
 export type ExperienceItem = {
@@ -139,33 +161,33 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    role: "Ingeniero de software",
-    company: "Vida Software",
-    period: "05/2025 - Presente",
+    role: "Automatización de BI",
+    company: "Sightflow",
+    period: "Corporación Grupo Romero / CIDELSA / Subway",
     highlights: [
-      "Lidero dashboards interactivos que alínean retail con producto digital.",
-      "Automatizo pronósticos y operaciones con pipelines Python + SQL.",
-      "Mantengo más de 30 módulos que mueven stock y precio sin intervención diaria.",
+      "Automatización de reportes comerciales y tableros de BI.",
+      "Centralización de indicadores para reducir preparación manual.",
+      "Entrega de información lista para seguimiento y toma de decisiones.",
     ],
   },
   {
-    role: "Analista de pricing y TI",
-    company: "Kompass Cargo",
-    period: "11/2024 - 05/2025",
+    role: "Consultoría de IA",
+    company: "TMF Group / PTC",
+    period: "Automatización de procesos",
     highlights: [
-      "Diseñé flujos digitales que redujeron costos operativos y errores.",
-      "Convertí datos dispersos en reportes claros con señales comerciales.",
-      "Gestioné propuestas técnicas para más de 30 clientes logísticos.",
+      "Automatización de un flujo de correos con Power Automate para TMF Group.",
+      "Automatización del flujo de creación de propuestas con Gemini para PTC.",
+      "Diseño de flujos internos para reducir tareas repetitivas.",
     ],
   },
   {
-    role: "Desarrollador web y soluciones IA",
-    company: "Freelance",
-    period: "01/2023 - 11/2024",
+    role: "E-commerce",
+    company: "GOXA / El Pez Nuestro de Cada Día",
+    period: "Canales digitales",
     highlights: [
-      "Lancé ocho experiencias web responsivas para startups que necesitaban conversión.",
-      "Construí 'Trippio', un planificador de viajes IA con pipelines RAG sencillos.",
-      "Desarrollé landing pages inteligentes con autenticación moderna.",
+      "Implementación de e-commerce para ventas digitales.",
+      "Landing comercial con pedidos, contactos y contenido centralizado.",
+      "Experiencias web enfocadas en conversión y operación simple.",
     ],
   },
 ];

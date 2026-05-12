@@ -5,7 +5,7 @@ import SiteHeader from "../components/SiteHeader";
 import { getExperience } from "../lib/content";
 
 export const metadata: Metadata = {
-  title: "Experiencia | NCC Technology",
+  title: "Experiencia | C8 Tech",
   description:
     "Experiencia en sistemas de datos, automatización y entregas con resultados medibles.",
 };

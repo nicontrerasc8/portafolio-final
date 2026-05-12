@@ -6,16 +6,16 @@ import ProjectFilters from "./ProjectFilters";
 import { getAllProjects } from "../lib/content";
 
 export const metadata: Metadata = {
-  title: "Proyectos | NCC Technology",
+  title: "Proyectos | C8 Tech",
   description:
-    "Casos en los que transformamos procesos manuales en automatizaciones simples y listas para operar.",
+    "Casos de Sightflow, consultoría de IA y e-commerce para automatizar operaciones y ventas.",
 };
 
 const copy = {
   kicker: "Portafolio",
-  title: "Sistemas de datos y automatización listos para usar",
+  title: "Portafolio dividido por línea de servicio",
   description:
-    "Filtra por foco y explorar cómo entregamos procesos operativos con claridad y velocidad.",
+    "Explora los proyectos de Sightflow, consultoría de IA y e-commerce con los clientes activos en cada línea.",
 };
 
 export default function ProjectsPage() {

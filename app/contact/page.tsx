@@ -4,7 +4,7 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Contacto | NCC Technology",
+  title: "Contacto | C8 Tech",
   description:
     "Conversemos sobre soluciones de datos sencillas, automatizaciones y entregas web rápidas.",
 };
@@ -14,7 +14,7 @@ const copy = {
   title: "¿Listos para lanzar tu producto de datos?",
   description:
     "Trabajamos con equipos que necesitan claridad, velocidad y automatizaciones que se mantienen solas. Comparte tu reto y trazaremos el camino completo.",
-  email: "hola@ncctechnology.com",
+  email: "nicontrerasc8@gmail.com",
   linkLabel: "LinkedIn",
 };
 

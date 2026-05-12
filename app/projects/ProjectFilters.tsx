@@ -1,9 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import Reveal from "../components/Reveal";
-import { categoryLabels, type Project, type ProjectCategory } from "../lib/content";
+import {
+  categoryLabels,
+  type Project,
+  type ProjectCategory,
+} from "../lib/content";
 
 type Props = {
   projects: Project[];
@@ -11,19 +14,17 @@ type Props = {
 
 const filters: (ProjectCategory | "All")[] = [
   "All",
-  "Data",
-  "ML",
-  "Automation",
-  "Web",
+  "Sightflow",
+  "AI",
+  "Ecommerce",
 ];
 
 const copy = {
-  all: "Todos mis proyectos",
-  problem: "Mi problema",
-  approach: "Mi enfoque",
-  outcome: "Mi resultado",
-  openCaseStudy: "Ver mi caso de estudio",
-  liveProduct: "Ver mi producto en vivo",
+  all: "Todo el portafolio",
+  problem: "Problema",
+  approach: "Enfoque",
+  outcome: "Resultado",
+  liveProduct: "Ver producto en vivo",
   caseDetails: "Puedo compartir más detalles a solicitud",
 };
 
@@ -56,8 +57,8 @@ export default function ProjectFilters({ projects }: Props) {
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         {visible.map((project, index) => (
           <Reveal key={project.slug} delay={index * 0.06}>
-            <article className="glass flex h-full flex-col gap-6 rounded-3xl p-6 border border-slate-200 bg-white/80 shadow-xl text-slate-600">
-              <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-slate-400">
+            <article className="glass flex h-full flex-col gap-6 rounded-3xl border border-slate-200 bg-white/80 p-6 text-slate-600 shadow-xl">
+              <div className="flex items-center justify-between gap-4 text-xs uppercase tracking-[0.3em] text-slate-400">
                 <span>{project.label}</span>
                 <span>
                   {project.categories
@@ -69,7 +70,9 @@ export default function ProjectFilters({ projects }: Props) {
                 <h3 className="text-2xl font-semibold text-slate-900">
                   {project.name}
                 </h3>
-                <p className="mt-3 text-sm text-slate-500">{project.summary}</p>
+                <p className="mt-3 text-sm text-slate-500">
+                  {project.summary}
+                </p>
               </div>
               <div className="grid gap-3 text-sm text-slate-500">
                 <p>
@@ -96,9 +99,7 @@ export default function ProjectFilters({ projects }: Props) {
                 ))}
               </div>
               <div className="pt-2 text-sm font-semibold text-blue-600">
-                {project.slug === "excellia-ubo" ? (
-                  <Link href="/projects/excellia-ubo">{copy.openCaseStudy}</Link>
-                ) : project.link ? (
+                {project.link ? (
                   <a href={project.link} target="_blank" rel="noreferrer">
                     {copy.liveProduct}
                   </a>
