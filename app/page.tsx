@@ -45,7 +45,7 @@ const clients = [
   },
 ];
 
-const projects = [
+const legacyProjects = [
   {
     id: "corporacion-grupo-romero",
     service: "BI",
@@ -155,43 +155,155 @@ const projects = [
   },
 ];
 
+const projectUpdates: Record<string, Partial<(typeof legacyProjects)[number]>> = {
+  "corporacion-grupo-romero": {
+    service: "Legaltech",
+    description:
+      "Legaltech a medida para automatizar la determinación del beneficiario final.",
+    problem:
+      "El área legal tributaria determinaba beneficiarios finales manualmente en Excel, con procesos que podían tomar hasta una semana por empresa.",
+    solution:
+      "Desarrollamos una plataforma que digitaliza el flujo, aplica reglas de análisis y reduce tareas repetitivas dentro de un proceso tributario crítico.",
+    results: [
+      "Tiempo promedio reducido a 15 minutos por empresa",
+      "Menor riesgo de error en un proceso sensible",
+      "Más control, trazabilidad y operación legal digitalizada",
+    ],
+    tags: ["Legaltech", "Tributario", "Automatización"],
+  },
+  cidelsa: {
+    service: "CRM",
+    description: "CRM comercial a medida, compatible con el ERP de Cidelsa.",
+    problem:
+      "La actividad comercial necesitaba visualizarse de forma clara, rápida y ordenada para distintos niveles de gestión.",
+    solution:
+      "Creamos un CRM integrado al ERP, con carga simple de información y vistas adaptadas para directores, gerentes, jefes y ejecutivos.",
+    results: [
+      "Mejor visibilidad comercial por rol y equipo",
+      "Seguimiento más ordenado de la gestión de ventas",
+      "Toma de decisiones más ágil con información centralizada",
+    ],
+    tags: ["CRM", "ERP", "Ventas"],
+  },
+  subway: {
+    service: "Dashboard",
+    description:
+      "Dashboard comercial y operativo para las tiendas Subway de Gastrobiz en Lima.",
+    problem:
+      "La operación necesitaba monitorear el desempeño de 7 sucursales desde una misma plataforma, con información ordenada y accionable.",
+    solution:
+      "Desarrollamos una solución de visualización y gestión que centraliza datos por tienda y facilita el seguimiento comercial diario.",
+    results: [
+      "Mayor control operativo por sucursal",
+      "Información comercial centralizada y más fácil de revisar",
+      "Mejor seguimiento del desempeño de cada tienda",
+    ],
+    tags: ["Dashboard", "Retail", "Sucursales"],
+  },
+  "tmf-group": {
+    service: "Automatización",
+    description:
+      "Automatización inteligente de correos para derivar comunicaciones al responsable correcto.",
+    problem:
+      "El reenvío de correos hacia el personal de cada cuenta consumía tiempo y generaba fricción en la operación diaria.",
+    solution:
+      "Implementamos un flujo en Power Automate que ordena, distribuye y deriva comunicaciones de forma más eficiente.",
+    results: [
+      "Menos trabajo manual en la gestión de correos",
+      "Mayor trazabilidad en la distribución interna",
+      "Gestión operativa más rápida y ordenada",
+    ],
+    tags: ["Power Automate", "Correos", "Procesos"],
+  },
+  ptc: {
+    service: "IA",
+    description:
+      "Automatización con IA para acelerar la creación de propuestas comerciales.",
+    problem:
+      "El equipo invertía tiempo en tareas repetitivas para armar, estructurar y estandarizar propuestas.",
+    solution:
+      "Creamos una solución con Gemini estructurado que automatiza el flujo de generación de documentos comerciales.",
+    results: [
+      "Propuestas comerciales listas en menos tiempo",
+      "Documentos mejor organizados y estandarizados",
+      "Menos trabajo manual",
+    ],
+    tags: ["IA", "Gemini", "Propuestas"],
+  },
+  goxa: {
+    service: "E-commerce",
+    description:
+      "Ecommerce con catálogo digital y carrito conectado directamente a WhatsApp.",
+    problem:
+      "Goxa necesitaba mostrar más de 30 productos y convertir el interés de sus clientes en pedidos rápidos.",
+    solution:
+      "Diseñamos una tienda online funcional donde los usuarios exploran productos, arman su carrito y envían el pedido por WhatsApp.",
+    results: [
+      "Catálogo digital con más de 30 productos",
+      "Proceso de compra simple conectado a WhatsApp",
+      "Tienda online enfocada en vender más",
+    ],
+    tags: ["E-commerce", "WhatsApp", "Catálogo"],
+  },
+  elpez: {
+    service: "Web",
+    description:
+      "Plataforma web de contenido y ecommerce para comunicar, informar y vender.",
+    problem:
+      "La marca necesitaba centralizar contenido, noticias, productos y funcionalidades digitales en una experiencia clara.",
+    solution:
+      "Desarrollamos una web tipo ecommerce que integra contenido y venta en una sola plataforma preparada para crecer.",
+    results: [
+      "Presencia digital más profesional",
+      "Contenido, noticias y productos centralizados",
+      "Plataforma lista para escalar nuevas funcionalidades",
+    ],
+    tags: ["Contenido", "E-commerce", "Web"],
+  },
+};
+
+const projects = legacyProjects.map((project) => ({
+  ...project,
+  ...projectUpdates[project.id],
+}));
+
 const services = [
   {
     title: "Reportes automáticos",
-    description: "Deja de armar Excel a mano. Te dejamos dashboards claros.",
+    description: "Convierte tus datos en dashboards claros, actualizados y listos para decidir.",
     icon: BarChart3,
     stat: "BI",
-    glow: "from-cyan-300/30 to-[#246bff]/30",
+    glow: "from-[#b8d8ff]/50 to-[#246bff]/20",
   },
   {
     title: "Procesos automáticos",
-    description: "Automatizamos correos, tareas repetitivas y flujos internos.",
+    description: "Automatizamos tareas repetitivas, correos y flujos internos para que tu equipo trabaje mejor.",
     icon: Zap,
     stat: "Flow",
-    glow: "from-[#246bff]/35 to-cyan-300/20",
+    glow: "from-[#246bff]/20 to-[#b8d8ff]/50",
   },
   {
-    title: "Webs que venden",
-    description: "Creamos tiendas y páginas simples para captar clientes.",
+    title: "Ecommerce",
+    description: "Creamos páginas y sistemas simples, rápidos y pensadas para convertir visitas en clientes.",
     icon: ShoppingCart,
     stat: "Web",
-    glow: "from-cyan-200/25 to-[#246bff]/35",
+    glow: "from-[#dbeafe]/70 to-[#246bff]/20",
   },
 ];
 
 function LogoBox({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="mx-4 flex h-40 min-w-[300px] items-center justify-center border border-cyan-200/12 bg-[#07183f]/70 px-9 py-5 shadow-xl shadow-[#06112c]/40 backdrop-blur">
+    <div className="mx-4 flex h-40 min-w-[300px] items-center justify-center border border-blue-100 bg-white/90 px-9 py-5 shadow-xl shadow-blue-100/70 backdrop-blur">
       {logo ? (
         <Image
           src={logo}
           alt={name}
           width={300}
           height={180}
-          className="max-h-32 w-full rounded-lg object-contain brightness-110 contrast-110"
+          className="max-h-32 w-full rounded-lg object-contain "
         />
       ) : (
-        <span className="text-center font-display text-4xl font-black text-white">
+        <span className="text-center font-display text-4xl font-black text-slate-950">
           {name}
         </span>
       )}
@@ -204,8 +316,8 @@ function ClientCarousel() {
 
   return (
     <div className="relative mt-12 w-full overflow-hidden">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#06112c] to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#06112c] to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent" />
 
       <div className="flex w-max animate-logoScroll">
         {repeatedClients.map((client, index) => (
@@ -233,79 +345,79 @@ function ProjectModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/35 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl rounded-3xl border border-cyan-200/15 bg-[#07183f] p-6 shadow-2xl md:p-8"
+        className="relative w-full max-w-2xl rounded-3xl border border-blue-100 bg-white p-6 shadow-2xl shadow-blue-100/80 md:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute right-5 top-5 rounded-full bg-white/10 p-2 transition hover:bg-white/20"
+          className="absolute right-5 top-5 rounded-full bg-slate-100 p-2 transition hover:bg-blue-100"
           aria-label="Cerrar"
         >
-          <X className="h-5 w-5 text-white" />
+          <X className="h-5 w-5 text-slate-950" />
         </button>
 
         <div className="mb-6 flex items-center gap-5 pr-10">
-          <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-cyan-200/12 bg-[#06112c] p-4">
+          <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-blue-100 bg-white p-4">
             {project.logo ? (
               <Image
                 src={project.logo}
                 alt={project.name}
                 width={120}
                 height={80}
-                className="max-h-20 w-auto rounded-lg object-contain brightness-110 contrast-110"
+                className="max-h-20 w-auto rounded-lg object-contain "
               />
             ) : (
-              <span className="text-center font-display text-xl font-black text-white">
+              <span className="text-center font-display text-xl font-black text-slate-950">
                 {project.name}
               </span>
             )}
           </div>
 
           <div>
-            <p className="font-body text-sm font-bold uppercase tracking-[0.2em] text-cyan-200">
+            <p className="font-body text-sm font-bold uppercase tracking-[0.2em] text-[#246bff]">
               {project.service}
             </p>
-            <h2 className="font-display mt-1 text-3xl font-bold text-white">
+            <h2 className="font-display mt-1 text-3xl font-bold text-slate-950">
               {project.name}
             </h2>
-            <p className="font-body mt-2 text-[#c9d8f2]">
+            <p className="font-body mt-2 text-slate-600">
               {project.description}
             </p>
           </div>
         </div>
 
         <div className="grid gap-4">
-          <div className="rounded-2xl bg-[#06112c]/70 p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+          <div className="rounded-2xl bg-[#f4f8ff]/90 p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
               Problema
             </p>
-            <p className="font-body mt-2 text-lg text-white">
+            <p className="font-body mt-2 text-lg text-slate-950">
               {project.problem}
             </p>
           </div>
 
-          <div className="rounded-2xl bg-[#06112c]/70 p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+          <div className="rounded-2xl bg-[#f4f8ff]/90 p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
               Solución
             </p>
-            <p className="font-body mt-2 text-lg text-white">
+            <p className="font-body mt-2 text-lg text-slate-950">
               {project.solution}
             </p>
           </div>
 
-          <div className="rounded-2xl bg-[#06112c]/70 p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+          <div className="rounded-2xl bg-[#f4f8ff]/90 p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
               Resultado
             </p>
 
             <div className="mt-3 grid gap-3">
               {project.results.map((result) => (
-                <div key={result} className="flex items-center gap-3 text-white">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-cyan-300" />
+                <div key={result} className="flex items-center gap-3 text-slate-950">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[#246bff]" />
                   <span className="font-body">{result}</span>
                 </div>
               ))}
@@ -340,7 +452,7 @@ function ProjectCard({
     <button
       type="button"
       onClick={onClick}
-      className="group rounded-3xl border border-cyan-200/12 bg-[#07183f]/80 p-6 text-left shadow-xl transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-[#0a1c4d]"
+      className="group rounded-3xl border border-blue-100 bg-white/90 p-6 text-left shadow-xl transition hover:-translate-y-1 hover:border-[#246bff]/35 hover:bg-blue-50"
     >
       <div className="mb-7 flex min-h-52 items-center justify-center">
         {project.logo ? (
@@ -349,24 +461,24 @@ function ProjectCard({
             alt={project.name}
             width={380}
             height={260}
-            className="aspect-[16/9] max-h-48 w-full rounded-lg object-contain brightness-110 contrast-110 transition duration-300 group-hover:scale-110"
+            className="aspect-[16/9] max-h-48 w-full rounded-lg object-contain  transition duration-300 group-hover:scale-110"
           />
         ) : (
-          <span className="text-center font-display text-5xl font-black text-white">
+          <span className="text-center font-display text-5xl font-black text-slate-950">
             {project.name}
           </span>
         )}
       </div>
 
-      <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+      <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
         {project.service}
       </p>
 
-      <h3 className="font-display mt-2 text-2xl font-bold text-white">
+      <h3 className="font-display mt-2 text-2xl font-bold text-slate-950">
         {project.name}
       </h3>
 
-      <p className="font-body mt-3 text-base leading-relaxed text-[#c9d8f2]">
+      <p className="font-body mt-3 text-base leading-relaxed text-slate-600">
         {project.description}
       </p>
 
@@ -374,14 +486,14 @@ function ProjectCard({
         {project.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="rounded-full bg-cyan-300/10 px-3 py-1 text-xs font-bold text-cyan-100"
+            className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-[#246bff]"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <div className="mt-6 flex items-center gap-2 font-body font-bold text-white">
+      <div className="mt-6 flex items-center gap-2 font-body font-bold text-slate-950">
         Ver caso
         <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
       </div>
@@ -400,30 +512,28 @@ function ServiceCard({
 
   return (
     <div
-      className="service-card group relative overflow-hidden rounded-[2rem] border border-cyan-200/12 bg-[#07183f]/80 p-8 text-center shadow-2xl shadow-[#06112c]/50"
+      className="service-card group relative overflow-hidden rounded-[2rem] border border-blue-100 bg-white/90 p-8 text-center shadow-2xl shadow-blue-100/70"
       style={{ animationDelay: `${index * 120}ms` }}
     >
       <div className={`absolute -top-20 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-gradient-to-br ${service.glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(201,216,242,0.10),transparent_48%)] opacity-70" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(36,107,255,0.08),transparent_48%)] opacity-70" />
 
-      <div className="relative mx-auto mb-7 flex h-28 w-28 items-center justify-center rounded-[1.75rem] border border-cyan-200/20 bg-[#06112c]/80 shadow-2xl shadow-[#246bff]/20 transition duration-500 group-hover:-translate-y-2 group-hover:scale-110 group-hover:border-cyan-200/40">
-        <div className="absolute inset-3 rounded-[1.35rem] bg-[#246bff]/10 transition group-hover:bg-cyan-300/10" />
-        <Icon className="relative h-14 w-14 text-cyan-100 drop-shadow-[0_0_18px_rgba(201,216,242,0.45)] transition duration-500 group-hover:text-white" />
+      <div className="relative mx-auto mb-7 flex h-28 w-28 items-center justify-center rounded-[1.75rem] border border-blue-100 bg-[#f4f8ff]/90 shadow-2xl shadow-blue-200/70 transition duration-500 group-hover:-translate-y-2 group-hover:scale-110 group-hover:border-[#246bff]/30">
+        <div className="absolute inset-3 rounded-[1.35rem] bg-[#246bff]/10 transition group-hover:bg-[#246bff]/15" />
+        <Icon className="relative h-14 w-14 text-[#246bff] drop-shadow-[0_0_18px_rgba(36,107,255,0.18)] transition duration-500 group-hover:text-[#246bff]" />
       </div>
 
-      <p className="relative mx-auto mb-4 inline-flex rounded-full border border-cyan-200/15 bg-cyan-300/10 px-4 py-1 text-xs font-black uppercase tracking-[0.22em] text-cyan-100">
-        {service.stat}
-      </p>
+  
 
-      <h3 className="relative font-display text-3xl font-black leading-tight text-white">
+      <h3 className="relative font-display text-3xl font-black leading-tight text-slate-950">
         {service.title}
       </h3>
 
-      <p className="relative mx-auto mt-4 max-w-xs font-body text-lg leading-relaxed text-[#c9d8f2]">
+      <p className="relative mx-auto mt-4 max-w-xs font-body text-lg leading-relaxed text-slate-600">
         {service.description}
       </p>
 
-      <div className="relative mx-auto mt-7 h-1 w-16 rounded-full bg-gradient-to-r from-cyan-200 to-[#246bff] opacity-70 transition duration-500 group-hover:w-24 group-hover:opacity-100" />
+      <div className="relative mx-auto mt-7 h-1 w-16 rounded-full bg-gradient-to-r from-[#9cc7ff] to-[#246bff] opacity-70 transition duration-500 group-hover:w-24 group-hover:opacity-100" />
     </div>
   );
 }
@@ -431,21 +541,21 @@ function ServiceCard({
 function TechBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#06112c] via-[#07183f] to-[#0a1c4d]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#f4f8ff] to-[#eaf2ff]" />
 
       <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgb(59 130 246 / 0.12) 1px, transparent 1px),
-            linear-gradient(to bottom, rgb(59 130 246 / 0.12) 1px, transparent 1px)
+            linear-gradient(to right, rgb(36 107 255 / 0.10) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(36 107 255 / 0.10) 1px, transparent 1px)
           `,
           backgroundSize: "64px 64px",
         }}
       />
 
-      <div className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#246bff]/15 blur-3xl" />
-      <div className="absolute bottom-[15%] right-[10%] h-96 w-96 rounded-full bg-cyan-300/10 blur-3xl" />
+      <div className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#246bff]/10 blur-3xl" />
+      <div className="absolute bottom-[15%] right-[10%] h-96 w-96 rounded-full bg-[#246bff]/5 blur-3xl" />
     </div>
   );
 }
@@ -456,7 +566,7 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-[#06112c]">
+    <div className="min-h-screen bg-white">
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap");
 
@@ -513,7 +623,7 @@ export default function Home() {
           position: absolute;
           inset: -40% auto -40% 0;
           width: 90px;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+          background: linear-gradient(90deg, transparent, rgba(36,107,255,0.16), transparent);
           transform: translateX(-120%) rotate(12deg);
           transition: opacity 0.3s ease;
           opacity: 0;
@@ -530,7 +640,7 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-            <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl border border-white/10 bg-[#06112c] shadow-2xl sm:h-40 sm:w-40">
+            <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl sm:h-40 sm:w-40">
               <Image
                 src="/logo.jpeg"
                 alt="C8 Tech"
@@ -541,16 +651,16 @@ export default function Home() {
               />
             </div>
 
-            <p className="font-body mb-5 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-cyan-200">
-              Automatización para empresas
+            <p className="font-body mb-5 rounded-full border border-blue-100 bg-[#246bff]/5 px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#246bff]">
+              SOLUCIONES DIGITALES A MEDIDA
             </p>
 
-            <h1 className="font-display text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
-              Simplificamos tu operación.
+            <h1 className="font-display text-5xl font-black leading-tight tracking-tight text-slate-950 sm:text-6xl md:text-7xl">
+              Impulsamos la eficiencia y el crecimiento de tu empresa con tecnología.
             </h1>
 
-            <p className="font-body mt-6 max-w-2xl text-xl leading-relaxed text-[#c9d8f2] md:text-2xl">
-              Automatizamos reportes, procesos y sistemas para que tu equipo trabaje más rápido.
+            <p className="font-body mt-6 max-w-2xl text-xl leading-relaxed text-slate-600 md:text-2xl">
+              Conectamos ventas, procesos y datos a través de soluciones en e-commerce, automatización y BI.
             </p>
 
             <div className="mt-9 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
@@ -564,9 +674,9 @@ export default function Home() {
 
               <Link
                 href="#casos"
-                className="font-body inline-flex items-center justify-center rounded-2xl border border-cyan-200/20 bg-white/5 px-8 py-5 text-lg font-black text-white transition hover:bg-white/10"
+                className="font-body inline-flex items-center justify-center rounded-2xl border border-blue-100 bg-white px-8 py-5 text-lg font-black text-[#246bff] transition hover:bg-blue-50"
               >
-                Ver trabajos
+                <strong className="text-[#246bff]">Ver trabajos</strong>
               </Link>
             </div>
           </div>
@@ -575,16 +685,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#06112c] px-4 py-24 sm:px-6">
+      <section className="relative overflow-hidden bg-white px-4 py-24 sm:px-6">
         <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#246bff]/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-14 text-center">
-            <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-cyan-200">
-              Qué hacemos
+            <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-[#246bff]">
+              ¿Qué hacemos?
             </p>
-            <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
-              Menos manual. Más automático.
+            <h2 className="font-display mt-3 text-4xl font-black text-slate-950 md:text-5xl">
+              Menos manual. Más automático. Más rentable.
             </h2>
           </div>
 
@@ -596,14 +706,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="casos" className="bg-[#07183f] px-4 py-20 sm:px-6">
+      <section id="casos" className="bg-white px-4 py-20 sm:px-6">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left">
             <div>
-              <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-cyan-200">
+              <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-[#246bff]">
                 Clientes
               </p>
-              <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
+              <h2 className="font-display mt-3 text-4xl font-black text-slate-950 md:text-5xl">
                 Trabajos realizados
               </h2>
             </div>
@@ -624,7 +734,7 @@ export default function Home() {
 
       <section
         id="contacto"
-        className="relative overflow-hidden bg-gradient-to-br from-[#06112c] via-[#0a1c4d] to-[#06112c] px-4 py-24 sm:px-6"
+        className="relative overflow-hidden bg-gradient-to-br from-white via-[#f4f8ff] to-white px-4 py-24 sm:px-6"
       >
         <div className="absolute inset-0 opacity-20">
           <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-[#246bff] blur-3xl" />
@@ -632,16 +742,16 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <h2 className="font-display text-5xl font-black leading-tight text-white md:text-6xl">
+          <h2 className="font-display text-5xl font-black leading-tight text-slate-950 md:text-6xl">
             ¿Qué proceso quieres simplificar?
           </h2>
 
-          <p className="font-body mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-[#c9d8f2]">
+          <p className="font-body mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-600">
             Cuéntanos qué haces manualmente. Te decimos cómo automatizarlo.
           </p>
 
           <Link
-            href="mailto:nicontrerasc8@gmail.com?subject=Quiero automatizar un proceso"
+            href="mailto:ncc.technology1@gmail.com?subject=Quiero automatizar un proceso"
             className="font-body mt-10 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#246bff] px-8 py-5 text-lg font-black text-white shadow-2xl transition hover:-translate-y-1 hover:bg-[#1f57d6] sm:w-auto"
           >
             Contactar ahora
