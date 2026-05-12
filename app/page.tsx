@@ -11,6 +11,8 @@ import {
   BarChart3,
   Zap,
   ShoppingCart,
+  Sun,
+  Moon,
 } from "lucide-react";
 import SiteFooter from "./components/SiteFooter";
 
@@ -44,6 +46,7 @@ const clients = [
     logo: "/elpez.png",
   },
 ];
+
 
 const legacyProjects = [
   {
@@ -154,6 +157,36 @@ const legacyProjects = [
     tags: ["Landing", "Pedidos", "Web"],
   },
 ];
+function ThemeToggle({
+  isDark,
+  onToggle,
+}: {
+  isDark: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className={`fixed right-5 top-5 z-[60] flex items-center gap-2 rounded-full border px-4 py-2 font-body text-sm font-black shadow-2xl backdrop-blur transition hover:-translate-y-0.5 ${
+        isDark
+          ? "border-white/10 bg-white/10 text-white shadow-black/40 hover:bg-white/15"
+          : "border-blue-100 bg-white/90 text-slate-950 shadow-blue-100/80 hover:bg-blue-50"
+      }`}
+      aria-label="Cambiar tema"
+    >
+      <span
+        className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+          isDark ? "bg-[#246bff] text-white" : "bg-[#f4f8ff] text-[#246bff]"
+        }`}
+      >
+        {isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+      </span>
+
+      <span>{isDark ? "Dark" : "Light"}</span>
+    </button>
+  );
+}
 
 const projectUpdates: Record<string, Partial<(typeof legacyProjects)[number]>> = {
   "corporacion-grupo-romero": {
@@ -564,9 +597,17 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(
     null,
   );
+  const [isDark, setIsDark] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div
+      data-theme={isDark ? "dark" : "light"}
+      className={`min-h-screen transition-colors duration-500 ${
+        isDark ? "bg-slate-950" : "bg-white"
+      }`}
+    >
+      <ThemeToggle isDark={isDark} onToggle={() => setIsDark(!isDark)} />
+
       <style jsx global>{`
         @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap");
 
@@ -633,6 +674,92 @@ export default function Home() {
           opacity: 1;
           animation: serviceShine 0.9s ease forwards;
         }
+
+        [data-theme="dark"] {
+          color-scheme: dark;
+        }
+
+        [data-theme="dark"] section {
+          background-color: #020617 !important;
+        }
+
+        [data-theme="dark"] .bg-white {
+          background-color: #020617 !important;
+        }
+
+        [data-theme="dark"] .bg-white\/90 {
+          background-color: rgba(15, 23, 42, 0.92) !important;
+        }
+
+        [data-theme="dark"] .bg-\[\#f4f8ff\]\/90 {
+          background-color: rgba(15, 23, 42, 0.95) !important;
+        }
+
+        [data-theme="dark"] .bg-blue-50 {
+          background-color: rgba(36, 107, 255, 0.12) !important;
+        }
+
+        [data-theme="dark"] .text-slate-950 {
+          color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .text-slate-600 {
+          color: #cbd5e1 !important;
+        }
+
+        [data-theme="dark"] .border-blue-100,
+        [data-theme="dark"] .border-slate-200 {
+          border-color: rgba(96, 165, 250, 0.25) !important;
+        }
+
+        [data-theme="dark"] .shadow-blue-100\/70,
+        [data-theme="dark"] .shadow-blue-100\/80,
+        [data-theme="dark"] .shadow-blue-200\/70 {
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55) !important;
+        }
+
+        [data-theme="dark"] .from-white {
+          --tw-gradient-from: #020617 var(--tw-gradient-from-position) !important;
+          --tw-gradient-to: rgb(2 6 23 / 0) var(--tw-gradient-to-position) !important;
+          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+        }
+
+        [data-theme="dark"] .via-\[\#f4f8ff\] {
+          --tw-gradient-to: rgb(15 23 42 / 0) var(--tw-gradient-to-position) !important;
+          --tw-gradient-stops: var(--tw-gradient-from), #0f172a var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+        }
+
+        [data-theme="dark"] .to-\[\#eaf2ff\],
+        [data-theme="dark"] .to-white {
+          --tw-gradient-to: #020617 var(--tw-gradient-to-position) !important;
+        }
+
+        [data-theme="dark"] .from-\[\#b8d8ff\]\/50,
+        [data-theme="dark"] .from-\[\#dbeafe\]\/70 {
+          --tw-gradient-from: rgba(36, 107, 255, 0.22) var(--tw-gradient-from-position) !important;
+          --tw-gradient-to: rgba(36, 107, 255, 0) var(--tw-gradient-to-position) !important;
+          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+        }
+
+        [data-theme="dark"] .to-\[\#246bff\]\/20 {
+          --tw-gradient-to: rgba(184, 216, 255, 0.14) var(--tw-gradient-to-position) !important;
+        }
+
+        [data-theme="dark"] .bg-gradient-to-r.from-white.to-transparent {
+          background-image: linear-gradient(to right, #020617, transparent) !important;
+        }
+
+        [data-theme="dark"] .bg-gradient-to-l.from-white.to-transparent {
+          background-image: linear-gradient(to left, #020617, transparent) !important;
+        }
+
+        [data-theme="dark"] .hover\:bg-blue-50:hover {
+          background-color: rgba(36, 107, 255, 0.16) !important;
+        }
+
+        [data-theme="dark"] .hover\:bg-blue-100:hover {
+          background-color: rgba(36, 107, 255, 0.18) !important;
+        }
       `}</style>
 
       <section className="relative overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
@@ -642,7 +769,7 @@ export default function Home() {
           <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
             <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl sm:h-40 sm:w-40">
               <Image
-                src="/logo.jpeg"
+                src={isDark ? "/logo-dark.jpeg" : "/logo.jpeg"}
                 alt="C8 Tech"
                 fill
                 sizes="160px"
