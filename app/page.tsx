@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   X,
@@ -341,84 +341,112 @@ function ProjectModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/35 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/45 p-2 backdrop-blur-sm sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl rounded-3xl border border-blue-100 bg-white p-6 shadow-2xl shadow-blue-100/80 md:p-8"
+        className="relative max-h-[calc(100dvh-1rem)] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-t-[1.75rem] border border-blue-100 bg-white p-4 shadow-2xl shadow-blue-100/80 sm:max-h-[calc(100dvh-2rem)] sm:rounded-3xl sm:p-6 md:p-8"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
       >
         <button
           onClick={onClose}
-          className="absolute right-5 top-5 rounded-full bg-slate-100 p-2 transition hover:bg-blue-100"
+          className="absolute right-4 top-4 z-10 rounded-full bg-slate-100 p-2 transition hover:bg-blue-100 sm:right-5 sm:top-5"
           aria-label="Cerrar"
         >
           <X className="h-5 w-5 text-slate-950" />
         </button>
 
-        <div className="mb-6 flex items-center gap-5 pr-10">
-          <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl border border-blue-100 bg-white p-4">
+        <div className="mb-5 flex flex-col gap-4 pr-10 sm:mb-6 sm:flex-row sm:items-center sm:gap-5">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-blue-100 bg-white p-3 sm:h-24 sm:w-24 sm:p-4">
             {project.logo ? (
               <Image
                 src={project.logo}
                 alt={project.name}
                 width={120}
                 height={80}
-                className="max-h-20 w-auto rounded-lg object-contain "
+                className="max-h-16 w-auto rounded-lg object-contain sm:max-h-20"
               />
             ) : (
-              <span className="text-center font-display text-xl font-black text-slate-950">
+              <span className="text-center font-display text-base font-black text-slate-950 sm:text-xl">
                 {project.name}
               </span>
             )}
           </div>
 
-          <div>
-            <p className="font-body text-sm font-bold uppercase tracking-[0.2em] text-[#246bff]">
+          <div className="min-w-0">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:text-sm sm:tracking-[0.2em]">
               {project.service}
             </p>
-            <h2 className="font-display mt-1 text-3xl font-bold text-slate-950">
+            <h2
+              id="project-modal-title"
+              className="font-display mt-1 break-words text-2xl font-bold leading-tight text-slate-950 sm:text-3xl"
+            >
               {project.name}
             </h2>
-            <p className="font-body mt-2 text-slate-600">
+            <p className="font-body mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">
               {project.description}
             </p>
           </div>
         </div>
 
-        <div className="grid gap-4">
-          <div className="rounded-2xl bg-[#f4f8ff]/90 p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
+        <div className="grid gap-3 sm:gap-4">
+          <div className="rounded-xl bg-[#f4f8ff]/90 p-4 sm:rounded-2xl sm:p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:tracking-[0.2em]">
               Problema
             </p>
-            <p className="font-body mt-2 text-lg text-slate-950">
+            <p className="font-body mt-2 text-base leading-relaxed text-slate-950 sm:text-lg">
               {project.problem}
             </p>
           </div>
 
-          <div className="rounded-2xl bg-[#f4f8ff]/90 p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
+          <div className="rounded-xl bg-[#f4f8ff]/90 p-4 sm:rounded-2xl sm:p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:tracking-[0.2em]">
               Solución
             </p>
-            <p className="font-body mt-2 text-lg text-slate-950">
+            <p className="font-body mt-2 text-base leading-relaxed text-slate-950 sm:text-lg">
               {project.solution}
             </p>
           </div>
 
-          <div className="rounded-2xl bg-[#f4f8ff]/90 p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
+          <div className="rounded-xl bg-[#f4f8ff]/90 p-4 sm:rounded-2xl sm:p-5">
+            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:tracking-[0.2em]">
               Resultado
             </p>
 
             <div className="mt-3 grid gap-3">
               {project.results.map((result) => (
-                <div key={result} className="flex items-center gap-3 text-slate-950">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[#246bff]" />
-                  <span className="font-body">{result}</span>
+                <div key={result} className="flex items-start gap-3 text-slate-950">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#246bff]" />
+                  <span className="font-body text-sm leading-relaxed sm:text-base">
+                    {result}
+                  </span>
                 </div>
               ))}
             </div>
@@ -430,7 +458,7 @@ function ProjectModal({
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body mt-6 inline-flex items-center gap-2 rounded-xl bg-[#246bff] px-5 py-3 font-bold text-white transition hover:bg-[#1f57d6]"
+            className="font-body mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#246bff] px-5 py-3 font-bold text-white transition hover:bg-[#1f57d6] sm:mt-6 sm:w-auto"
           >
             Ver sitio
             <ExternalLink className="h-4 w-4" />
