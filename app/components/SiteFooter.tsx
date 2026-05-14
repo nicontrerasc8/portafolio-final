@@ -5,10 +5,12 @@ export default function SiteFooter() {
         <p>© 2026 C8 Tech. Decisiones claras, resultados reales.</p>
         <div className="flex flex-wrap gap-4">
           <a
-            href="mailto:ncc.technology1@gmail.com"
+            href="https://wa.me/51949161510"
             className="text-[#9fb4d9] hover:text-cyan-100"
+            target="_blank"
+            rel="noreferrer"
           >
-            ncc.technology1@gmail.com
+            WhatsApp: +51 949 161 510
           </a>
           <a
             href="https://www.linkedin.com/in/nicolascontrerascastellanoo/"

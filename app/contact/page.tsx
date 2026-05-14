@@ -14,7 +14,7 @@ const copy = {
   title: "¿Listos para lanzar tu producto de datos?",
   description:
     "Trabajamos con equipos que necesitan claridad, velocidad y automatizaciones que se mantienen solas. Comparte tu reto y trazaremos el camino completo.",
-  email: "ncc.technology1@gmail.com",
+  whatsapp: "WhatsApp: +51 949 161 510",
   linkLabel: "LinkedIn",
 };
 
@@ -36,10 +36,12 @@ export default function ContactPage() {
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <a
-                href={`mailto:${copy.email}`}
+                href="https://wa.me/51949161510?text=Hola%2C%20quiero%20conversar%20sobre%20una%20solucion%20digital"
+                target="_blank"
+                rel="noreferrer"
                 className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-[#35f2c6]"
               >
-                {copy.email}
+                {copy.whatsapp}
               </a>
               <a
                 href="https://www.linkedin.com/"

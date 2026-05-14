@@ -779,7 +779,7 @@ export default function Home() {
           </p>
 
           <Link
-            href="mailto:ncc.technology1@gmail.com?subject=Quiero automatizar un proceso"
+            href="https://wa.me/51949161510?text=Hola%2C%20quiero%20automatizar%20un%20proceso"
             className="font-body mt-10 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-white px-8 py-5 text-lg font-black text-[#07111f] shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#dbeafe] sm:w-auto"
           >
             <strong className="text-[#246bff] flex flex-row items-center gap-3">
