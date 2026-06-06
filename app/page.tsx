@@ -1,108 +1,108 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   ArrowRight,
-  X,
-  CheckCircle2,
-  ExternalLink,
   BarChart3,
-  Zap,
+  Bot,
+  CheckCircle2,
+  ClipboardList,
+  ExternalLink,
+  Gauge,
+  Layers3,
+  LineChart,
+  Mail,
+  MousePointerClick,
+  Search,
+  ShieldCheck,
   ShoppingCart,
+  Sparkles,
+  X,
+  Zap,
 } from "lucide-react";
-import SiteFooter from "./components/SiteFooter";
 
 const clients = [
-  {
-    name: "Grupo Romero",
-    logo: "/logo-gruporomero.jpg",
-  },
-  {
-    name: "CIDELSA",
-    logo: "/cidelsa.png",
-  },
-  {
-    name: "Subway",
-    logo: "/subway.png",
-  },
-  {
-    name: "TMF Group",
-    logo: "/tmf.png",
-  },
-  {
-    name: "PTC",
-    logo: "/logo-ptc.png",
-  },
-  {
-    name: "GOXA",
-    logo: "/goxa.png",
-  },
-  {
-    name: "El Pez Nuestro",
-    logo: "/elpez.png",
-  },
+  { name: "Grupo Romero", logo: "/logo-gruporomero.jpg" },
+  { name: "CIDELSA", logo: "/cidelsa.png" },
+  { name: "Subway", logo: "/subway.png" },
+  { name: "TMF Group", logo: "/tmf.png" },
+  { name: "PTC", logo: "/logo-ptc.png" },
+  { name: "GOXA", logo: "/goxa.png" },
+  { name: "Excellia", logo: "/excellia.png" },
+  { name: "El Pez Nuestro", logo: "/elpez.png" },
 ];
 
-const legacyProjects = [
+const projects = [
   {
     id: "corporacion-grupo-romero",
-    service: "BI",
+    service: "Legaltech",
     name: "Grupo Romero",
     logo: "/logo-gruporomero.jpg",
-    description: "Automatización de reportes y análisis corporativo.",
-    problem: "Demasiado trabajo manual para consolidar información.",
-    solution: "Centralizamos datos y dejamos reportes listos para revisar.",
+    description:
+      "Plataforma para automatizar la determinación del beneficiario final.",
+    problem:
+      "El área legal tributaria trabajaba el análisis manualmente en Excel, con procesos que podían tomar hasta una semana por empresa.",
+    solution:
+      "Digitalizamos el flujo, aplicamos reglas de análisis y redujimos tareas repetitivas dentro de un proceso tributario crítico.",
     results: [
-      "Menos trabajo manual",
-      "Información más ordenada",
-      "Reportes más rápidos",
+      "Tiempo promedio reducido a 15 minutos por empresa",
+      "Menor riesgo de error en un proceso sensible",
+      "Más control, trazabilidad y operación legal digitalizada",
     ],
-    tags: ["BI", "Automatización", "Reportes"],
+    tags: ["Legaltech", "Tributario", "Automatización"],
   },
   {
     id: "cidelsa",
-    service: "BI",
+    service: "CRM",
     name: "CIDELSA",
     logo: "/cidelsa.png",
-    description: "Reportes comerciales automatizados.",
-    problem: "Reportes manuales que tomaban tiempo y generaban duplicidad.",
-    solution: "Automatizamos el flujo comercial en tableros de BI.",
+    description: "CRM comercial a medida, compatible con el ERP de Cidelsa.",
+    problem:
+      "La actividad comercial necesitaba visualizarse de forma clara y ordenada para distintos niveles de gestión.",
+    solution:
+      "Creamos un CRM integrado al ERP, con carga simple de información y vistas adaptadas por rol.",
     results: [
-      "Reportes automáticos",
-      "Mejor seguimiento comercial",
-      "Menos uso de archivos manuales",
+      "Mejor visibilidad comercial por equipo",
+      "Seguimiento más ordenado de ventas",
+      "Decisiones más ágiles con información centralizada",
     ],
-    tags: ["BI", "Ventas", "Dashboards"],
+    tags: ["CRM", "ERP", "Ventas"],
   },
   {
     id: "subway",
-    service: "BI",
+    service: "Dashboard",
     name: "Subway",
     logo: "/subway.png",
-    description: "Automatización de reportes comerciales.",
-    problem: "La operación necesitaba reportes más rápidos y consistentes.",
-    solution: "Estandarizamos indicadores y automatizamos reportes.",
+    description:
+      "Dashboard comercial y operativo para las tiendas Subway de Gastrobiz en Lima.",
+    problem:
+      "La operación necesitaba monitorear 7 sucursales desde una misma plataforma.",
+    solution:
+      "Desarrollamos una solución de visualización que centraliza datos por tienda y facilita el seguimiento diario.",
     results: [
-      "Indicadores claros",
-      "Menos carga operativa",
-      "Reportes más rápidos",
+      "Mayor control operativo por sucursal",
+      "Información comercial centralizada",
+      "Mejor seguimiento del desempeño de cada tienda",
     ],
-    tags: ["BI", "Retail", "Reportes"],
+    tags: ["Dashboard", "Retail", "Sucursales"],
   },
   {
     id: "tmf-group",
     service: "Automatización",
     name: "TMF Group",
     logo: "/tmf.png",
-    description: "Automatización de correos con Power Automate.",
-    problem: "Correos y derivaciones gestionados manualmente.",
-    solution: "Creamos un flujo automático para ordenar y derivar correos.",
+    description:
+      "Automatización inteligente de correos para derivar comunicaciones al responsable correcto.",
+    problem:
+      "El reenvío de correos hacia el personal de cada cuenta consumía tiempo y generaba fricción diaria.",
+    solution:
+      "Implementamos un flujo en Power Automate que ordena, distribuye y deriva comunicaciones.",
     results: [
-      "Menos tareas repetitivas",
-      "Flujo más ordenado",
-      "Mayor rapidez interna",
+      "Menos trabajo manual en correos",
+      "Mayor trazabilidad interna",
+      "Gestión operativa más rápida y ordenada",
     ],
     tags: ["Power Automate", "Correos", "Procesos"],
   },
@@ -111,12 +111,15 @@ const legacyProjects = [
     service: "IA",
     name: "PTC",
     logo: "/logo-ptc.png",
-    description: "Automatización de propuestas con IA.",
-    problem: "Crear propuestas tomaba tiempo y repetía pasos.",
-    solution: "Usamos IA para estructurar y acelerar propuestas.",
+    description:
+      "Automatización con IA para acelerar la creación de propuestas comerciales.",
+    problem:
+      "El equipo invertía tiempo en tareas repetitivas para estructurar y estandarizar propuestas.",
+    solution:
+      "Creamos una solución con Gemini estructurado para automatizar el flujo de documentos comerciales.",
     results: [
-      "Propuestas más rápidas",
-      "Formato más consistente",
+      "Propuestas comerciales listas en menos tiempo",
+      "Documentos mejor organizados",
       "Menos trabajo manual",
     ],
     tags: ["IA", "Gemini", "Propuestas"],
@@ -126,187 +129,127 @@ const legacyProjects = [
     service: "E-commerce",
     name: "GOXA",
     logo: "/goxa.png",
-    description: "Tienda online de productos naturales.",
-    problem: "El negocio necesitaba vender mejor por internet.",
-    solution: "Creamos un e-commerce simple, rápido y escalable.",
+    description:
+      "E-commerce con catálogo digital y carrito conectado directamente a WhatsApp.",
+    problem:
+      "Goxa necesitaba mostrar más de 30 productos y convertir interés en pedidos rápidos.",
+    solution:
+      "Diseñamos una tienda online donde los usuarios exploran productos, arman su carrito y envían el pedido por WhatsApp.",
     results: [
-      "Canal digital activo",
-      "Mejor experiencia de compra",
-      "Base lista para crecer",
+      "Catálogo digital con más de 30 productos",
+      "Compra simple conectada a WhatsApp",
+      "Tienda enfocada en vender más",
     ],
     link: "https://goxa.pe",
-    tags: ["E-commerce", "Ventas", "Web"],
-  },
-  {
-    id: "elpez",
-    service: "Web",
-    name: "El Pez Nuestro",
-    logo: "/elpez.png",
-    description: "Landing page para pedidos y contacto.",
-    problem: "El negocio necesitaba una presencia digital clara.",
-    solution: "Creamos una página simple para mostrar marca, pedidos y contacto.",
-    results: [
-      "Página oficial",
-      "Accesos rápidos",
-      "Mejor presencia digital",
-    ],
-    link: "https://elpeznuestrodecadadia.vercel.app/",
-    tags: ["Landing", "Pedidos", "Web"],
+    tags: ["E-commerce", "WhatsApp", "Catálogo"],
   },
 ];
 
-const projectUpdates: Record<string, Partial<(typeof legacyProjects)[number]>> = {
-  "corporacion-grupo-romero": {
-    service: "Legaltech",
+const painPoints = [
+  {
+    title: "Reportes que toman horas",
     description:
-      "Legaltech a medida para automatizar la determinación del beneficiario final.",
-    problem:
-      "El área legal tributaria determinaba beneficiarios finales manualmente en Excel, con procesos que podían tomar hasta una semana por empresa.",
-    solution:
-      "Desarrollamos una plataforma que digitaliza el flujo, aplica reglas de análisis y reduce tareas repetitivas dentro de un proceso tributario crítico.",
-    results: [
-      "Tiempo promedio reducido a 15 minutos por empresa",
-      "Menor riesgo de error en un proceso sensible",
-      "Más control, trazabilidad y operación legal digitalizada",
-    ],
-    tags: ["Legaltech", "Tributario", "Automatización"],
+      "Tu equipo consolida datos de múltiples fuentes a mano. El resultado llega tarde y nadie confía al 100% en los números.",
+    icon: ClipboardList,
   },
-  cidelsa: {
-    service: "CRM",
-    description: "CRM comercial a medida, compatible con el ERP de Cidelsa.",
-    problem:
-      "La actividad comercial necesitaba visualizarse de forma clara, rápida y ordenada para distintos niveles de gestión.",
-    solution:
-      "Creamos un CRM integrado al ERP, con carga simple de información y vistas adaptadas para directores, gerentes, jefes y ejecutivos.",
-    results: [
-      "Mejor visibilidad comercial por rol y equipo",
-      "Seguimiento más ordenado de la gestión de ventas",
-      "Toma de decisiones más ágil con información centralizada",
-    ],
-    tags: ["CRM", "ERP", "Ventas"],
-  },
-  subway: {
-    service: "Dashboard",
+  {
+    title: "Sistemas desconectados",
     description:
-      "Dashboard comercial y operativo para las tiendas Subway de Gastrobiz en Lima.",
-    problem:
-      "La operación necesitaba monitorear el desempeño de 7 sucursales desde una misma plataforma, con información ordenada y accionable.",
-    solution:
-      "Desarrollamos una solución de visualización y gestión que centraliza datos por tienda y facilita el seguimiento comercial diario.",
-    results: [
-      "Mayor control operativo por sucursal",
-      "Información comercial centralizada y más fácil de revisar",
-      "Mejor seguimiento del desempeño de cada tienda",
-    ],
-    tags: ["Dashboard", "Retail", "Sucursales"],
+      "Ventas, inventario, ERP y operaciones no conversan entre sí. Cada sistema nuevo termina creando más trabajo.",
+    icon: Layers3,
   },
-  "tmf-group": {
-    service: "Automatización",
+  {
+    title: "Procesos con fricción",
     description:
-      "Automatización inteligente de correos para derivar comunicaciones al responsable correcto.",
-    problem:
-      "El reenvío de correos hacia el personal de cada cuenta consumía tiempo y generaba fricción en la operación diaria.",
-    solution:
-      "Implementamos un flujo en Power Automate que ordena, distribuye y deriva comunicaciones de forma más eficiente.",
-    results: [
-      "Menos trabajo manual en la gestión de correos",
-      "Mayor trazabilidad en la distribución interna",
-      "Gestión operativa más rápida y ordenada",
-    ],
-    tags: ["Power Automate", "Correos", "Procesos"],
+      "Tareas que podrían ejecutarse en segundos dependen de correos, archivos y seguimiento manual.",
+    icon: MousePointerClick,
   },
-  ptc: {
-    service: "IA",
-    description:
-      "Automatización con IA para acelerar la creación de propuestas comerciales.",
-    problem:
-      "El equipo invertía tiempo en tareas repetitivas para armar, estructurar y estandarizar propuestas.",
-    solution:
-      "Creamos una solución con Gemini estructurado que automatiza el flujo de generación de documentos comerciales.",
-    results: [
-      "Propuestas comerciales listas en menos tiempo",
-      "Documentos mejor organizados y estandarizados",
-      "Menos trabajo manual",
-    ],
-    tags: ["IA", "Gemini", "Propuestas"],
-  },
-  goxa: {
-    service: "E-commerce",
-    description:
-      "Ecommerce con catálogo digital y carrito conectado directamente a WhatsApp.",
-    problem:
-      "Goxa necesitaba mostrar más de 30 productos y convertir el interés de sus clientes en pedidos rápidos.",
-    solution:
-      "Diseñamos una tienda online funcional donde los usuarios exploran productos, arman su carrito y envían el pedido por WhatsApp.",
-    results: [
-      "Catálogo digital con más de 30 productos",
-      "Proceso de compra simple conectado a WhatsApp",
-      "Tienda online enfocada en vender más",
-    ],
-    tags: ["E-commerce", "WhatsApp", "Catálogo"],
-  },
-  elpez: {
-    service: "Web",
-    description:
-      "Plataforma web de contenido y ecommerce para comunicar, informar y vender.",
-    problem:
-      "La marca necesitaba centralizar contenido, noticias, productos y funcionalidades digitales en una experiencia clara.",
-    solution:
-      "Desarrollamos una web tipo ecommerce que integra contenido y venta en una sola plataforma preparada para crecer.",
-    results: [
-      "Presencia digital más profesional",
-      "Contenido, noticias y productos centralizados",
-      "Plataforma lista para escalar nuevas funcionalidades",
-    ],
-    tags: ["Contenido", "E-commerce", "Web"],
-  },
-};
-
-const projects = legacyProjects.map((project) => ({
-  ...project,
-  ...projectUpdates[project.id],
-}));
+];
 
 const services = [
   {
     title: "Reportes automáticos",
-    description: "Convierte tus datos en dashboards claros, actualizados y listos para decidir.",
+    description:
+      "Dashboards claros, conectados a tus fuentes y listos para decidir sin copiar ni pegar.",
     icon: BarChart3,
-    stat: "BI",
-    glow: "from-[#b8d8ff]/50 to-[#246bff]/20",
+    features: ["BI conectado", "Alertas automáticas", "Reportes recurrentes"],
   },
   {
     title: "Procesos automáticos",
-    description: "Automatizamos tareas repetitivas, correos y flujos internos para que tu equipo trabaje mejor.",
+    description:
+      "Flujos que se ejecutan solos, reducen errores y liberan horas operativas cada semana.",
     icon: Zap,
-    stat: "Flow",
-    glow: "from-[#246bff]/20 to-[#b8d8ff]/50",
+    features: ["RPA", "Power Automate", "Integraciones"],
   },
   {
-    title: "Ecommerce",
-    description: "Creamos páginas y sistemas simples, rápidos y pensadas para convertir visitas en clientes.",
+    title: "E-commerce",
+    description:
+      "Tiendas, catálogos y sistemas web integrados con ventas, pedidos y canales de atención.",
     icon: ShoppingCart,
-    stat: "Web",
-    glow: "from-[#dbeafe]/70 to-[#246bff]/20",
+    features: ["Catálogo digital", "WhatsApp", "Panel administrativo"],
+  },
+];
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Diagnóstico",
+    description:
+      "Entendemos tu operación y ubicamos dónde se pierde más tiempo o margen.",
+    icon: Search,
+  },
+  {
+    number: "02",
+    title: "Diseño",
+    description:
+      "Definimos una solución exacta, sin módulos innecesarios ni licencias de más.",
+    icon: Bot,
+  },
+  {
+    number: "03",
+    title: "Desarrollo",
+    description:
+      "Construimos en ciclos cortos, con avances visibles y feedback frecuente.",
+    icon: Gauge,
+  },
+  {
+    number: "04",
+    title: "Entrega",
+    description:
+      "Capacitamos, medimos impacto y acompañamos la adopción del equipo.",
+    icon: ShieldCheck,
+  },
+];
+
+const differentiators = [
+  {
+    value: "-70%",
+    label: "menos tiempo en tareas manuales",
+  },
+  {
+    value: "+30",
+    label: "proyectos digitales entregados",
+  },
+  {
+    value: "15 min",
+    label: "para procesos que antes tomaban días",
+  },
+  {
+    value: "100%",
+    label: "soluciones hechas a medida",
   },
 ];
 
 function LogoBox({ name, logo }: { name: string; logo: string }) {
   return (
-    <div className="mx-4 flex h-40 min-w-[300px] items-center justify-center rounded-3xl border border-white/10 bg-white px-9 py-5 shadow-2xl shadow-black/30 backdrop-blur">
-      {logo ? (
-        <Image
-          src={logo}
-          alt={name}
-          width={300}
-          height={180}
-          className="max-h-32 w-full rounded-lg object-contain "
-        />
-      ) : (
-        <span className="text-center font-display text-4xl font-black text-slate-950">
-          {name}
-        </span>
-      )}
+    <div className="mx-3 flex h-24 min-w-56 shrink-0 items-center justify-center rounded-xl border border-blue-100 bg-white px-6 py-4 shadow-sm shadow-blue-100/70 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-100 sm:h-28 sm:min-w-64 sm:px-8">
+      <Image
+        src={logo}
+        alt={name}
+        width={260}
+        height={130}
+        className="max-h-16 w-auto object-contain sm:max-h-20"
+      />
     </div>
   );
 }
@@ -315,10 +258,12 @@ function ClientCarousel() {
   const repeatedClients = [...clients, ...clients];
 
   return (
-    <div className="relative mt-12 w-full overflow-hidden">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#07111f] to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#07111f] to-transparent" />
-
+    <div className="relative mt-12 overflow-hidden border-y border-blue-100 bg-white/80 py-8">
+      <div className="mx-auto mb-5 max-w-7xl px-6 text-center text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
+        Empresas que ya trabajan con soluciones C8
+      </div>
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
       <div className="flex w-max animate-logoScroll">
         {repeatedClients.map((client, index) => (
           <LogoBox
@@ -348,9 +293,7 @@ function ProjectModal({
     document.body.style.overflow = "hidden";
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+      if (event.key === "Escape") onClose();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -365,86 +308,75 @@ function ProjectModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/45 p-2 backdrop-blur-sm sm:items-center sm:p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/35 p-2 backdrop-blur-sm sm:items-center sm:p-4"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[calc(100dvh-1rem)] w-full max-w-2xl overflow-y-auto overscroll-contain rounded-t-[1.75rem] border border-blue-100 bg-white p-4 shadow-2xl shadow-blue-100/80 sm:max-h-[calc(100dvh-2rem)] sm:rounded-3xl sm:p-6 md:p-8"
-        onClick={(e) => e.stopPropagation()}
+        className="relative max-h-[calc(100dvh-1rem)] w-full max-w-2xl overflow-y-auto rounded-t-3xl border border-blue-100 bg-white p-5 shadow-2xl shadow-slate-900/20 sm:max-h-[calc(100dvh-2rem)] sm:rounded-3xl sm:p-7"
+        onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-modal-title"
       >
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 rounded-full bg-slate-100 p-2 transition hover:bg-blue-100 sm:right-5 sm:top-5"
+          className="absolute right-4 top-4 rounded-full border border-blue-100 bg-white p-2 text-slate-700 transition hover:bg-blue-50"
           aria-label="Cerrar"
+          type="button"
         >
-          <X className="h-5 w-5 text-slate-950" />
+          <X className="h-5 w-5" />
         </button>
 
-        <div className="mb-5 flex flex-col gap-4 pr-10 sm:mb-6 sm:flex-row sm:items-center sm:gap-5">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-blue-100 bg-white p-3 sm:h-24 sm:w-24 sm:p-4">
-            {project.logo ? (
-              <Image
-                src={project.logo}
-                alt={project.name}
-                width={120}
-                height={80}
-                className="max-h-16 w-auto rounded-lg object-contain sm:max-h-20"
-              />
-            ) : (
-              <span className="text-center font-display text-base font-black text-slate-950 sm:text-xl">
-                {project.name}
-              </span>
-            )}
+        <div className="mb-6 flex flex-col gap-4 pr-10 sm:flex-row sm:items-center">
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-blue-100 bg-blue-50/60 p-3">
+            <Image
+              src={project.logo}
+              alt={project.name}
+              width={120}
+              height={80}
+              className="max-h-14 w-auto object-contain"
+            />
           </div>
-
-          <div className="min-w-0">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:text-sm sm:tracking-[0.2em]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
               {project.service}
             </p>
             <h2
               id="project-modal-title"
-              className="font-display mt-1 break-words text-2xl font-bold leading-tight text-slate-950 sm:text-3xl"
+              className="mt-1 text-3xl font-black leading-tight text-slate-950"
             >
               {project.name}
             </h2>
-            <p className="font-body mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">
+            <p className="mt-2 text-base leading-relaxed text-slate-600">
               {project.description}
             </p>
           </div>
         </div>
 
-        <div className="grid gap-3 sm:gap-4">
-          <div className="rounded-xl bg-[#f4f8ff]/90 p-4 sm:rounded-2xl sm:p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:tracking-[0.2em]">
-              Problema
-            </p>
-            <p className="font-body mt-2 text-base leading-relaxed text-slate-950 sm:text-lg">
-              {project.problem}
-            </p>
-          </div>
+        <div className="grid gap-4">
+          {[
+            ["Problema", project.problem],
+            ["Solución", project.solution],
+          ].map(([label, text]) => (
+            <div key={label} className="rounded-2xl bg-[#f4f8ff] p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
+                {label}
+              </p>
+              <p className="mt-2 text-base leading-relaxed text-slate-800">
+                {text}
+              </p>
+            </div>
+          ))}
 
-          <div className="rounded-xl bg-[#f4f8ff]/90 p-4 sm:rounded-2xl sm:p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:tracking-[0.2em]">
-              Solución
-            </p>
-            <p className="font-body mt-2 text-base leading-relaxed text-slate-950 sm:text-lg">
-              {project.solution}
-            </p>
-          </div>
-
-          <div className="rounded-xl bg-[#f4f8ff]/90 p-4 sm:rounded-2xl sm:p-5">
-            <p className="font-body text-xs font-bold uppercase tracking-[0.16em] text-[#246bff] sm:tracking-[0.2em]">
+          <div className="rounded-2xl bg-[#f4f8ff] p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
               Resultado
             </p>
-
             <div className="mt-3 grid gap-3">
               {project.results.map((result) => (
-                <div key={result} className="flex items-start gap-3 text-slate-950">
+                <div key={result} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#246bff]" />
-                  <span className="font-body text-sm leading-relaxed sm:text-base">
+                  <span className="text-sm leading-relaxed text-slate-800 sm:text-base">
                     {result}
                   </span>
                 </div>
@@ -458,7 +390,7 @@ function ProjectModal({
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#246bff] px-5 py-3 font-bold text-white transition hover:bg-[#1f57d6] sm:mt-6 sm:w-auto"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#246bff] px-5 py-3 font-bold text-white transition hover:bg-[#1f57d6] sm:w-auto"
           >
             Ver sitio
             <ExternalLink className="h-4 w-4" />
@@ -469,143 +401,22 @@ function ProjectModal({
   );
 }
 
-function ProjectCard({
-  project,
-  onClick,
-}: {
-  project: (typeof projects)[0];
-  onClick: () => void;
-}) {
+function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="group rounded-3xl border border-white/10 bg-white p-6 text-left shadow-2xl shadow-black/30 transition hover:-translate-y-1 hover:border-[#246bff]/50 hover:bg-[#f8fbff]"
-    >
-      <div className="mb-7 flex min-h-52 items-center justify-center">
-        {project.logo ? (
-          <Image
-            src={project.logo}
-            alt={project.name}
-            width={380}
-            height={260}
-            className="aspect-[16/9] max-h-48 w-full rounded-lg object-contain  transition duration-300 group-hover:scale-110"
-          />
-        ) : (
-          <span className="text-center font-display text-5xl font-black text-slate-950">
-            {project.name}
-          </span>
-        )}
-      </div>
-
-      <p className="font-body text-xs font-bold uppercase tracking-[0.2em] text-[#246bff]">
-        {project.service}
-      </p>
-
-      <h3 className="font-display mt-2 text-2xl font-bold text-slate-950">
-        {project.name}
-      </h3>
-
-      <p className="font-body mt-3 text-base leading-relaxed text-slate-600">
-        {project.description}
-      </p>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.tags.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-[#246bff]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      <div className="mt-6 flex items-center gap-2 font-body font-bold text-slate-950">
-        Ver caso
-        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-      </div>
-    </button>
-  );
-}
-
-function ServiceCard({
-  service,
-  index,
-}: {
-  service: (typeof services)[0];
-  index: number;
-}) {
-  const Icon = service.icon;
-
-  return (
-    <div
-      className="service-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white p-8 text-center shadow-2xl shadow-black/30"
-      style={{ animationDelay: `${index * 120}ms` }}
-    >
-      <div className={`absolute -top-20 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-gradient-to-br ${service.glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(36,107,255,0.08),transparent_48%)] opacity-70" />
-
-      <div className="relative mx-auto mb-7 flex h-28 w-28 items-center justify-center rounded-[1.75rem] border border-blue-100 bg-[#f4f8ff]/90 shadow-2xl shadow-blue-200/70 transition duration-500 group-hover:-translate-y-2 group-hover:scale-110 group-hover:border-[#246bff]/30">
-        <div className="absolute inset-3 rounded-[1.35rem] bg-[#246bff]/10 transition group-hover:bg-[#246bff]/15" />
-        <Icon className="relative h-14 w-14 text-[#246bff] drop-shadow-[0_0_18px_rgba(36,107,255,0.18)] transition duration-500 group-hover:text-[#246bff]" />
-      </div>
-
-  
-
-      <h3 className="relative font-display text-3xl font-black leading-tight text-slate-950">
-        {service.title}
-      </h3>
-
-      <p className="relative mx-auto mt-4 max-w-xs font-body text-lg leading-relaxed text-slate-600">
-        {service.description}
-      </p>
-
-      <div className="relative mx-auto mt-7 h-1 w-16 rounded-full bg-gradient-to-r from-[#9cc7ff] to-[#246bff] opacity-70 transition duration-500 group-hover:w-24 group-hover:opacity-100" />
-    </div>
-  );
-}
-
-function TechBackground() {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#050b14] via-[#07111f] to-[#0b1f3a]" />
-
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px)
-          `,
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      <div className="absolute left-[10%] top-[20%] h-96 w-96 rounded-full bg-[#246bff]/25 blur-3xl" />
-      <div className="absolute bottom-[15%] right-[10%] h-96 w-96 rounded-full bg-cyan-400/10 blur-3xl" />
-    </div>
+    <p className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#246bff]">
+      <span className="h-1.5 w-1.5 rounded-full bg-[#246bff]" />
+      {children}
+    </p>
   );
 }
 
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(
-    null,
-  );
+  const [selectedProject, setSelectedProject] =
+    useState<(typeof projects)[0] | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#07111f] text-white">
+    <main className="min-h-screen overflow-hidden bg-white text-slate-950">
       <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap");
-
-        .font-display {
-          font-family: "Sora", -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        .font-body {
-          font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
         @keyframes logoScroll {
           from {
             transform: translateX(0);
@@ -615,182 +426,329 @@ export default function Home() {
           }
         }
 
-        @keyframes serviceFloat {
+        @keyframes floatUp {
           0%,
           100% {
             transform: translateY(0);
           }
           50% {
-            transform: translateY(-8px);
-          }
-        }
-
-        @keyframes serviceShine {
-          from {
-            transform: translateX(-120%) rotate(12deg);
-          }
-          to {
-            transform: translateX(180%) rotate(12deg);
+            transform: translateY(-10px);
           }
         }
 
         .animate-logoScroll {
-          animation: logoScroll 28s linear infinite;
+          animation: logoScroll 30s linear infinite;
         }
 
         .animate-logoScroll:hover {
           animation-play-state: paused;
         }
 
-        .service-card {
-          animation: serviceFloat 5s ease-in-out infinite;
-        }
-
-        .service-card::after {
-          content: "";
-          position: absolute;
-          inset: -40% auto -40% 0;
-          width: 90px;
-          background: linear-gradient(90deg, transparent, rgba(36,107,255,0.16), transparent);
-          transform: translateX(-120%) rotate(12deg);
-          transition: opacity 0.3s ease;
-          opacity: 0;
-        }
-
-        .service-card:hover::after {
-          opacity: 1;
-          animation: serviceShine 0.9s ease forwards;
+        .float-card {
+          animation: floatUp 5.5s ease-in-out infinite;
         }
       `}</style>
 
-      <section className="relative overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
-        <TechBackground />
+      <section className="relative min-h-screen overflow-hidden px-5 pb-16 pt-12 sm:px-8 lg:px-10">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(36,107,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(36,107,255,0.05)_1px,transparent_1px)] bg-[size:56px_56px]" />
+        <div className="absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_50%_0%,rgba(36,107,255,0.16),transparent_62%)]" />
 
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
-            <div className="relative mb-8 h-32 w-32 overflow-hidden rounded-3xl  sm:h-40 sm:w-40">
-              <Image
-                src="/logo.jpeg"
-                alt="C8 Tech"
-                fill
-                sizes="160px"
-                className="object-cover"
-                priority
-              />
-            </div>
-
-            <p className="font-body mb-5 rounded-full border border-white/15 bg-white/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.18em] text-[#b8d8ff] backdrop-blur">
-              SOLUCIONES DIGITALES A MEDIDA
-            </p>
-
-            <h1 className="font-display text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl md:text-7xl">
-              Impulsamos la eficiencia y el crecimiento de tu empresa con tecnología.
-            </h1>
-
-            <p className="font-body mt-6 max-w-2xl text-xl leading-relaxed text-slate-300 md:text-2xl">
-              Conectamos ventas, procesos y datos a través de soluciones en e-commerce, automatización y BI.
-            </p>
-
-            <div className="mt-9 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
-              <Link
-                href="#contacto"
-                className="font-body inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-5 text-lg font-black text-[#07111f] shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#dbeafe]"
-              >
-                <strong className="text-[#246bff] flex flex-row items-center gap-3">Quiero automatizar <ArrowRight className="h-5 w-5" /></strong>
-                
-              </Link>
-
-              <Link
-                href="#casos"
-                className="font-body inline-flex items-center justify-center rounded-2xl border border-white/20 bg-[#246bff] px-8 py-5 text-lg font-black text-white backdrop-blur transition hover:-translate-y-1 "
-              >
-                <strong>Ver trabajos</strong>
-              </Link>
-            </div>
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-7rem)] max-w-7xl flex-col items-center justify-center text-center">
+          <div className="mb-8 flex items-center justify-center gap-3 rounded-2xl border border-blue-100 bg-white px-5 py-4 shadow-xl shadow-blue-100/70">
+            <Image
+              src="/logo.jpeg"
+              alt="C8 Tech"
+              width={102}
+              height={102}
+              className="h-14 w-14 rounded-xl object-cover"
+              priority
+            />
+   
           </div>
 
-          <ClientCarousel />
+          <SectionLabel>Soluciones digitales a medida</SectionLabel>
+
+          <h1 className="mt-6 max-w-5xl text-4xl font-black leading-[1.03] tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
+            Menos trabajo manual. Más visibilidad.{" "}
+            <span className="bg-gradient-to-r from-[#246bff] to-[#00aee8] bg-clip-text text-transparent">
+              Más eficiencia.
+            </span>
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
+            Construimos tecnología a medida para conectar datos, automatizar
+            procesos y crear canales digitales que simplifican la operación de
+            tu empresa.
+          </p>
+
+          <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+            <Link
+              href="https://wa.me/51949161510?text=Hola%2C%20quiero%20automatizar%20un%20proceso"
+              className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#246bff] px-7 py-4 text-base font-black text-white shadow-lg shadow-blue-200 transition hover:-translate-y-0.5 hover:bg-[#1f57d6]"
+            >
+              Agendar reunión
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+            <Link
+              href="#casos"
+              className="inline-flex items-center justify-center gap-3 rounded-xl border border-blue-100 bg-white px-7 py-4 text-base font-black text-[#246bff] shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-100"
+            >
+              Ver casos
+              <LineChart className="h-5 w-5" />
+            </Link>
+          </div>
+
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#07111f] px-4 py-24 sm:px-6">
-        <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-[#246bff]/10 blur-3xl" />
+      <ClientCarousel />
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mb-14 text-center">
-            <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-[#246bff]">
-              ¿Qué hacemos?
+      <section className="bg-[#f4f8ff] px-5 py-24 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <SectionLabel>El problema que resolvemos</SectionLabel>
+            <h2 className="mt-5 text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-5xl">
+              Las empresas pierden tiempo y dinero en procesos manuales.
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+              Cada hora invertida en tareas repetitivas es una hora que tu
+              equipo no usa para vender, mejorar la operación o tomar mejores
+              decisiones.
             </p>
-            <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
-              Menos manual. Más automático. Más rentable.
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {painPoints.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-blue-100 bg-white p-7 shadow-sm shadow-blue-100/80 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-100"
+                >
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-red-100 bg-red-50 text-red-500">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-xl font-black text-slate-950">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-slate-600">
+                    {item.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-3xl bg-gradient-to-r from-[#246bff] via-[#1452cc] to-[#00aee8] p-8 text-center text-white shadow-xl shadow-blue-200">
+            <h3 className="text-2xl font-black">
+              Hay una mejor manera de operar.
+            </h3>
+            <p className="mx-auto mt-3 max-w-3xl text-base leading-relaxed text-white/85">
+              Con la tecnología correcta, lo que hoy toma 4 horas puede
+              hacerse en minutos, automáticamente y con trazabilidad.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-24 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center">
+            <SectionLabel>Qué hacemos</SectionLabel>
+            <h2 className="mx-auto mt-5 max-w-4xl text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-5xl">
+              Tres formas concretas de hacer tu operación más rentable.
             </h2>
           </div>
 
-          <div className="grid gap-7 md:grid-cols-3">
-            {services.map((service, index) => (
-              <ServiceCard key={service.title} service={service} index={index} />
-            ))}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+
+              return (
+                <div
+                  key={service.title}
+                  className="float-card rounded-3xl border border-blue-100 bg-white p-8 shadow-lg shadow-blue-100/70 transition hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-100"
+                  style={{ animationDelay: `${index * 180}ms` }}
+                >
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-blue-100 bg-blue-50 text-[#246bff]">
+                    <Icon className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-950">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-slate-600">
+                    {service.description}
+                  </p>
+                  <div className="mt-6 grid gap-3">
+                    {service.features.map((feature) => (
+                      <div
+                        key={feature}
+                        className="flex items-center gap-3 text-sm font-semibold text-slate-700"
+                      >
+                        <CheckCircle2 className="h-4 w-4 text-[#246bff]" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section id="casos" className="bg-[#07111f] px-4 py-20 sm:px-6">
+      <section className="bg-[#eef4ff] px-5 py-24 sm:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 flex flex-col gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left">
+          <div className="max-w-3xl">
+            <SectionLabel>Cómo trabajamos</SectionLabel>
+            <h2 className="mt-5 text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-5xl">
+              Un proceso claro para entregar valor desde las primeras semanas.
+            </h2>
+          </div>
+
+          <div className="mt-14 grid gap-5 lg:grid-cols-4">
+            {processSteps.map((step) => {
+              const Icon = step.icon;
+
+              return (
+                <div
+                  key={step.title}
+                  className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm shadow-blue-100/80"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-3xl font-black text-[#246bff]">
+                      {step.number}
+                    </span>
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-50 text-[#246bff]">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                  </div>
+                  <h3 className="mt-6 text-xl font-black text-slate-950">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                    {step.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="casos" className="px-5 pb-24 pt-12 sm:px-8 sm:pt-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-[#246bff]">
-                Clientes
-              </p>
-              <h2 className="font-display mt-3 text-4xl font-black text-white md:text-5xl">
-                Trabajos realizados
+              <SectionLabel>Casos de éxito</SectionLabel>
+              <h2 className="mt-5 text-4xl font-black leading-tight tracking-tight text-slate-950 md:text-5xl">
+                Empresas que ya operan diferente.
               </h2>
             </div>
-
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-600 lg:justify-self-end">
+              Trabajamos con equipos que necesitaban eliminar trabajo manual,
+              ordenar datos y convertir tecnología en impacto operativo real.
+            </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {projects.map((project) => (
-              <ProjectCard
+              <button
                 key={project.id}
-                project={project}
+                type="button"
                 onClick={() => setSelectedProject(project)}
-              />
+                className="group rounded-2xl border border-blue-100 bg-white p-6 text-left shadow-sm shadow-blue-100/80 transition hover:-translate-y-1 hover:border-[#246bff]/40 hover:shadow-xl hover:shadow-blue-100"
+              >
+                <div className="mb-5 flex h-32 items-center justify-center rounded-xl bg-[#f8fbff] p-5">
+                  <Image
+                    src={project.logo}
+                    alt={project.name}
+                    width={280}
+                    height={140}
+                    className="max-h-24 w-auto object-contain transition group-hover:scale-105"
+                  />
+                </div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#246bff]">
+                  {project.service}
+                </p>
+                <h3 className="mt-2 text-xl font-black text-slate-950">
+                  {project.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  {project.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-[#246bff]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-6 inline-flex items-center gap-2 text-sm font-black text-slate-950">
+                  Ver caso
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        id="contacto"
-        className="relative overflow-hidden bg-gradient-to-br from-[#050b14] via-[#07111f] to-[#0b1f3a] px-4 py-24 sm:px-6"
-      >
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-[#246bff] blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-cyan-300 blur-3xl" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <h2 className="font-display text-5xl font-black leading-tight text-white md:text-6xl">
-            ¿Qué proceso quieres simplificar?
-          </h2>
-
-          <p className="font-body mx-auto mt-6 max-w-2xl text-xl leading-relaxed text-slate-300">
-            Cuéntanos qué haces manualmente. Te decimos cómo automatizarlo.
+      <section className="relative overflow-hidden px-5 py-24 sm:px-8 lg:px-10">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#246bff] via-[#1452cc] to-[#00aee8]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="relative z-10 mx-auto max-w-4xl text-center text-white">
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em]">
+            <Mail className="h-4 w-4" />
+            Listo para dar el salto
           </p>
-
+          <h2 className="mt-5 text-4xl font-black leading-tight tracking-tight md:text-6xl">
+            Tu equipo merece trabajar en lo que realmente importa.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
+            Cuéntanos el proceso que quieres simplificar y te mostramos cómo lo
+            automatizaríamos, sin compromiso y sin tecnicismos.
+          </p>
           <Link
             href="https://wa.me/51949161510?text=Hola%2C%20quiero%20automatizar%20un%20proceso"
-            className="font-body mt-10 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-white px-8 py-5 text-lg font-black text-[#07111f] shadow-2xl shadow-black/40 transition hover:-translate-y-1 hover:bg-[#dbeafe] sm:w-auto"
+            className="mt-9 inline-flex w-full items-center justify-center gap-3 rounded-xl bg-white px-7 py-4 text-base font-black text-blue shadow-xl shadow-blue-950/20 transition hover:-translate-y-0.5 hover:bg-blue-50 sm:w-auto"
           >
-            <strong className="text-[#246bff] flex flex-row items-center gap-3">
+            <span className="text-black inline-flex w-full gap-3">
               Contactar ahora
-            <ArrowRight className="h-5 w-5" />
-            </strong>
+              <ArrowRight/>
+            </span>
+           
           </Link>
         </div>
       </section>
 
-      <SiteFooter />
+      <footer className="border-t border-blue-100 bg-white px-5 py-10 sm:px-8 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-slate-600 md:flex-row md:items-center md:justify-between">
+          <p>© 2026 C8 Tech. Soluciones digitales a medida.</p>
+          <div className="flex flex-wrap gap-4 font-semibold">
+            <a
+              href="https://wa.me/51949161510"
+              className="text-[#246bff] hover:text-[#1f57d6]"
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp
+            </a>
+            <a
+              href="https://www.linkedin.com/in/nicolascontrerascastellanoo/"
+              className="text-[#246bff] hover:text-[#1f57d6]"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </footer>
 
       {selectedProject && (
         <ProjectModal
@@ -799,6 +757,6 @@ export default function Home() {
           onClose={() => setSelectedProject(null)}
         />
       )}
-    </div>
+    </main>
   );
 }
